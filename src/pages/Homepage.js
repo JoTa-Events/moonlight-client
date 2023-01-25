@@ -1,8 +1,11 @@
- export default function Homepage() {
+import CreateEvent from "../components/CreateEvent";
 
-    return (
-      <div className="Homepage"> 
-        <h1>Homepage</h1>
-      </div>
-    );
-  }
+export default function Homepage() {
+  return (
+    <div className="Homepage">
+      <h1>Homepage</h1>
+
+      <CreateEvent />
+    </div>
+  );
+}
