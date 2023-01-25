@@ -16,7 +16,7 @@ export default function EventDetails({eventsList}) {
         axios
           .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then(() => {
-            navigate("/events");
+            navigate(`/events/${eventId}`)
           })
           .catch((err) => console.log(err));
     };  
@@ -33,7 +33,9 @@ export default function EventDetails({eventsList}) {
         <p>{event.location}</p>
         <p>{event.date}</p>
         <p>{event.description}</p>
-        <Link href={'/events/' + event.eventId}> Edit</Link>
+        <Link to={`/events/edit/${eventId}`}>
+        <button>Edit Project</button>
+      </Link>
         <button onClick={deleteEvent}>Delete</button>
       </>
     );

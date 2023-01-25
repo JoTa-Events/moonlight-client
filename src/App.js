@@ -42,7 +42,7 @@ function App() {
         <Route exact path="/events" element={<EventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails eventsList={eventsList} />} />
         <Route exact path="/events" element={<CreateEvent createCallback={createEvent} />} />
-        <Route exact path="/events/:eventId" element={<EditEvent />} />  
+        <Route exact path="/events/edit/:eventId" element={<EditEvent />} />  
 
         <Route path="*" element={<h1>404: Sorry, this route does not exist.</h1>} />
       </Routes>
