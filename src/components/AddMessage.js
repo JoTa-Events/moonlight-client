@@ -7,18 +7,22 @@ export default function AddMessage(props){
     const {eventId, getChatFromAPI} = props
     const {user}  = useContext(AuthContext)
     const [message, setMessage] = useState("")
-
+    
     const handleSubmit=(e)=>{
         e.preventDefault()
         const newMessage = {
-            message
-           
+            message,
+            userId: user._id
         }
+        
         axios.put(`${API_URL}/api/chats/${eventId}`,newMessage)
             .then(response=>{
+                
                 console.log(`new message created`,response.data.messages.slice(-1)[0].message)
                 getChatFromAPI()
             })
+
+        setMessage("")
     }
     return(
         <div className="form-message-container">
