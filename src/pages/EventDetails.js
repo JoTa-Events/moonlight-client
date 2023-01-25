@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import ChatBox from '../components/ChatBox';
 
 export default function EventDetails({eventsList}) {
 
@@ -23,18 +24,22 @@ export default function EventDetails({eventsList}) {
 
     return (
       <>
-        <img
-          src={event.image}
-          alt=""
-          style={{ margin: "auto", width: "auto", height: "350px" }}
-        />
+        <div className='event-details-container'>
+          <img
+            src={event.image}
+            alt=""
+            style={{ margin: "auto", width: "auto", height: "350px" }}
+          />
 
-        <h1>{event.title}</h1>
-        <p>{event.location}</p>
-        <p>{event.date}</p>
-        <p>{event.description}</p>
-        <Link href={'/events/' + event.eventId}> Edit</Link>
-        <button onClick={deleteEvent}>Delete</button>
+          <h1>{event.title}</h1>
+          <p>{event.location}</p>
+          <p>{event.date}</p>
+          <p>{event.description}</p>
+          <Link href={"/events/" + event.eventId}> Edit</Link>
+          <button onClick={deleteEvent}>Delete</button>
+        </div>
+        
+        <ChatBox eventId={eventId}/>
       </>
     );
   }
