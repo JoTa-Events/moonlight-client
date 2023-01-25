@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default  function SignupPage(){
@@ -10,6 +10,7 @@ export default  function SignupPage(){
         const [username,setUsername]=useState("")
         const [email,setEmail]= useState("")
         const [password,setPassword]= useState("")
+        const navigate=useNavigate()
 
         const handleEmail = (e) => setEmail(e.target.value);
         const handlePassword = (e) => setPassword(e.target.value);
@@ -27,10 +28,10 @@ export default  function SignupPage(){
               .then((response) => {
                 console.log("user created");
 
-                Navigate("login");
+                navigate("/login");
               })
               .catch((error) => {
-                const errorDescription = error.response.data.message;
+                const errorDescription = error.response ? error.response.data.message : "error signing up"
 
                 setErrorMessage(errorDescription);
                 console.log("something happened creating an user", error);
