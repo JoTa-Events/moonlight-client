@@ -18,9 +18,12 @@ export default function EditEvent(props) {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
       .then((response) => {
-        const oneProject = response.data;
-        setTitle(oneProject.title);
-        setDescription(oneProject.description);
+        const event = response.data;
+
+        setTitle(event.title);
+        setDate(event.date);
+        setLocation(event.location);
+        setDescription(event.description);
       })
       .catch((error) => console.log(error));
     
@@ -30,10 +33,10 @@ export default function EditEvent(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newEventDetails = { title, date, location, description };
+    const requestBody = { title, date, location, description };
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/projects/${eventId}`, newEventDetails)
+      .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, requestBody)
       .then((response) => {
         navigate(`/events/${eventId}`)
       });
@@ -41,7 +44,7 @@ export default function EditEvent(props) {
   
   return (
     <div className="EditEvent">
-      <h3>Edit the Project</h3>
+      <h3>Edit this Event</h3>
 
       <Form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", width: "40%", margin: "auto" }} >
           <Form.Label>Title</Form.Label>
@@ -86,7 +89,7 @@ export default function EditEvent(props) {
             }}
           />
 
-            <Button type="submit">Create</Button>
+            <Button type="submit">Update</Button>
         </Form>
 
     </div>

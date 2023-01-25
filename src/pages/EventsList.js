@@ -1,9 +1,31 @@
-
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import CreateEvent from '../components/CreateEvent';
 
-export default function EventsList({ eventsList }) {
+export default function EventsList() {
+
+  const [eventsList, setEventsList] = useState([]);
+
+  const getAllEvents = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/events`)
+      .then((response) => setEventsList(response.data))
+      .catch((error) => console.log("Error getting events from API", error));
+  };
+
+  useEffect(() => {
+    getAllEvents();
+  }, []);
+
+  // creating a new event
+  const createEvent = (newEventObject) => {
+    setEventsList((prevEvents) => {
+      const newEventList = [newEventObject, ...prevEvents];
+      return newEventList;
+    })
+  }
+
   return (
     <Container>
 
@@ -18,8 +40,8 @@ export default function EventsList({ eventsList }) {
             style={{ margin: "auto", width: "auto", height: "250px" }}
           />
           <Card.Body>
-            <Link to={"/events/" + event._id}>
-              <h2 style={{ marginBottom: "20px" }}>{event.title}</h2>
+          <Link to={`/events/${event._id}`}>
+              <h2>{event.title}</h2>
             </Link>
           </Card.Body>
         </Card>
