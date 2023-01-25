@@ -1,22 +1,32 @@
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-export default function EventDetails({eventsList}) {
+export default function EventDetails() {
 
     const navigate = useNavigate();
-
+    const [event, setEvent] = useState([]);
     const {eventId} = useParams();
 
-    const event = eventsList.find(EventDetails => {
-        return EventDetails._id === eventId
-    })
+    const getEvent = () => {
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
+          .then((response) => {
+              setEvent(response.data);
+            })
+          .catch((error) => console.log(error));
+      };
+
+      useEffect(()=> {
+        getEvent();
+      }, [] );
 
     // deleting the event
     const deleteEvent = () => {
         axios
           .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then(() => {
-            navigate(`/events/${eventId}`)
+            navigate(`/events/`)
           })
           .catch((err) => console.log(err));
     };  
@@ -33,9 +43,10 @@ export default function EventDetails({eventsList}) {
         <p>{event.location}</p>
         <p>{event.date}</p>
         <p>{event.description}</p>
+            
         <Link to={`/events/edit/${eventId}`}>
-        <button>Edit Project</button>
-      </Link>
+            <button>Edit this Event</button>
+        </Link>
         <button onClick={deleteEvent}>Delete</button>
       </>
     );
