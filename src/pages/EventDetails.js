@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import ChatBox from '../components/ChatBox';
 
 export default function EventDetails() {
 
@@ -12,9 +13,10 @@ export default function EventDetails() {
         axios
           .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then((response) => {
+            console.log("this is the response===>",response)
               setEvent(response.data);
             })
-          .catch((error) => console.log(error));
+          .catch((error) => console.log("something happened getting one event",error));
       };
 
       useEffect(()=> {
@@ -33,21 +35,25 @@ export default function EventDetails() {
 
     return (
       <>
-        <img
-          src={event.image}
-          alt=""
-          style={{ margin: "auto", width: "auto", height: "350px" }}
-        />
+        <div className='event-details-container'>
+          <img
+            src={event.image}
+            alt=""
+            style={{ margin: "auto", width: "auto", height: "350px" }}
+          />
 
-        <h1>{event.title}</h1>
-        <p>{event.location}</p>
-        <p>{event.date}</p>
-        <p>{event.description}</p>
-            
-        <Link to={`/events/edit/${eventId}`}>
-            <button>Edit this Event</button>
-        </Link>
-        <button onClick={deleteEvent}>Delete</button>
+          <h1>{event.title}</h1>
+          <p>{event.location}</p>
+          <p>{event.date}</p>
+          <p>{event.description}</p>
+          <Link to={"/events/" + event.eventId}> Edit</Link>
+          <button onClick={deleteEvent}>Delete</button>
+        </div>
+        
+        <ChatBox eventId={eventId}/>
+       
+        
+       
       </>
     );
   }
