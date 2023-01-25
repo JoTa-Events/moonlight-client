@@ -58,7 +58,7 @@ function AuthProviderWrapper(props) {
     // To log out the user, remove the token
     removeToken();
 
-    // and update the state variables    
+    // and update the state variables
     authenticateUser();
   }  
 

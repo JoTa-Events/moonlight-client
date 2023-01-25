@@ -1,15 +1,38 @@
-import Homepage from './pages/Homepage';
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import Nav from './components/Navbar';
 import EventsList from './pages/EventsList';
 import CreateEvent from './components/CreateEvent';
 import EventDetails from './pages/EventDetails';
 import EditEvent from './components/EditEvent';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import Homepage from './pages/Homepage';
+import Nav from './components/Nav';
+import { Routes, Route } from 'react-router-dom';
+import './App.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 function App() {
+
+  const [eventsList, setEventsList] = useState([]);
+
+  const getAllEvents = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/events`)
+      .then((response) => setEventsList(response.data))
+      .catch((error) => console.log("Error getting events from API", error));
+  };
+
+  useEffect(() => {
+    getAllEvents();
+  }, []);
+
+  // creating a new event
+  const createEvent = (newEventObject) => {
+    setEventsList((prevEvents) => {
+      const newEventList = [newEventObject, ...prevEvents];
+      return newEventList;
+    })
+  }
 
   return (
     <div className="App">
@@ -18,9 +41,9 @@ function App() {
 
     <Routes>      
         <Route exact path="/" element={<Homepage />} />
-        <Route exact path="/events" element={<EventsList />} />
+        <Route exact path="/events" element={<EventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails />} />
-        <Route exact path="/events" element={<CreateEvent/>} />
+        <Route exact path="/events/create" element={<CreateEvent createCallback={createEvent} />} />
         <Route exact path="/events/edit/:eventId" element={<EditEvent />} />
 
         {/* register */}
