@@ -1,15 +1,31 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Form } from "react-bootstrap";
 
-export default function CreateEvent(props) {
-  const navigate = useNavigate();
+export default function EditEvent(props) {
 
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
+    const navigate = useNavigate();
+
+    const [title, setTitle] = useState("");
+    const [date, setDate] = useState("");
+    const [location, setLocation] = useState("");
+    const [description, setDescription] = useState("");
+  
+    const { eventId } = useParams();
+  
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
+      .then((response) => {
+        const oneProject = response.data;
+        setTitle(oneProject.title);
+        setDescription(oneProject.description);
+      })
+      .catch((error) => console.log(error));
+    
+  }, [eventId]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,27 +33,17 @@ export default function CreateEvent(props) {
     const newEventDetails = { title, date, location, description };
 
     axios
-        .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails)
-        .then((response) => {
-            navigate("/events");
-        })
-        .catch((error) => console.log(error));
-    
-    props.createCallback(newEventDetails);
-    
-    // Resetting the states
-    setTitle("");
-    setDate("");
-    setLocation("");
-    setDescription("");
-
+      .put(`${process.env.REACT_APP_API_URL}/api/projects/${eventId}`, newEventDetails)
+      .then((response) => {
+        navigate(`/events/${eventId}`)
+      });
   };
-
+  
   return (
-    <div className="CreateEvent">
-      <h1>Submit an event</h1>
+    <div className="EditEvent">
+      <h3>Edit the Project</h3>
 
-        <Form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", width: "40%", margin: "auto" }} >
+      <Form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", width: "40%", margin: "auto" }} >
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
@@ -86,4 +92,3 @@ export default function CreateEvent(props) {
     </div>
   );
 }
-
