@@ -2,6 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
+// import arrays for countries and capital cities
+import cityArr from "../data/capitalCity"
+import countryArr from "../data/countries"
 
 export default function CreateEvent(props) {
   const navigate = useNavigate();
@@ -59,17 +62,19 @@ export default function CreateEvent(props) {
           />
 
           <Form.Label>Country</Form.Label>
-          <Form.Select
-            name="country"
-            value={country}
-            onChange={(e) => {
-              setCountry(e.target.value);
-            }}
-          />
+          <Form.Select name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
+            <option value="">Select one</option>
+            {countryArr.map(country => 
+              <option value={country}>{country}</option>
+            )}
+          </Form.Select>
 
           <Form.Label>City</Form.Label>
-          <Form.Select name="city">
-            <option value={city} onChange={(e) => {setCity(e.target.value); }}>City</option>
+          <Form.Select name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
+            <option value="">Select one</option>
+            {cityArr.map(city =>
+              <option value={city}>{city}</option>
+            )}
           </Form.Select>
 
           <Form.Label>Description</Form.Label>

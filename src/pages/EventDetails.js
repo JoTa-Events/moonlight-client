@@ -46,6 +46,8 @@ export default function EventDetails(props) {
           />
 
           <h1>{event.title}</h1>
+          <h2> Number of participants: {event.participants}</h2>
+          <button>Join event</button>
           <p>{event.country}</p>
           <p>{event.city}</p>
           <p>{event.date}</p>
