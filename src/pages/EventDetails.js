@@ -13,10 +13,9 @@ export default function EventDetails() {
         axios
           .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then((response) => {
-            console.log("this is the response===>",response)
               setEvent(response.data);
             })
-          .catch((error) => console.log("something happened getting one event",error));
+          .catch((error) => console.log("Error getting event", error));
       };
 
       useEffect(()=> {
@@ -28,7 +27,7 @@ export default function EventDetails() {
         axios
           .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then(() => {
-            navigate(`/events/`)
+            navigate(`/events`)
           })
           .catch((err) => console.log(err));
     };  
@@ -46,7 +45,7 @@ export default function EventDetails() {
           <p>{event.location}</p>
           <p>{event.date}</p>
           <p>{event.description}</p>
-          <Link to={"/events/" + event.eventId}> Edit</Link>
+          <Link to={`/events/edit/${event._id}`}> Edit</Link>
           <button onClick={deleteEvent}>Delete</button>
         </div>
         

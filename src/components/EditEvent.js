@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Form } from "react-bootstrap";
 
-export default function EditEvent(props) {
+export default function EditEvent() {
 
     const navigate = useNavigate();
 
