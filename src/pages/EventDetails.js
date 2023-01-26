@@ -75,13 +75,13 @@ export default function EventDetails(props) {
           <button onClick={deleteEvent}>Delete</button>
         </div>
         
+       
         
         <div style={{width: "50%", textAlign: "start"}}>
 
         <button onClick={getParticipants}> Join Event</button>
-
-          <button onClick={toggleEventChat}>{toggle ? 'Join Event' : <JoinEvent toggleEventChat={toggleEventChat} />}</button>
-
+          <button onClick={toggleEventChat}>{toggle ? 'Show Chat' : "Hide Chat" }</button>
+          {toggle && <JoinEvent />}
         </div>
         
         
