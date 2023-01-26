@@ -20,6 +20,7 @@ export default function CreateEvent(props) {
   const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   
   const {user}  = useContext(AuthContext)
 
@@ -29,13 +30,18 @@ export default function CreateEvent(props) {
 
     uploadData.append("image", e.target.files[0]);
 
+    setIsUploadingImage(true);
+
     service
       .uploadImage(uploadData)
       .then((response) => {
-        
         setImage(response.fileUrl);
+        console.log(image)
       })
-      .catch((err) => console.log("Error while uploading the file: ", err));
+      .catch((err) => console.log("Error while uploading the file: ", err))
+      .finally ( () => {
+        setIsUploadingImage(false)
+      });
   };
 
   const handleSubmit = (e) => {
@@ -115,7 +121,10 @@ export default function CreateEvent(props) {
 
           <input type="file" onChange={(e) => handleFileUpload(e)} />
 
-            <Button type="submit">Create</Button>
+            { isUploadingImage 
+            ? <Button type="submit" disabled variant="dark">Uploading</Button>
+            : <Button type="submit" variant="dark">Create</Button>
+            }
         </Form>
 
     </div>
