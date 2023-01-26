@@ -7,8 +7,10 @@ export default function JoinEvent(props) {
 
     return (
       <div style={{ marginTop: "50px" }}>
-        <button onClick={props.toggleEventChat}> Leave chat</button>
-      <h1>chat it out</h1>
+        <h1>chat it out
+            {/* <button onClick={props.toggleEventChat}> Leave chat</button> */}
+        </h1>
+
         <ChatBox eventId={eventId} /> 
       </div>
     );

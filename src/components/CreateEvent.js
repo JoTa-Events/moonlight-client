@@ -2,12 +2,14 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
+import { AuthContext } from "../context/auth.context";
 import authForAPI from "../utils/authForAPI";
+
+import service from "../service"
 
 // import arrays for countries and capital cities
 import cityArr from "../data/capitalCity"
 import countryArr from "../data/countries"
-import { AuthContext } from "../context/auth.context";
 
 export default function CreateEvent(props) {
   const navigate = useNavigate();
@@ -17,18 +19,32 @@ export default function CreateEvent(props) {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
   
   const {user}  = useContext(AuthContext)
-  
-  
+
+  // uploading image
+  const handleFileUpload = (e) => {
+    const uploadData = new FormData();
+
+    uploadData.append("image", e.target.files[0]);
+
+    service
+      .uploadImage(uploadData)
+      .then((response) => {
+        
+        setImage(response.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const author = user._id
-
-    const newEventDetails = { title, date, country, city, description, author};
+    const newEventDetails = { title, date, country, city, description, author, image};
 
     axios
-        .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails,authForAPI())
+        .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails, authForAPI())
         .then((response) => {
             navigate("/events");
 
@@ -37,10 +53,12 @@ export default function CreateEvent(props) {
             setCountry("");
             setCity("")
             setDescription("");
+            setImage("")
             props.createCallback(newEventDetails);
         })
         .catch((error) => console.log(error));
   };
+
 
   return (
     <div className="CreateEvent">
@@ -94,6 +112,8 @@ export default function CreateEvent(props) {
               setDescription(e.target.value);
             }}
           />
+
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
 
             <Button type="submit">Create</Button>
         </Form>

@@ -1,4 +1,3 @@
-import { Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function EventsList({eventsList}) {

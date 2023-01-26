@@ -1,45 +1,46 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-
-import JoinEvent from '../components/JoinEvent';
 import { AuthContext } from '../context/auth.context';
+
 import authForAPI from '../utils/authForAPI';
+import JoinEvent from '../components/JoinEvent';
 
 export default function EventDetails(props) {
 
     const navigate = useNavigate();
+    const {eventId} = useParams();
     const [event, setEvent] = useState([]);
     const [participants, setParticipants] = useState([]);
-    const [toggle, setToggle] = useState(true);
-    const {eventId} = useParams();
+    // const [toggle, setToggle] = useState(true);
     
     const {user} = useContext(AuthContext)
 
     const getEvent = () => {
-        axios
-          .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
-          .then((response) => {
-              setEvent(response.data);
-            })
-          .catch((error) => console.log("Error getting event", error));
-      };
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
+        .then((response) => {
+            setEvent(response.data);
+          })
+        .catch((error) => console.log("Error getting event", error));
+    };
 
       useEffect(()=> {
         getEvent();
       }, [] );
 
-      // get participants
-      const getParticipants = () => {
-        const requestBody = { userId:user._id };
-        
-        axios
+    // get participants
+    const getParticipants = () => {
+      const requestBody = { userId:user._id };
+
+      axios
         .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}/participants`, requestBody, authForAPI())
         .then((response) => {
             setParticipants(response.data);
           })
         .catch((error) => console.log("Error getting event", error));
-      }
+    }
 
     // deleting the event
     const deleteEvent = () => {
@@ -53,9 +54,9 @@ export default function EventDetails(props) {
     };
 
     // join event toggle button
-    const toggleEventChat = () => {
-      setToggle(!toggle)
-    };
+    // const toggleEventChat = () => {
+    //   setToggle(!toggle)
+    // };
 
     return (
       <div style={{display: "flex", justifyContent: "center", marginTop: "50px" }}>
@@ -68,9 +69,10 @@ export default function EventDetails(props) {
 
           <h1>{event.title}</h1>
 
-          <p>Location: {event.country} / {event.city}</p>
-          <p>Date: {event.date}</p>
-          <p>{event.description}</p>
+          <p><b>Location:</b> {event.country} / {event.city}</p>
+          <p><b>Date:</b> {event.date}</p>
+          <p><b>Description: </b>{event.description}</p>
+
           <Link to={`/events/edit/${event._id}`}>Edit</Link>
           <button onClick={deleteEvent}>Delete</button>
         </div>
@@ -80,7 +82,8 @@ export default function EventDetails(props) {
 
         <button onClick={getParticipants}> Join Event</button>
 
-          <button onClick={toggleEventChat}>{toggle ? 'Join Event' : <JoinEvent toggleEventChat={toggleEventChat} />}</button>
+        <JoinEvent />
+        {/* <button onClick={toggleEventChat}>{toggle ? 'Join Event' : <JoinEvent toggleEventChat={toggleEventChat} />}</button> */}
 
         </div>
         

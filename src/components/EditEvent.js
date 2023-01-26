@@ -43,7 +43,7 @@ export default function EditEvent() {
     const requestBody = { title, date, country, city, description };
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, requestBody,authForAPI() )
+      .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, requestBody, authForAPI() )
       .then((response) => {
         navigate(`/events/${eventId}`)
       });
