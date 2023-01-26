@@ -13,7 +13,7 @@ export default function EventDetails(props) {
     const {eventId} = useParams();
     const [event, setEvent] = useState([]);
     const [participants, setParticipants] = useState([]);
-    // const [toggle, setToggle] = useState(true);
+    const [toggle, setToggle] = useState(true);
     
     const {user} = useContext(AuthContext)
 
@@ -54,9 +54,9 @@ export default function EventDetails(props) {
     };
 
     // join event toggle button
-    // const toggleEventChat = () => {
-    //   setToggle(!toggle)
-    // };
+    const toggleEventChat = () => {
+      setToggle(!toggle)
+    };
 
     return (
       <div style={{display: "flex", justifyContent: "center", marginTop: "50px" }}>
@@ -77,14 +77,13 @@ export default function EventDetails(props) {
           <button onClick={deleteEvent}>Delete</button>
         </div>
         
+       
         
         <div style={{width: "50%", textAlign: "start"}}>
 
         <button onClick={getParticipants}> Join Event</button>
-
-        <JoinEvent />
-        {/* <button onClick={toggleEventChat}>{toggle ? 'Join Event' : <JoinEvent toggleEventChat={toggleEventChat} />}</button> */}
-
+          <button onClick={toggleEventChat}>{toggle ? 'Show Chat' : "Hide Chat" }</button>
+          {toggle && <JoinEvent />}
         </div>
         
         

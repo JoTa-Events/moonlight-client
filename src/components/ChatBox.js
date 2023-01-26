@@ -32,6 +32,7 @@ export default function ChatBox(props){
 
    const renderChat = ()=>{
     return(<>
+        
         {chatObj.messages.map(message=>(
             <div key= {message._id} className="chat-container">
                 <p>
