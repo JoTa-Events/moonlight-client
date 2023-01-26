@@ -38,6 +38,8 @@ export default function EventDetails(props) {
         .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}/participants`, requestBody, authForAPI())
         .then((response) => {
             setParticipants(response.data);
+
+            
           })
         .catch((error) => console.log("Error getting event", error));
     }
@@ -81,9 +83,10 @@ export default function EventDetails(props) {
         
         <div style={{width: "50%", textAlign: "start"}}>
 
-        <button onClick={getParticipants}> Join Event</button>
+          <button onClick={getParticipants}> Join Event</button>
           <button onClick={toggleEventChat}>{toggle ? 'Show Chat' : "Hide Chat" }</button>
-          {toggle && <JoinEvent />}
+          {toggle && <JoinEvent eventId={eventId} />}
+
         </div>
         
         

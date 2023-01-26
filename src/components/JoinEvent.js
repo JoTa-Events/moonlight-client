@@ -1,9 +1,9 @@
 import ChatBox from '../components/ChatBox';
-import { useParams } from 'react-router-dom';
+
 
 export default function JoinEvent(props) {
 
-    const {eventId} = useParams();
+    const {eventId} = props;
 
     return (
       <div className='chat-container' style={{ marginTop: "50px" }}>

@@ -95,16 +95,16 @@ export default function CreateEvent(props) {
           <Form.Label>Country</Form.Label>
           <Form.Select  name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
             <option value="">Select one</option>
-            {countryArr.map(country => 
-              <option value={country}>{country}</option>
+            {countryArr.map((country,index )=> 
+              <option key={index} value={country}>{country}</option>
             )}
           </Form.Select>
 
           <Form.Label>City</Form.Label>
           <Form.Select  name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
             <option value="">Select one</option>
-            {cityArr.map(city =>
-              <option value={city}>{city}</option>
+            {cityArr.map((city,index) =>
+              <option key={index} value={city}>{city}</option>
             )}
           </Form.Select>
 
