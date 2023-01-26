@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import authForAPI from "../utils/authForAPI"
 import AddMessage from "./AddMessage"
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -9,9 +10,13 @@ export default function ChatBox(props){
 
     const [chatObj,setChatObj]=useState(null)
 
+    
     const getChatFromAPI = () => {
+        
+    
+        
       axios
-        .get(`${API_URL}/api/chats/${eventId}`)
+        .get(`${API_URL}/api/chats/${eventId}`,authForAPI())
         .then((response) => {
           console.log("Chat from API", response.data);
           setChatObj(response.data);
