@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import authForAPI from "../utils/authForAPI";
@@ -7,6 +7,7 @@ import authForAPI from "../utils/authForAPI";
 // import arrays for countries and capital cities
 import cityArr from "../data/capitalCity"
 import countryArr from "../data/countries"
+import { AuthContext } from "../context/auth.context";
 
 export default function CreateEvent(props) {
   const navigate = useNavigate();
@@ -16,11 +17,15 @@ export default function CreateEvent(props) {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
-
+  
+  const {user}  = useContext(AuthContext)
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    const author = user._id
 
-    const newEventDetails = { title, date, country, city, description };
+    const newEventDetails = { title, date, country, city, description, author};
 
     axios
         .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails,authForAPI())
@@ -64,7 +69,7 @@ export default function CreateEvent(props) {
           />
 
           <Form.Label>Country</Form.Label>
-          <Form.Select name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
+          <Form.Select  name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
             <option value="">Select one</option>
             {countryArr.map(country => 
               <option value={country}>{country}</option>
@@ -72,7 +77,7 @@ export default function CreateEvent(props) {
           </Form.Select>
 
           <Form.Label>City</Form.Label>
-          <Form.Select name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
+          <Form.Select  name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
             <option value="">Select one</option>
             {cityArr.map(city =>
               <option value={city}>{city}</option>

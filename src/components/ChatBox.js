@@ -18,7 +18,7 @@ export default function ChatBox(props){
       axios
         .get(`${API_URL}/api/chats/${eventId}`,authForAPI())
         .then((response) => {
-          console.log("Chat from API", response.data);
+        //   console.log("Chat from API", response.data);
           setChatObj(response.data);
         })
         .catch((error) => {
