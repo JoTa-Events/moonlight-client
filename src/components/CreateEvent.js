@@ -8,29 +8,28 @@ export default function CreateEvent(props) {
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newEventDetails = { title, date, location, description };
+    const newEventDetails = { title, date, country, city, description };
 
     axios
         .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails)
         .then((response) => {
             navigate("/events");
+
+            setTitle("");
+            setDate("");
+            setCountry("");
+            setCity("")
+            setDescription("");
+            props.createCallback(newEventDetails);
         })
         .catch((error) => console.log(error));
-    
-    props.createCallback(newEventDetails);
-    
-    // Resetting the states
-    setTitle("");
-    setDate("");
-    setLocation("");
-    setDescription("");
-
   };
 
   return (
@@ -59,15 +58,19 @@ export default function CreateEvent(props) {
             }}
           />
 
-          <Form.Label>Location</Form.Label>
-          <Form.Control
-            type="text"
-            name="location"
-            value={location}
+          <Form.Label>Country</Form.Label>
+          <Form.Select
+            name="country"
+            value={country}
             onChange={(e) => {
-              setLocation(e.target.value);
+              setCountry(e.target.value);
             }}
           />
+
+          <Form.Label>City</Form.Label>
+          <Form.Select name="city">
+            <option value={city} onChange={(e) => {setCity(e.target.value); }}>City</option>
+          </Form.Select>
 
           <Form.Label>Description</Form.Label>
           <Form.Control

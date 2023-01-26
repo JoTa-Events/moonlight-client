@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { propTypes } from 'react-bootstrap/esm/Image';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import ChatBox from '../components/ChatBox';
 
-export default function EventDetails() {
+export default function EventDetails(props) {
 
     const navigate = useNavigate();
     const [event, setEvent] = useState([]);
@@ -30,8 +31,9 @@ export default function EventDetails() {
           .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then(() => {
             navigate(`/events`)
+            props.editCallback()
           })
-          .catch((err) => console.log(err));
+          .catch((error) => console.log('Error deleting these details', error));
     };  
 
     return (
@@ -44,7 +46,8 @@ export default function EventDetails() {
           />
 
           <h1>{event.title}</h1>
-          <p>{event.location}</p>
+          <p>{event.country}</p>
+          <p>{event.city}</p>
           <p>{event.date}</p>
           <p>{event.description}</p>
           <Link to={`/events/edit/${event._id}`}> Edit</Link>

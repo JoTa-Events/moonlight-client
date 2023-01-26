@@ -26,14 +26,6 @@ function App() {
     getAllEvents();
   }, []);
 
-  // creating a new event
-  const createEvent = (newEventObject) => {
-    setEventsList((prevEvents) => {
-      const newEventList = [newEventObject, ...prevEvents];
-      return newEventList;
-    })
-  }
-
   return (
     <div className="App">
 
@@ -42,8 +34,8 @@ function App() {
     <Routes>      
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/events" element={<EventsList eventsList={eventsList} />} />
-        <Route path="/events/:eventId" element={<EventDetails />} />
-        <Route exact path="/events/create" element={<CreateEvent createCallback={createEvent} />} />
+        <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
+        <Route exact path="/events/create" element={<CreateEvent createCallback={getAllEvents} />} />
         <Route exact path="/events/edit/:eventId" element={<EditEvent />} />
 
         {/* register */}
