@@ -5,6 +5,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 const AuthContext = createContext();
 
 function AuthProviderWrapper(props) {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -13,7 +14,7 @@ function AuthProviderWrapper(props) {
     localStorage.setItem('authToken', token);
   }
 
-  const authenticateUser = () => {           //  <==  ADD  
+  const authenticateUser = () => { 
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem('authToken');
     
@@ -47,11 +48,10 @@ function AuthProviderWrapper(props) {
     }   
   }
 
-  const removeToken = () => {                    // <== ADD
+  const removeToken = () => {
     // Upon logout, remove the token from the localStorage
     localStorage.removeItem("authToken");
   }
- 
  
   const logOutUser = () => {    
                
@@ -63,13 +63,11 @@ function AuthProviderWrapper(props) {
   }  
 
   useEffect(() => {                                                 
-     authenticateUser()
+    authenticateUser()
   }, []);
   
-  
- 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user,storeToken,authenticateUser,logOutUser }}>
+    <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser}}>
       {props.children}
     </AuthContext.Provider>
   )

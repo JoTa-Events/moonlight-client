@@ -1,9 +1,19 @@
 .App {
   text-align: center;
+  font-family: 'Roboto';
 }
 
 a {
   text-decoration: none;
+}
+
+/* error messages feedback */
+.error-message {
+  background: #f02b63;
+  color: #f7f9f4;
+  border-radius: 10px;
+  margin: auto;
+  padding: 15px;
 }
 
 /* cards / events list */

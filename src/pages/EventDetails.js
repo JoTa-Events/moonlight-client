@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
@@ -10,12 +9,13 @@ import JoinEvent from '../components/JoinEvent';
 export default function EventDetails(props) {
 
     const navigate = useNavigate();
+    const {user} = useContext(AuthContext);
     const {eventId} = useParams();
+
     const [event, setEvent] = useState([]);
     const [participants, setParticipants] = useState([]);
     const [toggle, setToggle] = useState(true);
     
-    const {user} = useContext(AuthContext)
 
     const getEvent = () => {
       axios
@@ -26,33 +26,31 @@ export default function EventDetails(props) {
         .catch((error) => console.log("Error getting event", error));
     };
 
-      useEffect(()=> {
-        getEvent();
-      }, [] );
+    useEffect(()=> {
+      getEvent();
+    }, [] );
 
     // get participants
     const getParticipants = () => {
-      const requestBody = { userId:user._id };
+      const requestBody = { userId: user._id };
 
       axios
         .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}/participants`, requestBody, authForAPI())
         .then((response) => {
             setParticipants(response.data);
-
-            
-          })
+        })
         .catch((error) => console.log("Error getting event", error));
     }
 
     // deleting the event
     const deleteEvent = () => {
-        axios
-          .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`,authForAPI())
-          .then(() => {
-            navigate(`/events`)
-            props.editCallback()
-          })
-          .catch((error) => console.log('Error deleting these details', error));
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`,authForAPI())
+        .then(() => {
+          navigate(`/events`)
+          props.editCallback()
+        })
+        .catch((error) => console.log('Error deleting these details', error));
     };
 
     // join event toggle button
@@ -62,12 +60,8 @@ export default function EventDetails(props) {
 
     return (
       <div style={{display: "flex", justifyContent: "center", marginTop: "50px" }}>
-        <div className='event-details-container' style={{width: "50%"}} >
-          <img
-            src={event.image}
-            alt=""
-            style={{ margin: "auto", width: "auto", height: "350px" }}
-          />
+        <div className='event-details-container' style={{width: "50%", border: "1px solid"}} >
+          <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
 
           <h1>{event.title}</h1>
 
@@ -77,14 +71,12 @@ export default function EventDetails(props) {
 
           <Link to={`/events/edit/${event._id}`}>Edit</Link>
           <button onClick={deleteEvent}>Delete</button>
+
         </div>
-        
-       
-        
-        <div style={{width: "50%", textAlign: "start"}}>
+        <div style={{width: "50%", textAlign: "start", border: "1px solid"}}>
 
           <button onClick={getParticipants}> Join Event</button>
-          <button onClick={toggleEventChat}>{toggle ? 'Show Chat' : "Hide Chat" }</button>
+          <button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat" }</button>
           {toggle && <JoinEvent eventId={eventId} />}
 
         </div>

@@ -2,13 +2,13 @@ import axios from "axios"
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 import authForAPI from "../utils/authForAPI"
-const API_URL=process.env.REACT_APP_API_URL
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function AddMessage(props){
 
-    const {eventId, getChatFromAPI} = props
-    const {user}  = useContext(AuthContext)
-    const [message, setMessage] = useState("")
+    const {eventId, getChatFromAPI} = props;
+    const {user}  = useContext(AuthContext);
+    const [message, setMessage] = useState("");
     
     const handleSubmit=(e)=>{
         e.preventDefault()
@@ -17,15 +17,15 @@ export default function AddMessage(props){
             userId: user._id
         }
         
-        axios.put(`${API_URL}/api/chats/${eventId}`,newMessage,authForAPI())
+        axios.put(`${API_URL}/api/chats/${eventId}`, newMessage, authForAPI())
             .then(response=>{
-                
-                console.log(`new message created`,response.data.messages.slice(-1)[0].message)
-                getChatFromAPI()
+                console.log('New message created', response.data.messages.slice(-1)[0].message)
+                getChatFromAPI();
             })
 
-        setMessage("")
+        setMessage("");
     }
+
     return(
         <div className="form-message-container">
             <form onSubmit={handleSubmit}>
@@ -33,12 +33,10 @@ export default function AddMessage(props){
                     type="text"
                     name="message"
                     value={message}
-                    onChange={(e)=>setMessage(e.target.value)}
+                    onChange={(e) => setMessage(e.target.value)}
                 />
                 <button>Add message</button>
             </form>
-
         </div>
     )
-
 }

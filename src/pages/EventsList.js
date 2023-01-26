@@ -7,15 +7,16 @@ export default function EventsList({eventsList}) {
       <h2>What's popping?</h2>
 
       {eventsList.map((event) => (
-        <div className="card" key={event._id}>
+        <div className="card" key={event._id} style={{display: "inline-block", margin: "10px", border: "1px solid"}} >
           <div className="card-content">
-            <img src={event.image} alt="" style={{ width: "300px" }} />
+            <img src={event.image} alt="" style={{ width: "300px", margin: "10px"}} />
             <Link to={`/events/${event._id}`}>
-              <h2 className="title">{event.title}</h2>
+              <span className="title" style={{margin: "10px", color: "#282c34", fontSize: "25px"}} >{event.title}</span>
             </Link>
           </div>
         </div>
       ))}
+      
     </>
   );
 }
