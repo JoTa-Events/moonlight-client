@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
  
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

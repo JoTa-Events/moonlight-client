@@ -1,7 +1,9 @@
 import axios from "axios"
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
+import authForAPI from "../utils/authForAPI"
 const API_URL=process.env.REACT_APP_API_URL
+
 export default function AddMessage(props){
 
     const {eventId, getChatFromAPI} = props
@@ -15,7 +17,7 @@ export default function AddMessage(props){
             userId: user._id
         }
         
-        axios.put(`${API_URL}/api/chats/${eventId}`,newMessage)
+        axios.put(`${API_URL}/api/chats/${eventId}`,newMessage,authForAPI())
             .then(response=>{
                 
                 console.log(`new message created`,response.data.messages.slice(-1)[0].message)
