@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+
 import ChatBox from '../components/ChatBox';
 
 export default function EventDetails() {
@@ -13,6 +14,7 @@ export default function EventDetails() {
         axios
           .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
           .then((response) => {
+            
               setEvent(response.data);
             })
           .catch((error) => console.log("Error getting event", error));
@@ -49,8 +51,9 @@ export default function EventDetails() {
           <button onClick={deleteEvent}>Delete</button>
         </div>
         
+        
         <ChatBox eventId={eventId}/>
-       
+        
         
        
       </>

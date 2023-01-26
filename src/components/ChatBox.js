@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import AddMessage from "./AddMessage"
 const API_URL = process.env.REACT_APP_API_URL
 
 export default function ChatBox(props){
@@ -8,16 +9,19 @@ export default function ChatBox(props){
 
     const [chatObj,setChatObj]=useState(null)
 
-
+    const getChatFromAPI = () => {
+      axios
+        .get(`${API_URL}/api/chats/${eventId}`)
+        .then((response) => {
+          console.log("Chat from API", response.data);
+          setChatObj(response.data);
+        })
+        .catch((error) => {
+          console.log("something happened getting the chat from API", error);
+        });
+    };
     useEffect(()=>{
-        axios.get(`${API_URL}/api/chats/${eventId}`)
-            .then(response=>{
-                console.log("Chat from API",response.data)
-                setChatObj(response.data)
-            })
-            .catch(error=>{
-                console.log("something happened getting the chat from API",error);
-            })
+        getChatFromAPI()
     },[])
 
    const renderChat = ()=>{
@@ -33,10 +37,13 @@ export default function ChatBox(props){
    } 
     return(
         <div className="Chat-container">
-            {!chatObj ? "loading...." : renderChat() }
+            <div className="all-messages-container">
+
+                {!chatObj ? "loading...." : renderChat() }
+            </div>
 
 
-
+            <AddMessage eventId={eventId}  getChatFromAPI={getChatFromAPI} />
         </div>
         )
 }
