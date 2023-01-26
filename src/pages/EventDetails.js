@@ -64,7 +64,7 @@ export default function EventDetails(props) {
           <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
 
           <h1>{event.title}</h1>
-
+          <h3>by:{event.author?.username}</h3>
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {event.date}</p>
           <p><b>Description: </b>{event.description}</p>

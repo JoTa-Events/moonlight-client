@@ -13,6 +13,7 @@ export default function EventsList({eventsList}) {
             <Link to={`/events/${event._id}`}>
               <span className="title" style={{margin: "10px", color: "#282c34", fontSize: "25px"}} >{event.title}</span>
             </Link>
+            <span className="title" style={{margin: "10px", color: "#282c34", fontSize: "15px"}} >{event.author?.username}</span>
           </div>
         </div>
       ))}

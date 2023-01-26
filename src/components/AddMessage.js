@@ -30,6 +30,7 @@ export default function AddMessage(props){
         <div className="form-message-container">
             <form onSubmit={handleSubmit}>
                 <textarea
+                    required
                     type="text"
                     name="message"
                     value={message}
