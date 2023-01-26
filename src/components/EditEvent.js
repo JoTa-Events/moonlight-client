@@ -4,13 +4,18 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Form } from "react-bootstrap";
 import authForAPI from "../utils/authForAPI";
 
+// import arrays for countries and capital cities
+import cityArr from "../data/capitalCity"
+import countryArr from "../data/countries"
+
 export default function EditEvent() {
 
     const navigate = useNavigate();
 
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
-    const [location, setLocation] = useState("");
+    const [country, setCountry] = useState("");
+    const [city, setCity] = useState("");
     const [description, setDescription] = useState("");
   
     const { eventId } = useParams();
@@ -23,7 +28,8 @@ export default function EditEvent() {
 
         setTitle(event.title);
         setDate(event.date);
-        setLocation(event.location);
+        setCountry(event.country);
+        setCity(event.city);
         setDescription(event.description);
       })
       .catch((error) => console.log(error));
@@ -34,7 +40,7 @@ export default function EditEvent() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { title, date, location, description };
+    const requestBody = { title, date, country, city, description };
 
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, requestBody,authForAPI() )
@@ -69,15 +75,21 @@ export default function EditEvent() {
             }}
           />
 
-          <Form.Label>Location</Form.Label>
-          <Form.Control
-            type="text"
-            name="location"
-            value={location}
-            onChange={(e) => {
-              setLocation(e.target.value);
-            }}
-          />
+<Form.Label>Country</Form.Label>
+          <Form.Select name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
+            <option value="">Select one</option>
+            {countryArr.map(country => 
+              <option value={country}>{country}</option>
+            )}
+          </Form.Select>
+
+          <Form.Label>City</Form.Label>
+          <Form.Select name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
+            <option value="">Select one</option>
+            {cityArr.map(city =>
+              <option value={city}>{city}</option>
+            )}
+          </Form.Select>
 
           <Form.Label>Description</Form.Label>
           <Form.Control

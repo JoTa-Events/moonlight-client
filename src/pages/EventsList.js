@@ -4,26 +4,19 @@ import { Link } from 'react-router-dom';
 export default function EventsList({eventsList}) {
 
   return (
-    <Container>
+    <>
+      <h2>What's popping?</h2>
 
-    {eventsList.map((event) => (
-        <Card
-          key={event._id}
-          style={{ width: "30%", padding: "15px", border: "solid 1px" }}
-        >
-          <Card.Img
-            src={event.image}
-            alt=""
-            style={{ margin: "auto", width: "auto", height: "250px" }}
-          />
-          <Card.Body>
-          <Link to={`/events/${event._id}`}>
-              <h2>{event.title}</h2>
+      {eventsList.map((event) => (
+        <div className="card" key={event._id}>
+          <div className="card-content">
+            <img src={event.image} alt="" style={{ width: "300px" }} />
+            <Link to={`/events/${event._id}`}>
+              <h2 className="title">{event.title}</h2>
             </Link>
-          </Card.Body>
-        </Card>
-    ))}
-    
-    </Container>
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
