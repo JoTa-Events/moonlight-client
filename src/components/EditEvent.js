@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Form } from "react-bootstrap";
+import authForAPI from "../utils/authForAPI";
 
 export default function EditEvent() {
 
@@ -36,7 +37,7 @@ export default function EditEvent() {
     const requestBody = { title, date, location, description };
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, requestBody)
+      .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, requestBody,authForAPI() )
       .then((response) => {
         navigate(`/events/${eventId}`)
       });

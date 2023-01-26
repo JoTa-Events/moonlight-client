@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
+import authForAPI from "../utils/authForAPI";
+
 // import arrays for countries and capital cities
 import cityArr from "../data/capitalCity"
 import countryArr from "../data/countries"
@@ -21,7 +23,7 @@ export default function CreateEvent(props) {
     const newEventDetails = { title, date, country, city, description };
 
     axios
-        .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails)
+        .post(`${process.env.REACT_APP_API_URL}/api/events`, newEventDetails,authForAPI())
         .then((response) => {
             navigate("/events");
 
