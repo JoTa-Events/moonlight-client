@@ -4,6 +4,7 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import ChatBox from '../components/ChatBox';
+import authForAPI from '../utils/authForAPI';
 
 export default function EventDetails(props) {
 
@@ -28,7 +29,7 @@ export default function EventDetails(props) {
     // deleting the event
     const deleteEvent = () => {
         axios
-          .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
+          .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`,authForAPI())
           .then(() => {
             navigate(`/events`)
             props.editCallback()
