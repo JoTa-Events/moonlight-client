@@ -5,6 +5,7 @@ import { AuthContext } from '../context/auth.context';
 
 import authForAPI from '../utils/authForAPI';
 import JoinEvent from '../components/JoinEvent';
+import dayjs from 'dayjs';
 
 export default function EventDetails(props) {
 
@@ -65,7 +66,7 @@ export default function EventDetails(props) {
           <h1>{event.title}</h1>
           <h3>by: {event.author?.username}</h3>
           <p><b>Location:</b> {event.country} / {event.city}</p>
-          <p><b>Date:</b> {event.date}</p>
+          <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY") }</p>
           <p><b>Description: </b>{event.description}</p>
 
           {/* only creator of the event can use the functionality edit/delete */}
