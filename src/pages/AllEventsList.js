@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import FutureEvents from '../components/FutureEvents';
 import EventsThisWeek from '../components/EventsThisWeek';
 import PastEvents from '../components/PastEvents';
+import SearchBar from '../components/SearchBar';
 
 export default function AllEventsList(props) {
   const{eventsList}=props
@@ -11,6 +12,8 @@ export default function AllEventsList(props) {
 
   return (
     <>
+      <SearchBar eventKey={"title"} eventsList={eventsList}/>
+      <hr />
       <h2>What's popping?</h2>
       <hr/>
       <h2>Events of next 7 days</h2>{}
