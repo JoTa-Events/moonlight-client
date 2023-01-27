@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Roboto';
+  font-size: 13px;
 }
 
 a {
@@ -86,9 +87,8 @@ li a:hover {
   position: relative;
   height: 30px;
   transition: all 200ms linear;
-  border-radius: 5px;
-  width: 200px;
-  font-size: 12px;
+  border-radius: 4px;
+  width: 220px;
   letter-spacing: 2.5px;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -137,8 +137,8 @@ li a:hover {
   background-color: #282c34;
   top: 40px;
   left: 0;
-  width: 200px;
-  border-radius: 5px;
+  width: 100%;
+  border-radius: 4px;
   display: block;
   z-index: 2;
   opacity: 0;
@@ -164,7 +164,7 @@ li a:hover {
 .section-dropdown:after {
   position: absolute;
   top: -7px;
-  left: 30px;
+  left: 150px;
   width: 0; 
   height: 0; 
   border-left: 8px solid transparent;
@@ -177,17 +177,16 @@ li a:hover {
 }
 a {
   position: relative;
-  color: #fff;
+  color: #f7f9f4;
   transition: all 200ms linear;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 15px;
   border-radius: 2px;
   padding: 5px 0;
   padding-left: 20px;
   padding-right: 15px;
   margin: 2px 0;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   display: -ms-flexbox;
   display: flex;
@@ -204,7 +203,6 @@ a {
   color: #f7f9f4;
   transition: all 200ms linear;
   font-weight: 500;
-  font-size: 15px;
   border-radius: 2px;
   padding: 5px 0;
   padding-left: 20px;
@@ -249,5 +247,5 @@ a {
   max-height: 999px;
 }
 .section-dropdown a:hover {
-  letter-spacing: 4.5px;
+  letter-spacing: 4px;
 }
