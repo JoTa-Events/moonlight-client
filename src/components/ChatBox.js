@@ -28,6 +28,7 @@ export default function ChatBox(props){
    const renderChat = () => {
     return (
         <>
+        <h1>Chat</h1>
         {chatObj.messages.map(message=>(
             <div key= {message._id} className="chat-container">
                 <p>
@@ -35,6 +36,7 @@ export default function ChatBox(props){
                 </p>
             </div>
         ))}
+        <AddMessage eventId={eventId}  getChatFromAPI={getChatFromAPI} />
         </>
     )
    }
@@ -42,10 +44,8 @@ export default function ChatBox(props){
     return (
         <div className="Chat-container">
             <div className="all-messages-container">
-                {!chatObj ? "loading...." : renderChat() }
+                {!chatObj ? "" : renderChat() }
             </div>
-
-            <AddMessage eventId={eventId}  getChatFromAPI={getChatFromAPI} />
         </div>
     )
 }
