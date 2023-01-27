@@ -18,7 +18,7 @@ a {
 }
 /* Tab Container */
 .Tabs {
-  width: 100%;
+  width: auto;
   min-height: 800px;
   padding: 1.5rem 1rem;
   background-color: #ede5d8;
@@ -54,7 +54,7 @@ a {
 }
 .react-tabs__tab-panel--selected {
   display: block;
-  font-size: 2rem;
+  font-size: 1rem;
   text-align: center;
 }
 
