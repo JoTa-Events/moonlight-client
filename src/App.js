@@ -2,6 +2,7 @@ import AllEventsList from './pages/AllEventsList';
 import CreateEvent from './components/CreateEvent';
 import EventDetails from './pages/EventDetails';
 import EditEvent from './components/EditEvent';
+import MyProfile from './pages/MyProfile';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Homepage from './pages/Homepage';
@@ -33,6 +34,7 @@ function App() {
     <Nav />
 
     <Routes>
+        <Route exact path="/profile" element={<MyProfile />} />
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/events" element={<AllEventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
