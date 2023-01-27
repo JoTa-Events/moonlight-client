@@ -52,7 +52,7 @@ export default function EventDetails(props) {
       .catch((error) => console.log('Error deleting these details', error));
   };
   
-  // join event toggle button
+  // chat toggle button
   const toggleEventChat = () => {
     setToggle(!toggle)
   };

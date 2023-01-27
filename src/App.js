@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import MyProfile from './pages/MyProfile';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
 
     <Routes>      
         <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/profile" element={<MyProfile />} />
         <Route exact path="/events" element={<EventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
         <Route exact path="/events/create" element={<CreateEvent createCallback={getAllEvents} />} />

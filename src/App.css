@@ -74,7 +74,6 @@ li a:hover {
   text-align: center;
   z-index: 200;
 }
-
 [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked){
   position: absolute;
@@ -82,38 +81,65 @@ li a:hover {
   opacity: 0;
   pointer-events: none;
 }
-
 .dropdown:checked + label,
 .dropdown:not(:checked) + label{
   position: relative;
+  height: 30px;
   transition: all 200ms linear;
-  min-width: 200px;
+  border-radius: 5px;
+  width: 200px;
   font-size: 12px;
   letter-spacing: 2.5px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
   display: inline-flex;
-  justify-content: end;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
   text-align: center;
-  color: #f7f9f4;
+  background-color: #f56457;
+  cursor: pointer;
+  color: #282c34;
 }
-
 .dropdown:checked + label:before,
 .dropdown:not(:checked) + label:before{
   position: fixed;
   top: 0;
   left: 0;
   content: '';
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  cursor: auto;
+  pointer-events: none;
 }
-
+.dropdown:checked + label:before{
+  pointer-events: auto;
+}
+.dropdown:not(:checked) + label .uil {
+  margin-left: 10px;
+  transition: transform 200ms linear;
+}
+.dropdown:checked + label .uil {
+  transform: rotate(180deg);
+  margin-left: 10px;
+  transition: transform 200ms linear;
+}
 .section-dropdown {
   position: absolute;
   padding: 5px;
   background-color: #282c34;
-  top: 35px;
+  top: 40px;
   left: 0;
-  width: 100%;
-  border-radius: 4px;
+  width: 200px;
+  border-radius: 5px;
   display: block;
-  box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
   z-index: 2;
   opacity: 0;
   pointer-events: none;
@@ -138,7 +164,7 @@ li a:hover {
 .section-dropdown:after {
   position: absolute;
   top: -7px;
-  left: 150px;
+  left: 30px;
   width: 0; 
   height: 0; 
   border-left: 8px solid transparent;
@@ -146,15 +172,82 @@ li a:hover {
   border-bottom: 8px solid #282c34;
   content: '';
   display: block;
+  z-index: 2;
+  transition: all 200ms linear;
 }
-
-.section-dropdown a {
-  padding: 10px 0;
+a {
+  position: relative;
+  color: #fff;
+  transition: all 200ms linear;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 5px 0;
+  padding-left: 20px;
+  padding-right: 15px;
+  margin: 2px 0;
+  text-align: center;
   text-decoration: none;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-between;
+    -ms-flex-pack: distribute;
 }
-
+.dropdown-sub:checked + label,
+.dropdown-sub:not(:checked) + label{
+  position: relative;
+  color: #f7f9f4;
+  transition: all 200ms linear;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 5px 0;
+  padding-left: 20px;
+  padding-right: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-between;
+    -ms-flex-pack: distribute;
+    cursor: pointer;
+}
+.dropdown-sub:not(:checked) + label .uil {
+  transition: transform 200ms linear;
+}
+.dropdown-sub:checked + label .uil {
+  transform: rotate(135deg);
+  transition: transform 200ms linear;
+}
+.dropdown-sub:checked + label:hover,
+.dropdown-sub:not(:checked) + label:hover{
+  color: #f7f9f4;
+}
+.section-dropdown-sub {
+  position: relative;
+  display: block;
+  width: 100%;
+  opacity: 0;
+  max-height: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: hidden;
+  transition: all 200ms linear;
+}
+.dropdown-sub:checked ~ .section-dropdown-sub{
+  pointer-events: auto;
+  opacity: 1;
+  max-height: 999px;
+}
 .section-dropdown a:hover {
-  background-color: #f56457;
-  color: #282c34;
   letter-spacing: 4.5px;
 }
