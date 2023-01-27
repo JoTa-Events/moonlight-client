@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 import authForAPI from '../utils/authForAPI';
-import JoinEvent from '../components/JoinEvent';
+import ChatBox from '../components/ChatBox';
 
 export default function EventDetails(props) {
 
@@ -37,9 +37,10 @@ export default function EventDetails(props) {
         .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}/participants`, requestBody, authForAPI())
         .then((response) => {
             setParticipants(response.data);
-        })
-        .catch((error) => console.log("Error getting event", error));
-    }
+            getEvent()
+          })
+          .catch((error) => console.log("Error getting event", error));
+        }
 
     // deleting the event
     const deleteEvent = () => {
@@ -82,8 +83,10 @@ export default function EventDetails(props) {
           <h1>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h1>
           
           <button onClick={getParticipants}>Join Event</button>
-          <button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat" }</button>
-          {toggle && <JoinEvent eventId={eventId} />}
+          <ChatBox eventId={eventId} />
+
+          {/* <button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat" }</button> 
+          {toggle && <JoinEvent eventId={eventId} />} */}
 
         </div>
 
