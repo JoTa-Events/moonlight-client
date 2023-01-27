@@ -57,6 +57,10 @@ export default function EventDetails(props) {
     setToggle(!toggle)
   };
 
+  const renderChat=()=>{
+    return <ChatBox  eventId={eventId} /> 
+  }
+
   return (
     <>
       <div style={{display: "flex", justifyContent: "space-evenly", marginTop: "50px" }}>
@@ -81,11 +85,16 @@ export default function EventDetails(props) {
         <div style={{width: "50%", padding: "0 25px", textAlign: "start", border: "1px solid"}}>
           <h1>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h1>
 
-          {event.participants?.includes(user._id)
-            ? <button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat" }</button>
-            : <button onClick={getParticipants}>Join Event</button>
-          }
-            {toggle && <ChatBox eventId={eventId} /> }
+
+          {user 
+            ? event.participants?.includes(user._id) 
+              ?(<button onClick={toggleEventChat}>{toggle
+                  ? 'Hide Chat' : "Show Chat"}</button>) 
+                    : <button onClick={getParticipants}>Join Event</button> 
+                      : ""}
+          
+         
+            {toggle && renderChat()}
 
         </div>
 
