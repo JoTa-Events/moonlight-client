@@ -65,7 +65,7 @@ export default function EventDetails(props) {
           <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
 
           <p><b>Location:</b> {event.country} / {event.city}</p>
-          <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY") }</p>
+          <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
           <p><b>Description: </b>{event.description}</p>
           <p><b>By:</b> {event.author?.username}</p>
 

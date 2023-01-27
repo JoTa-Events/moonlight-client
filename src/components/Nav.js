@@ -26,14 +26,14 @@ export default function Nav() {
             {isLoggedIn && (
               <>
                 <input type="checkbox" />
-                <div class="sec-center">
+                <div className="sec-center">
                   <input
-                    class="dropdown"
+                    className="dropdown"
                     type="checkbox"
                     id="dropdown"
                     name="dropdown"
                   />
-                  <label class="for-dropdown" for="dropdown">
+                  <label className="for-dropdown" htmlFor="dropdown">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-user-circle"
@@ -53,17 +53,17 @@ export default function Nav() {
                     </svg> 
                     {user.username}
                   </label>
-                  <div class="section-dropdown">
+                  <div className="section-dropdown">
                     <input
-                      class="dropdown-sub"
+                      className="dropdown-sub"
                       type="checkbox"
                       id="dropdown-sub"
                       name="dropdown-sub"
                     />
-                    <label class="for-dropdown-sub" for="dropdown-sub">
+                    <label className="for-dropdown-sub" htmlFor="dropdown-sub">
                       <NavLink to="/profile">Profile</NavLink>
                     </label>
-                    <div class="section-dropdown-sub">
+                    <div className="section-dropdown-sub">
                       <a href="#">My Events?</a>
                       <a href="#">My Inbox?</a>
                       <a href="#">?</a>
@@ -77,14 +77,14 @@ export default function Nav() {
             {!isLoggedIn && (
               <>
                 <input type="checkbox" />
-                <div class="sec-center">
+                <div className="sec-center">
                   <input
-                    class="dropdown"
+                    className="dropdown"
                     type="checkbox"
                     id="dropdown"
                     name="dropdown"
                   />
-                  <label class="for-dropdown" for="dropdown">
+                  <label className="for-dropdown" htmlFor="dropdown">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-user-circle"
@@ -105,7 +105,7 @@ export default function Nav() {
                     Register
                   </label>
 
-                  <div class="section-dropdown">
+                  <div className="section-dropdown">
                     <NavLink to="/signup">Signup</NavLink>
                     <NavLink to="/login">Login</NavLink>
                   </div>

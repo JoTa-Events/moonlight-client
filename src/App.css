@@ -1,3 +1,8 @@
+body {
+  height: 100%;
+
+}
+
 .App {
   text-align: center;
   font-family: 'Roboto';
@@ -6,6 +11,51 @@
 
 a {
   text-decoration: none;
+}
+
+.profile {
+  height: 100%;
+}
+/* Tab Container */
+.Tabs {
+  width: 100%;
+  min-height: 800px;
+  padding: 1.5rem 1rem;
+  background-color: #ede5d8;
+  color: #282c34;
+  text-transform: uppercase;
+}
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+}
+.react-tabs__tab-list {
+  width: 60%;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #282c34;
+  padding-left: 0px;
+}
+.react-tabs__tab {
+  width: 50%;
+  padding: 1rem;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.7s;
+}
+.react-tabs__tab--selected {
+  background: #f56457;
+  color: #282c34;
+}
+.react-tabs__tab-panel {
+  display: none;
+}
+.react-tabs__tab-panel--selected {
+  display: block;
+  font-size: 2rem;
+  text-align: center;
 }
 
 /* error messages feedback */
