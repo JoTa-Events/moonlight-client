@@ -1,0 +1,16 @@
+.events-container{
+    display: flex;
+    border: 1px solid black;
+    overflow-x:scroll;
+    
+    
+}
+.event-inweek{
+    border: 1px solid black;
+    
+    
+}
+.event-inweek a{
+    color: black;
+    text-decoration: none;
+}
