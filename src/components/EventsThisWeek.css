@@ -1,4 +1,4 @@
-.week-events-container{
+.events-container{
     display: flex;
     border: 1px solid black;
     overflow-x:scroll;

@@ -1,4 +1,4 @@
-import EventsList from './pages/EventsList';
+import AllEventsList from './pages/AllEventsList';
 import CreateEvent from './components/CreateEvent';
 import EventDetails from './pages/EventDetails';
 import EditEvent from './components/EditEvent';
@@ -10,7 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import EventsListWeek from './components/EventsListWeek';
+
 
 function App() {
 
@@ -34,7 +34,7 @@ function App() {
 
     <Routes>
         <Route exact path="/" element={<Homepage />} />
-        <Route exact path="/events" element={<EventsList eventsList={eventsList} />} />
+        <Route exact path="/events" element={<AllEventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
         <Route exact path="/events/create" element={<CreateEvent createCallback={getAllEvents} />} />
         <Route exact path="/events/edit/:eventId" element={<EditEvent />} />
