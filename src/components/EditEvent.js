@@ -53,7 +53,7 @@ export default function EditEvent() {
       <h3>Edit this Event</h3>
 
       <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", width: "35%", margin: "auto"}} >
-          <input>Title</input>
+          <label>Title</label>
           <input
             type="text"
             required={true}

@@ -15,7 +15,6 @@ export default function EventDetails(props) {
     const [event, setEvent] = useState([]);
     const [participants, setParticipants] = useState([]);
     const [toggle, setToggle] = useState(true);
-    
 
     const getEvent = () => {
       axios
@@ -64,25 +63,30 @@ export default function EventDetails(props) {
           <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
 
           <h1>{event.title}</h1>
-          <h3>by:{event.author?.username}</h3>
+          <h3>by: {event.author?.username}</h3>
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {event.date}</p>
           <p><b>Description: </b>{event.description}</p>
 
-          <Link to={`/events/edit/${event._id}`}>Edit</Link>
-          <button onClick={deleteEvent}>Delete</button>
+          {/* only creator of the event can use the functionality edit/delete */}
+          {event.author?.username === user?.username && 
+              <>
+                <Link to={`/events/edit/${event._id}`}>Edit</Link>
+                <button onClick={deleteEvent}>Delete</button>
+              </>
+          }
 
         </div>
         <div style={{width: "50%", textAlign: "start", border: "1px solid"}}>
 
-          <button onClick={getParticipants}> Join Event</button>
+          <h1>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h1>
+          
+          <button onClick={getParticipants}>Join Event</button>
           <button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat" }</button>
           {toggle && <JoinEvent eventId={eventId} />}
 
         </div>
-        
-        
-       
+
       </div>
     );
   }
