@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import EventsListWeek from './components/EventsListWeek';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
 
     <Nav />
 
-    <Routes>      
+    <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/events" element={<EventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
