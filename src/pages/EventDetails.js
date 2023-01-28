@@ -70,7 +70,7 @@ export default function EventDetails(props) {
 
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
-          <p><b>Description: </b>{event.description}</p>
+          {/* <p><b>Description: </b>{event.description}</p> */}
           <p><b>By:</b> {event.author?.username}</p>
 
           {/* only creator of the event can use the functionality edit/delete */}
@@ -82,7 +82,7 @@ export default function EventDetails(props) {
           }
 
         </div>
-        <div style={{width: "50%", padding: "0 25px", textAlign: "start", border: "1px solid"}}>
+        <div className='ChatBox' style={{width: "50%"}}>
           <h1>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h1>
 
 

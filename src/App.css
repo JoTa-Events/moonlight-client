@@ -19,8 +19,12 @@ a {
   width: auto;
   padding: 1.5rem 1rem;
   color: #282c34;
+}
+
+.Tab-Title {
   text-transform: uppercase;
 }
+
 .react-tabs {
   -webkit-tap-highlight-color: transparent;
 }

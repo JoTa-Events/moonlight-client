@@ -8,7 +8,6 @@ import { Link, NavLink } from 'react-router-dom';
 export default function MyProfile({eventsList}) {
 
 const { user } = useContext(AuthContext);
-const [eventId, setEventId] = useState(null)
 
 // my chats list
 const myChatsList = eventsList?.filter((event) => {
@@ -23,7 +22,6 @@ const renderMyChats = () => {
       <TabList>
         {myChatsList.map((event) => (
           <Tab key={event._id}>
-            {/* <NavLink onClick={setEventId}>{event.title}</NavLink> */}
             {event.title}
           </Tab>
         ))}

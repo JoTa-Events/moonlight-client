@@ -1,0 +1,67 @@
+.chatbox {
+    border: 1px solid #282c34;
+    width: min(100% - 15px, 600px);
+    height: 550px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 50px;
+}
+
+.chatbox-head {
+    text-align: start;
+    color: #f7f9f4;
+    background: #282c34;
+    padding: 10px;
+}
+
+.chat-messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    background: #f7f9f4;
+    border-radius: 20px;
+    float: left;
+    padding: 5px 15px;
+    margin: 5px 0;
+    width: max-content;
+}
+
+.chatbox-footer {
+    display: flex;
+    border-top: 1px solid #282c34;
+}
+
+/* add message component */
+.form-message-container form {
+    width: 100%;
+}
+
+.form-chat {
+    width: min(100% - 20px, 600px);
+    margin-inline: auto;
+    height: 100vh;
+    margin: auto;
+    position: relative; 
+}
+
+.form-chat input {
+    display: block;
+    width: 100%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .5vw 0 ;
+    border: none;
+    border-radius: 5px;
+}
+
+form button {
+    padding: .5rem 1rem .5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    margin-left: auto;
+    
+}

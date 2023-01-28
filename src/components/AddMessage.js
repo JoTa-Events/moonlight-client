@@ -2,6 +2,8 @@ import axios from "axios"
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 import authForAPI from "../utils/authForAPI"
+import "./components-css/ChatBox.css"
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function AddMessage(props){
@@ -27,17 +29,18 @@ export default function AddMessage(props){
     }
 
     return(
-        <div className="form-message-container">
-            <form onSubmit={handleSubmit}>
-                <textarea
+        <>
+            <form className="form-chat" onSubmit={handleSubmit}>
+                <input 
                     required
                     type="text"
+                    placeholder="Type here..."
                     name="message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                 />
-                <button>Add message</button>
+                <button>Send</button>
             </form>
-        </div>
+        </>
     )
 }
