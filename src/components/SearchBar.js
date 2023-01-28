@@ -38,7 +38,14 @@ export default function SearchBar(props) {
         dayjs(event.date).format("YYYY-MM-DD").includes(queryStringDate)
         
     ));
- 
+    
+  const clearSearch= ()=>{
+    setQueryStringTitle("")
+    setQueryStringDescription("")
+    setQueryStringUsername("")
+    setQueryStringDate("")
+
+  }
 
   const renderList = () => {
     return (
@@ -76,6 +83,7 @@ export default function SearchBar(props) {
         setQueryString={setQueryStringDate}
         queryString={queryStringDate}
       />
+      <button onClick={clearSearch}>Clear search</button>
       
       {(queryStringTitle || queryStringDescription || queryStringUsername ||queryStringDate) && 
       (!eventsList ? "Loading......" : renderList())}
