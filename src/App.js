@@ -35,7 +35,7 @@ function App() {
 
     <Routes>
         <Route exact path="/profile" element={<MyProfile eventsList={eventsList} />} />
-        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage eventsList={eventsList} />} />
         <Route exact path="/events" element={<AllEventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
         <Route exact path="/events/create" element={<CreateEvent createCallback={getAllEvents} />} />

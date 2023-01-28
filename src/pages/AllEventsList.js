@@ -14,13 +14,11 @@ export default function AllEventsList(props) {
     <>
       <SearchBar eventKey={"title"} eventsList={eventsList}/>
       <hr />
-      <h2>What's popping?</h2>
-      <hr/>
-      <h2>Events of next 7 days</h2>{}
-     <EventsThisWeek eventsList={eventsList} />
-     <hr/>
-     <h2>Events after {dayjs(nextWeek).format("ddd DD MMM")}</h2>
-     <FutureEvents eventsList={eventsList}/>      
+      
+      
+    
+     
+         
      <hr/>
      <h2>Past Events {dayjs(nextWeek).format("ddd DD MMM")}</h2>
      <PastEvents eventsList={eventsList}/>  
