@@ -6,6 +6,7 @@ import { AuthContext } from '../context/auth.context';
 import ChatBox from '../components/ChatBox';
 import authForAPI from '../utils/authForAPI';
 import dayjs from 'dayjs';
+import "./pages-css/EventDetails.css"
 
 export default function EventDetails(props) {
 
@@ -63,26 +64,26 @@ export default function EventDetails(props) {
 
   return (
     <>
-      <div style={{display: "flex", justifyContent: "space-evenly", marginTop: "50px" }}>
-        <div className='event-details-container' style={{width: "30%", border: "1px solid"}} >
+      <div className='event-details-container' style={{display: "flex", alignItems: "space-evenly", marginTop: "50px" }}>
+        <div className='event-details'>
           <h1>{event.title}</h1>
           <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
 
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
-          {/* <p><b>Description: </b>{event.description}</p> */}
+          <p><b>Description: </b>{event.description}</p>
           <p><b>By:</b> {event.author?.username}</p>
 
           {/* only creator of the event can use the functionality edit/delete */}
           {event.author?.username === user?.username && 
-              <>
+              <div className='edit-delete'>
                 <Link to={`/events/edit/${event._id}`}>Edit</Link>
                 <button onClick={deleteEvent}>Delete</button>
-              </>
+              </div>
           }
 
         </div>
-        <div className='ChatBox' style={{width: "50%"}}>
+        <div className='ChatBox'>
           <h1>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h1>
 
 
