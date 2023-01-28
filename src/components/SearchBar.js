@@ -4,7 +4,8 @@ import SearchInputText from "./SearchInputText";
 import "./components-css/Search.css"
 import SearchInputDate from "./SearchInputDate";
 import dayjs from "dayjs";
-
+import converter from "number-to-words"
+import capitalize from "../utils/capitalize";
 export default function SearchBar(props) {
   const { eventsList } = props;
   
@@ -12,6 +13,9 @@ export default function SearchBar(props) {
   const [queryStringDescription, setQueryStringDescription] = useState("");
   const [queryStringUsername,setQueryStringUsername] = useState("")
   const [queryStringDate,setQueryStringDate] = useState("")
+
+
+ 
 
   const searchResultTitle = eventsList.filter((event) =>
     event.title.toLowerCase().includes(queryStringTitle.toLowerCase())
@@ -38,13 +42,16 @@ export default function SearchBar(props) {
 
   const renderList = () => {
     return (
-      <div className="search-result">
-        {searchResultDate.map((event) => (
-          <div className="event-inweek" key={event._id}>
-            <EventInList event={event} />
-          </div>
-        ))}
-      </div>
+      <>
+        <h4 style={{margin:"1rem 0"}}>{capitalize(converter.toWords(searchResultDate.length))} events found</h4>
+        <div className="search-result">
+          {searchResultDate.map((event) => (
+            <div className="event-inweek" key={event._id}>
+              <EventInList event={event} />
+            </div>
+          ))}
+        </div>
+      </>
     );
   };
   return (
@@ -70,8 +77,8 @@ export default function SearchBar(props) {
         queryString={queryStringDate}
       />
       
-
-      {!eventsList ? "Loading......" : renderList()}
+      {(queryStringTitle || queryStringDescription || queryStringUsername ||queryStringDate) && 
+      (!eventsList ? "Loading......" : renderList())}
     </>
   );
 }

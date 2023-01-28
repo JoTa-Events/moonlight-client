@@ -7,8 +7,8 @@ import SearchBar from '../components/SearchBar';
 
 export default function AllEventsList(props) {
   const{eventsList}=props
-  const nextWeek =dayjs().add(7,"day")
-
+  const today = dayjs().startOf("day");
+  
 
   return (
     <>
@@ -17,11 +17,11 @@ export default function AllEventsList(props) {
       
       
     
-     
+     <FutureEvents fromDate={today} eventsList={eventsList} />
          
      <hr/>
-     <h2>Past Events {dayjs(nextWeek).format("ddd DD MMM")}</h2>
-     <PastEvents eventsList={eventsList}/>  
+     <h2>Past Events</h2>
+     <PastEvents fromDate={today} eventsList={eventsList}/>  
          
     
     

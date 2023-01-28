@@ -5,7 +5,7 @@ import "./components-css/EventsThisWeek.css";
 
 export default function EventsListWeek(props) {
   const { eventsList } = props;
-  const today = dayjs();
+  const today = dayjs().startOf("day");
   const nextWeek = dayjs().add(7, "day");
 
   const thisWeekEvents = eventsList?.filter((event) => {

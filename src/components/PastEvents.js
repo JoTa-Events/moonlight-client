@@ -2,15 +2,15 @@ import dayjs from "dayjs"
 import EventInList from "./EventInList"
 
 export default function PastEvents(props){
-    const {eventsList} = props
-    const today =dayjs()
+    const {eventsList,fromDate} = props
+    
 
     const afterOneWeekEvents= eventsList?.filter(event=>{
         
         const eventDate = dayjs(event.date)
         
         
-        return ((eventDate.isBefore(today)))
+        return ((eventDate.isBefore(fromDate)))
        
         
     })
