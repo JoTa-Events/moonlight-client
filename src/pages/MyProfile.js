@@ -3,7 +3,7 @@ import { AuthContext } from '../context/auth.context';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import dayjs from 'dayjs';
 import ChatBox from '../components/ChatBox';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function MyProfile({eventsList}) {
 
@@ -15,9 +15,7 @@ const myChatsList = eventsList?.filter((event) => {
     if(event.participants?.includes(user?._id)){
         return event
     }
-    
 })
-console.log(myChatsList);
 
 const renderMyChats = () => {
   return (
@@ -49,7 +47,28 @@ const renderMyEvents = () => {
     <div style={{display: "flex", margin: "30px" }}>
       {myEventsList.map((event) => (
         <div key={event._id} style={{ border: "1px solid", width: "20%", wordWrap: "break-word", margin: "0 10px"}}>
-          <h1>{event.title}</h1>
+
+          <Link to={`/events/${event._id}`}>
+          <h2>{event.title}</h2>
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="icon icon-tabler icon-tabler-arrow-narrow-right" 
+            width={25} 
+            height={25}
+            viewBox="0 0 24 24" 
+            strokeWidth="1" 
+            stroke="currentColor" 
+            fill="none" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 12l14 0"></path>
+            <path d="M15 16l4 -4"></path>
+            <path d="M15 8l4 4"></path>
+          </svg>
+
+          </Link>
           <img src={event.image} alt='' style={{width: "300px"}} />
           <p>{dayjs(event.date).format("ddd DD MMM YYYY")}</p>
           <p>{event.location}</p>
@@ -71,9 +90,12 @@ const renderMyEvents = () => {
           <Tab>?</Tab>
         </TabList>
 
-        <TabPanel>{!myEventsList ? "Loading..." : renderMyEvents()}</TabPanel>
+        <TabPanel>
+          {!myEventsList ? "Loading..." : renderMyEvents()}
+        </TabPanel>
 
-        <TabPanel>{!myChatsList ? "Loading..." : renderMyChats()}
+        <TabPanel>
+          {!myChatsList ? "Loading..." : renderMyChats()}
         </TabPanel>
 
         <TabPanel>

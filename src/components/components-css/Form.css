@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.FormEvent {
+    margin-top: 50px;
+}
+
+.FormEvent h1 {
+    text-align: start;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.form-box {
+    width: min(100% - 20px, 640px);
+    margin-inline: auto;
+    height: 100vh;
+    margin: auto;
+    position: relative; 
+}
+
+.form-box label {
+    display: block;
+    text-align: start;
+    margin: 0 0 0 0;
+}
+
+.form-box input, textarea, select {
+    display: block;
+    width: 100%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: .5vw 0 ;
+    border: 0;
+    border-radius: 5px;
+}
+
+form button {
+    padding: .5rem 1rem .5rem 1rem;
+    border-radius: 5px;
+}
