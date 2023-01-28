@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import ChatBox from "../components/ChatBox";
 import { Link } from "react-router-dom";
 
-import "./pages-css/Profile.css"
+import "./pages-css/Profile.css";
 
 export default function MyProfile({ eventsList }) {
   const { user } = useContext(AuthContext);
@@ -41,46 +41,30 @@ export default function MyProfile({ eventsList }) {
 
   const renderMyEvents = () => {
     return (
-      <div style={{ display: "flex", margin: "30px" }}>
+      <>
         {myEventsList.map((event) => (
-          <div
-            key={event._id}
-            style={{
-              border: "1px solid",
-              width: "20%",
-              wordWrap: "break-word",
-              margin: "0 10px",
-            }}
-          >
+          <div className="container" key={event._id}>
             <Link to={`/events/${event._id}`}>
-              <h2>{event.title}</h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                width={25}
-                height={25}
-                viewBox="0 0 24 24"
-                strokeWidth="1"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M5 12l14 0"></path>
-                <path d="M15 16l4 -4"></path>
-                <path d="M15 8l4 4"></path>
-              </svg>
+              <div className="card">
+                <div class="card-header">
+                  <img src={event.image} alt="" />
+                </div>
+                <div className="card-body">
+
+                  <h3>{event.title}</h3>
+                  <br />
+                  <p>{event.description}</p>
+                  <p>{event.location}</p>
+
+                  <div className="date">
+                    <h5>{dayjs(event.date).format("ddd DD MMM YYYY")}</h5>
+                  </div>
+                </div>
+              </div>
             </Link>
-            <img src={event.image} alt="" style={{ width: "300px" }} />
-            <p>{dayjs(event.date).format("ddd DD MMM YYYY")}</p>
-            <p>{event.location}</p>
-            <p>
-              <i>{event.description}</i>
-            </p>
           </div>
         ))}
-      </div>
+      </>
     );
   };
 

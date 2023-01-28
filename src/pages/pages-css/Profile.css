@@ -1,8 +1,8 @@
 /* Tab Container */
 .Tabs {
+    color: #282c34;
     width: auto;
     padding: 1.5rem 1rem;
-    color: #282c34;
     text-transform: uppercase;
 }
 
@@ -11,18 +11,17 @@
 }
 
 .react-tabs__tab-list {
-    width: 60%;
+    width: 50%;
     margin: 0 auto 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #282c34;
-    padding-left: 0px;
 }
 
 .react-tabs__tab {
     width: 50%;
-    padding: 1rem;
+    padding: .7rem;
     list-style: none;
     text-align: center;
     cursor: pointer;
@@ -41,4 +40,38 @@
 .react-tabs__tab-panel--selected {
     display: block;
     text-align: center;
+}
+
+/* List of Events in Profile */
+.container {
+    display: inline-block;
+}
+
+.card {
+    background-color: #f7f9f4;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 325px;
+}
+
+.card-header img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 100px;
+}
+
+.date {
+    margin-top: auto;
+    margin: 0;
+    color: #f56457;
 }

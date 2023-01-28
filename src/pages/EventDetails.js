@@ -66,9 +66,9 @@ export default function EventDetails(props) {
     <>
       <div className='event-details-container' style={{display: "flex", alignItems: "space-evenly", marginTop: "50px" }}>
         <div className='event-details'>
-          <h1>{event.title}</h1>
           <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
 
+          <h1>{event.title}</h1>
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
           <p><b>Description: </b>{event.description}</p>
