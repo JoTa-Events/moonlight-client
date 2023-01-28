@@ -12,11 +12,14 @@ export default function AllEventsList(props) {
 
   return (
     <>
+
+      
       <SearchBar eventKey={"title"} eventsList={eventsList}/>
       <hr />
       
       
-    
+      <hr/>
+     <h2>Future Events</h2>
      <FutureEvents fromDate={today} eventsList={eventsList} />
          
      <hr/>

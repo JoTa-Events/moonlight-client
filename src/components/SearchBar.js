@@ -13,7 +13,7 @@ export default function SearchBar(props) {
   const [queryStringDescription, setQueryStringDescription] = useState("");
   const [queryStringUsername,setQueryStringUsername] = useState("")
   const [queryStringDate,setQueryStringDate] = useState("")
-
+  const [isSearchHidden,setIsSearchHidden]=useState(true)
 
  
 
@@ -44,7 +44,12 @@ export default function SearchBar(props) {
     setQueryStringDescription("")
     setQueryStringUsername("")
     setQueryStringDate("")
+    
 
+  }
+  
+  const ShowHideSearch =()=>{
+    setIsSearchHidden((prevValue)=>(!prevValue))
   }
 
   const renderList = () => {
@@ -63,6 +68,11 @@ export default function SearchBar(props) {
   };
   return (
     <>
+
+        <button hidden={!isSearchHidden} type="submit" onClick={ShowHideSearch} style={{padding:"0.3rem",borderRadius:"5px"}}>Search Events</button>
+       <div hidden={isSearchHidden}
+       >
+
        <SearchInputText
         eventKey={"title"}
         setQueryString={setQueryStringTitle}
@@ -83,8 +93,9 @@ export default function SearchBar(props) {
         setQueryString={setQueryStringDate}
         queryString={queryStringDate}
       />
-      <button onClick={clearSearch}>Clear search</button>
+      <button onClick={clearSearch}>Clear search</button><button style={{padding:"0 0.3rem",margin:"0.2rem"  }} onClick={()=>{ShowHideSearch();clearSearch()}}><b>x</b></button>
       
+       </div>
       {(queryStringTitle || queryStringDescription || queryStringUsername ||queryStringDate) && 
       (!eventsList ? "Loading......" : renderList())}
     </>
