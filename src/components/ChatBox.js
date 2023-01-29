@@ -29,7 +29,7 @@ export default function ChatBox(props) {
     return (
       <div className="chatbox">
         <div className="chatbox-head"><span>Chat</span></div>
-          <div  className="chat-messages">
+          <div  className="chat-messages messeges-list">
             {chatObj.messages.map((message) => (
                 <p className="message" key={message._id}>
                 <b>{message.author?.username}:</b> {message.message}

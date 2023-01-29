@@ -50,7 +50,6 @@
 
 .card {
     background-color: #f7f9f4;
-    border-radius: 10px;
     overflow: hidden;
     width: 275px;
     flex: 1 1 100px;
@@ -78,3 +77,21 @@
 }
 
 /* List of Chats in Profile */
+#chat-container {
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+  }
+  
+  #chat-list {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #ddd;
+    border-bottom: 1px solid #999;
+  }
