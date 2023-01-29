@@ -48,7 +48,7 @@ export default function MyProfile({ eventsList, deleteCallback }) {
         <>
           <TabList className="chat-list">
             {myChatsList.map((event) => (
-              <Tab key={event._id}>{event.title}</Tab>
+              <Tab style={{border: ".5px solid #282c34"}} key={event._id}>{event.title}</Tab>
             ))}
           </TabList>
         </>

@@ -1,7 +1,7 @@
 .chatbox {
     border: 1px solid #282c34;
     width: min(100% - 15px, 600px);
-    height: 550px;
+    height: 560px;
     border-radius: 4px;
     overflow: hidden;
     text-transform: lowercase;
