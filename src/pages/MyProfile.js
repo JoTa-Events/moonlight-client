@@ -17,13 +17,14 @@ import capitalize from "../utils/capitalize";
 export default function MyProfile({ eventsList, deleteCallback }) {
   const API_URL= process.env.REACT_APP_API_URL
   const today = dayjs().startOf("day");
-  const [isFormHidden,setIsFormHidden]=useState(true)
   const { user } = useContext(AuthContext);
   const [avatar, setAvatar] = useState(null);
   const [userData,setUserData]=useState(null)
-
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isFormHidden,setIsFormHidden]=useState(true)
+  
   useEffect(()=>{
-    console.log(`cuantas veces se actica esto`)
+  
     axios.get(`${API_URL}/api/my-profile`,authForAPI())
       .then(response=>{
         setUserData(response.data)
@@ -117,12 +118,23 @@ export default function MyProfile({ eventsList, deleteCallback }) {
       <h1>{capitalize(userData.username)}</h1>
       <h3>email: {userData.email}</h3>
       <h4>A Moonlight member for {dayjs(today).diff(userData.createdAt,"day")} days</h4>
+
       <button hidden={!isFormHidden} onClick={hideDisplayForm}>Update avatar</button>
+      
       <div hidden={isFormHidden}>
-        <form onSubmit={handleSubmit}>
-          <input type="file" onChange={handleFileUpload} />
-          <button type="submit">Upload</button>
+        <form >
+          <input required type="file" onChange={handleFileUpload} />
+
+
+          { isUploadingImage 
+          ? <button  type="submit" disabled>Uploading</button>
+          : <button onClick={handleSubmit}  type="submit">Submit</button>
+        }    
+
+         
+        <button onClick={(e)=>{handleCancel(e)}}>x</button>
         </form>
+        
         {avatar && <img className="profile-avatar" style={{width:"100px"}} src={avatar} alt="Uploaded-avatar" />}
       </div>
     </div>;
@@ -137,9 +149,10 @@ export default function MyProfile({ eventsList, deleteCallback }) {
 
   const handleFileUpload = (e) => {
 
+    
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
-    // setIsUploadingImage(true);
+     setIsUploadingImage(true);
 
     service
       .uploadImage(uploadData)
@@ -149,13 +162,17 @@ export default function MyProfile({ eventsList, deleteCallback }) {
       .catch((error) => console.log("Error while uploading the file: ", error))
       .finally ( () => {
         
-        // setIsUploadingImage(false)
+         setIsUploadingImage(false)
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+     if (!e.target.form.checkValidity()){
+ 
+      return
+     }
     const requestBody = { avatar};
 
     axios
@@ -171,12 +188,19 @@ export default function MyProfile({ eventsList, deleteCallback }) {
         
         hideDisplayForm()
         setAvatar("")
-        
+        e.target.form.reset()
       });
      
    
   };
-
+  const handleCancel=(e)=>{
+    e.preventDefault()
+    e.target.form.reset()
+    setIsFormHidden(prevState=>{
+      return !prevState
+    })
+    setAvatar(null)
+  }
 
   return (
     <div className="profile">
