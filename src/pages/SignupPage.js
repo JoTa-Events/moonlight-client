@@ -1,16 +1,15 @@
 import axios from "axios";
-import { useState } from "react"
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default  function SignupPage(){
+export default function SignupPage() {
+  const API_URL = process.env.REACT_APP_API_URL;
 
-  const API_URL = process.env.REACT_APP_API_URL
-
-  const [username,setUsername]=useState("")
-  const [email,setEmail]= useState("")
-  const [password,setPassword]= useState("")
-  const navigate=useNavigate()
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -18,10 +17,12 @@ export default  function SignupPage(){
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleSignupSubmit = (e) => {
-    e.preventDefault()
-    const newUser={
-      username,email,password
-    }
+    e.preventDefault();
+    const newUser = {
+      username,
+      email,
+      password,
+    };
 
     axios
       .post(`${API_URL}/auth/signup`, newUser)
@@ -31,52 +32,53 @@ export default  function SignupPage(){
         navigate("/login");
       })
       .catch((error) => {
-        const errorDescription = error.response ? error.response.data.message:"Error when signing up"
+        const errorDescription = error.response
+          ? error.response.data.message
+          : "Error when signing up";
 
         setErrorMessage(errorDescription);
         console.log("Error when creating a new user", error);
-      });    
-    };
+      });
+  };
 
   return (
-    <div className="Signup-page">
-
+    <div className="container">
       <form onSubmit={handleSignupSubmit}>
+      <h2>Signup</h2>
         <label htmlFor="email">Email:</label>
-        <input 
+        <input
           id="email"
           type="email"
           name="email"
           value={email}
           onChange={handleEmail}
         />
- 
+
         <label htmlFor="password">Password:</label>
-        <input 
+        <input
           id="password"
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
         />
- 
+
         <label htmlFor="username">Username:</label>
-        <input 
+        <input
           id="username"
           type="text"
           name="username"
           value={username}
           onChange={handleUsername}
         />
- 
+
         <button type="submit">Sign Up</button>
+
+        <p>Already have account?</p>
+        <Link to={"/login"}>Login</Link>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}>Login</Link>
-
     </div>
-  )
+  );
 }
