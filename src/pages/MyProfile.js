@@ -54,8 +54,8 @@ export default function MyProfile({ eventsList, deleteCallback }) {
           </TabList>
         </>
         {myChatsList.map((event) => (
-          <div className='ChatBox'>
-            <TabPanel key={event._id}>
+          <div  key={event._id} className='ChatBox'>
+            <TabPanel>
               <ChatBox eventId={event._id} />
             </TabPanel>
           </div>
