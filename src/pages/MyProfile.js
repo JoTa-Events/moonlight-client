@@ -16,14 +16,15 @@ export default function MyProfile({ eventsList, deleteCallback }) {
   const [isFormHidden, setIsFormHidden] = useState(true);
   const { user } = useContext(AuthContext);
   const [avatar, setAvatar] = useState(null);
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    console.log(`cuantas veces se actica esto`);
-    axios
-      .get(`${API_URL}/api/my-profile`, authForAPI())
-      .then((response) => {
-        setUserData(response.data);
+  const [userData,setUserData]=useState(null)
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isFormHidden,setIsFormHidden]=useState(true)
+  
+  useEffect(()=>{
+  
+    axios.get(`${API_URL}/api/my-profile`,authForAPI())
+      .then(response=>{
+        setUserData(response.data)
       })
       .catch((error) => {
         console.log(`error getting the data from ${user.username}`);
@@ -50,8 +51,8 @@ export default function MyProfile({ eventsList, deleteCallback }) {
           </TabList>
         </>
         {myChatsList.map((event) => (
-          <div className="ChatBox">
-            <TabPanel key={event._id}>
+          <div  key={event._id} className='ChatBox'>
+            <TabPanel>
               <ChatBox eventId={event._id} />
             </TabPanel>
           </div>
@@ -107,35 +108,23 @@ export default function MyProfile({ eventsList, deleteCallback }) {
 
   // ---------myprofile----------
 
-  const renderUserData = () => {
-    return (
-      <div className="profile-details-container">
-        <div className="profile-img-container">
-          <img className="profile-avatar" src={userData.avatar} alt="avatar" />
-        </div>
-        <h1>{capitalize(userData.username)}</h1>
-        <h3>email: {userData.email}</h3>
-        <h4>
-          A Moonlight member for {dayjs(today).diff(userData.createdAt, "day")}{" "}
-          days
-        </h4>
-        <button hidden={!isFormHidden} onClick={hideDisplayForm}>
-          Update avatar
-        </button>
-        <div hidden={isFormHidden}>
-          <form onSubmit={handleSubmit}>
-            <input type="file" onChange={handleFileUpload} />
-            <button type="submit">Upload</button>
-          </form>
-          {avatar && (
-            <img
-              className="profile-avatar"
-              style={{ width: "100px" }}
-              src={avatar}
-              alt="Uploaded-avatar"
-            />
-          )}
-        </div>
+  const renderUserData = ()=>{
+    
+    return <div className="profile-details-container">
+      <div className="profile-img-container" >
+
+        <img className="profile-avatar" src={userData.avatar} alt="avatar" />
+      </div>
+      <h1>{capitalize(userData.username)}</h1>
+      <h3>email: {userData.email}</h3>
+      <h4>A Moonlight member for {dayjs(today).diff(userData.createdAt,"day")} days</h4>
+      <button hidden={!isFormHidden} onClick={hideDisplayForm}>Update avatar</button>
+      <div hidden={isFormHidden}>
+        <form onSubmit={handleSubmit}>
+          <input type="file" onChange={handleFileUpload} />
+          <button type="submit">Upload</button>
+        </form>
+        {avatar && <img className="profile-avatar" style={{width:"100px"}} src={avatar} alt="Uploaded-avatar" />}
       </div>
     );
   };
@@ -146,9 +135,10 @@ export default function MyProfile({ eventsList, deleteCallback }) {
   };
 
   const handleFileUpload = (e) => {
+
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
-    // setIsUploadingImage(true);
+     setIsUploadingImage(true);
 
     service
       .uploadImage(uploadData)
@@ -156,7 +146,8 @@ export default function MyProfile({ eventsList, deleteCallback }) {
         setAvatar(response.fileUrl);
       })
       .catch((error) => console.log("Error while uploading the file: ", error))
-      .finally(() => {
+      .finally ( () => {
+        
         // setIsUploadingImage(false)
       });
   };
@@ -164,7 +155,7 @@ export default function MyProfile({ eventsList, deleteCallback }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestBody = { avatar };
+    const requestBody = { avatar};
 
     axios
       .put(`${API_URL}/api/my-profile`, requestBody, authForAPI())
@@ -175,10 +166,13 @@ export default function MyProfile({ eventsList, deleteCallback }) {
         console.log(error);
       })
       .finally(() => {
-        hideDisplayForm();
-        setAvatar("");
+        
+        hideDisplayForm()
+        setAvatar("")
+        
       });
   };
+
 
   return (
     <div className="profile">

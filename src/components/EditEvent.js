@@ -7,6 +7,7 @@ import "./components-css/Form.css";
 // import arrays for countries and capital cities
 import cityArr from "../data/capitalCity";
 import countryArr from "../data/countries";
+import dayjs from "dayjs";
 
 export default function EditEvent() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function EditEvent() {
         const event = response.data;
 
         setTitle(event.title);
-        setDate(event.date);
+        setDate(dayjs(event.date).format("YYYY-MM-DD"));
         setCountry(event.country);
         setCity(event.city);
         setDescription(event.description);
