@@ -1,9 +1,9 @@
 /* Tab Container */
 .Tabs {
     color: #282c34;
+    text-transform: uppercase;
     width: auto;
     padding: 1.5rem 1rem;
-    text-transform: uppercase;
 }
 
 .react-tabs {
@@ -44,15 +44,16 @@
 
 /* List of Events in Profile */
 .container {
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .card {
     background-color: #f7f9f4;
     border-radius: 10px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    width: 325px;
+    width: 275px;
+    flex: 1 1 100px;
 }
 
 .card-header img {
@@ -75,3 +76,5 @@
     margin: 0;
     color: #f56457;
 }
+
+/* List of Chats in Profile */

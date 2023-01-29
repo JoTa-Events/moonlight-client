@@ -19,16 +19,20 @@ export default function MyProfile({ eventsList }) {
 
   const renderMyChats = () => {
     return (
-      <Tabs className="Tabs">
-        <TabList>
-          {myChatsList.map((event) => (
-            <Tab key={event._id}>{event.title}</Tab>
-          ))}
-        </TabList>
+      <Tabs className="chats">
+        <div className="chat-tabs">
+          <TabList >
+            {myChatsList.map((event) => (
+              <Tab key={event._id}>{event.title}</Tab>
+            ))}
+          </TabList>
+        </div>
         {myChatsList.map((event) => (
-          <TabPanel key={event._id}>
-            <ChatBox eventId={event._id} />
-          </TabPanel>
+          <div className='ChatBox'>
+            <TabPanel key={event._id}>
+              <ChatBox eventId={event._id} />
+            </TabPanel>
+          </div>
         ))}
       </Tabs>
     );
@@ -41,9 +45,9 @@ export default function MyProfile({ eventsList }) {
 
   const renderMyEvents = () => {
     return (
-      <>
+      <div className="container">
         {myEventsList.map((event) => (
-          <div className="container" key={event._id}>
+          <div key={event._id}>
             <Link to={`/events/${event._id}`}>
               <div className="card">
                 <div class="card-header">
@@ -64,7 +68,7 @@ export default function MyProfile({ eventsList }) {
             </Link>
           </div>
         ))}
-      </>
+      </div>
     );
   };
 

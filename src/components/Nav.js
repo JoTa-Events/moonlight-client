@@ -7,30 +7,20 @@ export default function Nav() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
+    <div className="wrapper">
     <nav>
-      <div className="custom-navbar">
-        <div className="navbar-links-logo">
-          <ul>
-            <li>
-              <NavLink to="/">Moonlight</NavLink>
-            </li>
-            <li>
-              <NavLink to="/events">Events</NavLink>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-links">
-          <ul>
-            {isLoggedIn && (
-              <>
-                <input type="checkbox" />
+      <div className="navbar-left">
+        <NavLink to="/">Moonlight</NavLink>
+        <NavLink to="/events">Events</NavLink>
+      </div>
+
+      <div className="navbar-right">
+        <ul>
+          {isLoggedIn && (
+            <>
+              <input type="checkbox" />
                 <div className="sec-center">
-                  <input
-                    className="dropdown"
-                    type="checkbox"
-                    id="dropdown"
-                    name="dropdown"
-                  />
+                  <input className="dropdown" type="checkbox" id="dropdown" name="dropdown" />
                   {/* dropdown */}
                   <label className="for-dropdown" htmlFor="dropdown">
                   <svg  style={{marginRight: "10px"}}
@@ -53,12 +43,7 @@ export default function Nav() {
                   {user.username}
                   </label>
                   <div className="section-dropdown">
-                    <input
-                      className="dropdown-sub"
-                      type="checkbox"
-                      id="dropdown-sub"
-                      name="dropdown-sub"
-                    />
+                    <input className="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub" />
                     {/* profile link */}
                     <NavLink to="/profile">
                     <svg
@@ -129,12 +114,7 @@ export default function Nav() {
               <>
                 <input type="checkbox" />
                 <div className="sec-center">
-                  <input
-                    className="dropdown"
-                    type="checkbox"
-                    id="dropdown"
-                    name="dropdown"
-                  />
+                  <input className="dropdown" type="checkbox" id="dropdown" name="dropdown" />
                   {/* dropdown */}
                   <label className="for-dropdown" htmlFor="dropdown">
                   <svg  style={{marginRight: "10px"}}
@@ -157,7 +137,6 @@ export default function Nav() {
                   </svg>
                   Register
                   </label>
-
                   <div className="section-dropdown">
                     {/* signup */}
                     <NavLink to="/signup">
@@ -206,7 +185,7 @@ export default function Nav() {
             )}
           </ul>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }

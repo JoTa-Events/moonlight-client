@@ -1,12 +1,8 @@
 body {
-  height: 100%;
   background-color: #ede5d8;
-}
-
-.App {
-  text-align: center;
   font-family: 'Roboto';
-  font-size: 13px;
+  font-size: 14px;
+  height: 100%;
 }
 
 a {

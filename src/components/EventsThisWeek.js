@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { Link } from "react-router-dom";
 import EventInList from "./EventInList";
 import "./components-css/EventsThisWeek.css";
 

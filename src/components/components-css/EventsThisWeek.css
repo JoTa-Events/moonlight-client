@@ -1,16 +1,18 @@
 .events-container{
     display: flex;
-    border: 1px solid black;
-    overflow-x:scroll;
-    
-    
+    overflow-x: scroll;
 }
-.event-inweek{
-    border: 1px solid black;
-    
-    
-}
+
 .event-inweek a{
-    color: black;
+    color: #282c34;
     text-decoration: none;
+}
+
+/* past events opacity */
+.past-events {
+    opacity: 0.6;
+}
+
+.past-events:hover {
+    opacity: 1.0;
 }

@@ -1,25 +1,31 @@
-/* container that holds the event details and chatbox */
+/* event details page */
+/* container that holds details and chatbox */
 .event-details-container {
+    text-align: center;
+
     margin: 0 5%;
     overflow: auto;
     resize: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-column-gap: 25px;
+    grid-column-gap: 20px;
 }
 
-/* size of both containers */
 .ChatBox,
 .event-details {
     margin: 0 auto;
+    overflow: hidden;
     grid-template-rows: min-content;
     width: min(100% - 15px, 600px);
     height: min(100% - 15px, 600px);
-    overflow: hidden;
 }
 
 .ChatBox {
     text-align: start;
+}
+
+.event-details h1 {
+    margin-bottom: 15px;
 }
 
 .event-details {
@@ -28,4 +34,41 @@
 
 .edit-delete {
     display: inline-flex;
+}
+
+/* List of Events page */
+.events-list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-events-list {
+    background-color: #f7f9f4;
+    overflow: hidden;
+    width: 275px;
+    flex: 1 1 100px;
+}
+
+.card-events-header img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-events-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 100px;
+}
+
+.card-events-body h4 {
+    margin-bottom: 5%;
+}
+
+/* all events details page */
+.allEvents {
+    margin: 0 2%;
 }

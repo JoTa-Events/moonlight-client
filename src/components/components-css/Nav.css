@@ -1,39 +1,15 @@
-.custom-navbar {
-    padding: 25px 0;
+.wrapper {
     background-color: #282c34;
-}
-
-.navbar-links-logo {
-    display: inline-block;
-    margin-left: 15px;
-    float: left;
     text-transform: uppercase;
+    margin: 0 auto;
+    padding: 1.5rem;
 }
 
-.navbar-links {
-    display: inline-block;
-    margin-right: 15px;
-    float: right;
-    text-transform: uppercase;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    float: left;
-    padding: 0px 15px;
-}
-
-li a,
-span {
-    display: block;
+nav a {
     color: #f7f9f4;
-    letter-spacing: 2.5px;
     font-size: 12px;
+    letter-spacing: 2.5px;
+    padding: 0px 15px;
 
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
@@ -42,12 +18,18 @@ span {
     transition: all 0.3s ease-in;
 }
 
-.custom-navbar a {
-    color: #f7f9f4;
+nav a:hover {
+    color: #f56457;
 }
 
-.custom-navbar a:hover {
-    color: #f56457;
+.navbar-left {
+    display: flex;
+    flex-wrap: wrap;
+    float: left;
+}
+
+.navbar-right {
+    float: right;
 }
 
 /* dropdrown box - nav bar */

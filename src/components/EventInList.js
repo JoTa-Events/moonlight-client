@@ -1,51 +1,23 @@
-import dayjs from "dayjs"
-import { Link } from "react-router-dom"
+import dayjs from "dayjs";
+import { Link } from "react-router-dom";
+import "../pages/pages-css/EventDetails.css"
 
-export default function EventInList(props){
-    
-    const {event}=props
+export default function EventInList(props) {
+  const { event } = props;
 
-    return <Link to={`/events/${event._id}`}>
-        <div
-              className="card"
-              key={event._id}
-              style={{
-                display: "inline-block",
-                margin: "10px",
-                border: "1px solid",
-              }}
-            >
-              <div className="card-content">
-                <img
-                  src={event.image}
-                  alt=""
-                  style={{ width: "300px", margin: "10px" }}
-                />
-                <span
-                  className="title"
-                  style={{ margin: "8px", color: "#282c34", fontSize: "15px" }}
-                >
-                  {dayjs(event.date).format("dddd DD MMM") }
-                </span>
-                
-                  <span
-                    className="title"
-                    style={{
-                      margin: "10px",
-                      color: "#282c34",
-                      fontSize: "25px",
-                    }}
-                  >
-                    {event.title}
-                  </span>
-                
-                <span
-                  className="title"
-                  style={{ margin: "10px", color: "#282c34", fontSize: "15px" }}
-                >
-                  {event.author?.username}
-                </span>
-              </div>
-            </div>
-            </Link>
+  return (
+    <Link to={`/events/${event._id}`}>
+      <div className="events-list-container" key={event._id} >
+        <div className="card-events-list">
+          <div className="card-events-header">
+            <img src={event.image} alt="" />
+          </div>
+          <div className="card-events-body" style={{backgroundColor: "#282c34"}} >
+            <h4 style={{letterSpacing: "4px", color: "#f56457"}}>{dayjs(event.date).format("dddd DD MMM")}</h4>
+            <span style={{color: "#f7f9f4"}} >{event.title}</span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
 }
