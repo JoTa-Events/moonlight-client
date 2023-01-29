@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import dayjs from "dayjs";
@@ -7,13 +7,33 @@ import { Link } from "react-router-dom";
 import "./pages-css/Profile.css";
 import service from "../service"
 import axios from 'axios';
+import authForAPI from "../utils/authForAPI";
+import capitalize from "../utils/capitalize";
 
-const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1674988751/moonlight-default-img/photo-1674094170431-000e0edbc342_qb8ru0.jpg'
+
+
 
 
 export default function MyProfile({ eventsList }) {
+  const API_URL= process.env.REACT_APP_API_URL
+  const today = dayjs().startOf("day");
+  const [isFormHidden,setIsFormHidden]=useState(true)
   const { user } = useContext(AuthContext);
-  const [avatar, setAvatar] = useState(DefaultImage);
+  const [avatar, setAvatar] = useState(null);
+  const [userData,setUserData]=useState(null)
+
+  useEffect(()=>{
+    console.log(`cuantas veces se actica esto`)
+    axios.get(`${API_URL}/api/my-profile`,authForAPI())
+      .then(response=>{
+        setUserData(response.data)
+      })
+      .catch(error=>{
+        console.log(`error getting the data from ${user.username}`);
+      })
+
+  },[avatar])
+ 
 
   // my chats list
   const myChatsList = eventsList?.filter((event) => {
@@ -77,7 +97,37 @@ export default function MyProfile({ eventsList }) {
     );
   };
 
-  // myprofile
+
+  // ---------myprofile----------
+
+  const renderUserData = ()=>{
+    
+    return <div className="profile-details-container">
+      <div className="profile-img-container" >
+
+        <img className="profile-avatar" src={userData.avatar} alt="avatar" />
+      </div>
+      <h1>{capitalize(userData.username)}</h1>
+      <h3>email: {userData.email}</h3>
+      <h4>A Moonlight member for {dayjs(today).diff(userData.createdAt,"day")} days</h4>
+      <button hidden={!isFormHidden} onClick={hideDisplayForm}>Update avatar</button>
+      <div hidden={isFormHidden}>
+        <form onSubmit={handleSubmit}>
+          <input type="file" onChange={handleFileUpload} />
+          <button type="submit">Upload</button>
+        </form>
+        {avatar && <img className="profile-avatar" style={{width:"100px"}} src={avatar} alt="Uploaded-avatar" />}
+      </div>
+    </div>;
+    
+
+  }
+  const hideDisplayForm=()=>{
+    setIsFormHidden(prevState=>{
+      return !prevState
+    })
+  }
+
   const handleFileUpload = (e) => {
 
     const uploadData = new FormData();
@@ -91,6 +141,7 @@ export default function MyProfile({ eventsList }) {
       })
       .catch((error) => console.log("Error while uploading the file: ", error))
       .finally ( () => {
+        
         // setIsUploadingImage(false)
       });
   };
@@ -101,14 +152,26 @@ export default function MyProfile({ eventsList }) {
     const requestBody = { avatar};
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/profile/${user.username}`, requestBody)
+      .put(`${API_URL}/api/my-profile`, requestBody,authForAPI())
       .then((response) => {
-          setAvatar("")
-
+          console.log(response)
+          console.log(`esto tampoco se esta activando`)
+        
           // props.createCallback(requestBody);
       })
-      .catch((error) => console.log(error));
-  }
+      .catch((error) =>{
+        console.log(error)
+      })
+      .finally(() => {
+        
+        hideDisplayForm()
+        setAvatar("")
+        
+      });
+     
+   
+  };
+
 
   return (
     <div className="profile">
@@ -124,18 +187,9 @@ export default function MyProfile({ eventsList }) {
         <TabPanel>{!myChatsList ? "Loading..." : renderMyChats()}</TabPanel>
 
         <TabPanel>
-          <p>Tab 3 works!</p>
-
-          <img src={user?.avatar} alt="" />
-          <h1>{user?.username}</h1>
-
-          <div>
-            <form onSubmit={handleSubmit}>
-              <input type="file" onChange={handleFileUpload} />
-              <button type="submit">Upload</button>
-            </form>
-            {avatar && <img src={user?.avatar} alt="Uploaded Image" />}
-          </div>
+          
+          {!userData ? "Loading...": renderUserData()}
+          
         </TabPanel>
       </Tabs>
     </div>

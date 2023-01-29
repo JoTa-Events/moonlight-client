@@ -41,6 +41,26 @@
     display: block;
     text-align: center;
 }
+/****profile*****/
+.profile-details-container{
+    text-transform:none;
+}
+.profile-img-container{
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    overflow: hidden;
+    
+    
+
+}
+.profile-avatar{
+    width: 100%;
+
+    
+}
 
 /* List of Events in Profile */
 .container {
