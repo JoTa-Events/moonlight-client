@@ -14,7 +14,7 @@ import capitalize from "../utils/capitalize";
 
 
 
-export default function MyProfile({ eventsList }) {
+export default function MyProfile({ eventsList, deleteCallback }) {
   const API_URL= process.env.REACT_APP_API_URL
   const today = dayjs().startOf("day");
   const [isFormHidden,setIsFormHidden]=useState(true)
@@ -88,6 +88,13 @@ export default function MyProfile({ eventsList }) {
                   <div className="date">
                     <h5>{dayjs(event.date).format("ddd DD MMM YYYY")}</h5>
                   </div>
+
+                  {event.author?.username === user?.username && 
+                      <div className='edit-delete'>
+                        <Link to={`/events/edit/${event._id}`}>Edit</Link>
+                        <Link to="/profile" onClick={() => deleteCallback(event._id)}>Delete</Link>
+                      </div>
+                  }
                 </div>
               </div>
             </Link>
@@ -154,9 +161,7 @@ export default function MyProfile({ eventsList }) {
     axios
       .put(`${API_URL}/api/my-profile`, requestBody,authForAPI())
       .then((response) => {
-          console.log(response)
-          console.log(`esto tampoco se esta activando`)
-        
+                 
           // props.createCallback(requestBody);
       })
       .catch((error) =>{
@@ -179,7 +184,7 @@ export default function MyProfile({ eventsList }) {
         <TabList>
           <Tab>My events</Tab>
           <Tab>Chats</Tab>
-          <Tab>?</Tab>
+          <Tab>My Profile</Tab>
         </TabList>
 
         <TabPanel>{!myEventsList ? "Loading..." : renderMyEvents()}</TabPanel>

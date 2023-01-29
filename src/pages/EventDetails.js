@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 import ChatBox from '../components/ChatBox';
@@ -11,7 +11,6 @@ import "./pages-css/EventDetails.css"
 export default function EventDetails(props) {
 
   const {user} = useContext(AuthContext);
-  const navigate = useNavigate();
   const {eventId} = useParams();
   
   const [event, setEvent] = useState([]);
@@ -41,17 +40,6 @@ export default function EventDetails(props) {
       })
       .catch((error) => console.log("Error getting event", error));
   }
-      
-  // deleting the event
-  const deleteEvent = () => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`,authForAPI())
-      .then(() => {
-        navigate(`/events`)
-        props.editCallback()
-      })
-      .catch((error) => console.log('Error deleting these details', error));
-  };
   
   // chat toggle button
   const toggleEventChat = () => {
@@ -78,7 +66,7 @@ export default function EventDetails(props) {
           {event.author?.username === user?.username && 
               <div className='edit-delete'>
                 <Link to={`/events/edit/${event._id}`}>Edit</Link>
-                <button onClick={deleteEvent}>Delete</button>
+                <Link to="/events" onClick={() => props.deleteCallback(eventId)}>Delete</Link>
               </div>
           }
 

@@ -3,12 +3,12 @@
 .event-details-container {
     text-align: center;
 
+    display: flex;
+    flex-wrap: wrap;
+
     margin: 0 5%;
     overflow: auto;
     resize: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-column-gap: 20px;
 }
 
 .ChatBox,
@@ -17,7 +17,6 @@
     overflow: hidden;
     grid-template-rows: min-content;
     width: min(100% - 15px, 600px);
-    height: min(100% - 15px, 600px);
 }
 
 .ChatBox {
@@ -30,10 +29,12 @@
 
 .event-details {
     word-wrap: break-word;
+    height: fit-content;
 }
 
 .edit-delete {
     display: inline-flex;
+    margin-top: 5%;
 }
 
 /* List of Events page */
@@ -61,7 +62,6 @@
     justify-content: center;
     align-items: flex-start;
     padding: 20px;
-    min-height: 100px;
 }
 
 .card-events-body h4 {
