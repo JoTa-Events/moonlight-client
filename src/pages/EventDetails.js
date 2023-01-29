@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 import ChatBox from '../components/ChatBox';
@@ -9,12 +9,19 @@ import dayjs from 'dayjs';
 import "./pages-css/EventDetails.css"
 
 export default function EventDetails(props) {
-
+  
   const {user} = useContext(AuthContext);
   const {eventId} = useParams();
   
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
+  
+  const today = dayjs().startOf("day");
+  const navigate = useNavigate()
+  
+  const isUserInEvent = event.participants?.includes(user?._id) 
+  const isAnOldEvent = dayjs(event.date).format("YYYY-MM-DD") < today.format("YYYY-MM-DD")
+  
   
   const getEvent = () => {
     axios
@@ -31,6 +38,17 @@ export default function EventDetails(props) {
 
   // get participants
   const getParticipants = () => {
+    
+    
+    if(!user){
+       navigate(`/login`);
+      
+      return 
+    }
+    
+    
+
+
     const requestBody = { userId: user._id };
 
     axios
@@ -46,6 +64,9 @@ export default function EventDetails(props) {
     setToggle(!toggle)
   };
 
+  
+ 
+
   const renderChat=()=>{
     return <ChatBox  eventId={eventId} /> 
   }
@@ -56,11 +77,17 @@ export default function EventDetails(props) {
         <div className='event-details'>
           <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
           <h1>{event.title}</h1>
+          <Link style={{margin:"auto", display:"inline-block"}} to={`/profile/${event.author?.username}`}><p><b>By:</b> {event.author?.username}</p></Link>
 
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
           <p><b>Description: </b>{event.description}</p>
-          <Link style={{margin:"auto", display:"inline-block"}} to={`/profile/${event.author?.username}`}><p><b>By:</b> {event.author?.username}</p></Link>
+
+          {/* join event button */}
+          
+          <h3>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h3>
+          { isUserInEvent || isAnOldEvent ? "" : <button onClick={getParticipants}>Join Event</button>  }
+           
 
           {/* only creator of the event can use the functionality edit/delete */}
           {event.author?.username === user?.username && 
@@ -72,17 +99,10 @@ export default function EventDetails(props) {
 
         </div>
         <div className='ChatBox'>
-          <h1>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h1>
-
-
-          {user 
-            ? event.participants?.includes(user._id) 
-              ?(<button onClick={toggleEventChat}>{toggle
-                  ? 'Hide Chat' : "Show Chat"}</button>) 
-                    : <button onClick={getParticipants}>Join Event</button> 
-                      : ""}
           
-            {toggle && renderChat()}
+          {isUserInEvent ? (<button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat"}</button>) : ""}
+                
+          {toggle && renderChat()}
 
         </div>
 
