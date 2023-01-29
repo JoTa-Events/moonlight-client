@@ -11,7 +11,7 @@ import axios from 'axios';
 const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1674988751/moonlight-default-img/photo-1674094170431-000e0edbc342_qb8ru0.jpg'
 
 
-export default function MyProfile({ eventsList }) {
+export default function MyProfile({ eventsList, deleteCallback }) {
   const { user } = useContext(AuthContext);
   const [avatar, setAvatar] = useState(DefaultImage);
 
@@ -68,6 +68,13 @@ export default function MyProfile({ eventsList }) {
                   <div className="date">
                     <h5>{dayjs(event.date).format("ddd DD MMM YYYY")}</h5>
                   </div>
+
+                  {event.author?.username === user?.username && 
+                      <div className='edit-delete'>
+                        <Link to={`/events/edit/${event._id}`}>Edit</Link>
+                        <Link to="/profile" onClick={() => deleteCallback(event._id)}>Delete</Link>
+                      </div>
+                  }
                 </div>
               </div>
             </Link>
@@ -116,7 +123,7 @@ export default function MyProfile({ eventsList }) {
         <TabList>
           <Tab>My events</Tab>
           <Tab>Chats</Tab>
-          <Tab>?</Tab>
+          <Tab>My Profile</Tab>
         </TabList>
 
         <TabPanel>{!myEventsList ? "Loading..." : renderMyEvents()}</TabPanel>

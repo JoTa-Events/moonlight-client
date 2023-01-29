@@ -7,11 +7,13 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import AuthorProfile from './pages/AuthorProfile';
+import authForAPI from './utils/authForAPI';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import axios from 'axios';
+import './App.css';
 
 
 function App() {
@@ -29,24 +31,59 @@ function App() {
     getAllEvents();
   }, []);
 
+    // deleting the event
+    const deleteEvent = (eventId) => {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`, authForAPI())
+        .then(() => {
+          getAllEvents();
+        })
+        .catch((error) => console.log('Error deleting these details', error));
+    };
+
+
   return (
     <div className="App">
 
     <Nav />
 
     <Routes>
-        <Route exact path="/profile" element={<MyProfile eventsList={eventsList} />} />
-        <Route exact path="/profile/:username" element={<AuthorProfile/>}/>
+        <Route exact path="/profile" 
+          element={<MyProfile eventsList={eventsList} deleteCallback={deleteEvent} />} 
+        />
 
-        <Route exact path="/" element={<Homepage eventsList={eventsList} />} />
-        <Route exact path="/events" element={<AllEventsList eventsList={eventsList} />} />
-        <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
-        <Route exact path="/events/create" element={<CreateEvent createCallback={getAllEvents} />} />
-        <Route exact path="/events/edit/:eventId" element={<EditEvent />} />
+        <Route exact path="/profile/:username" 
+          element={<AuthorProfile/>}
+        />
+
+        <Route exact path="/" 
+          element={<Homepage eventsList={eventsList} />} 
+        />
+
+        <Route exact path="/events" 
+          element={<AllEventsList eventsList={eventsList} />} 
+        />
+
+        <Route path="/events/:eventId" 
+          element={<EventDetails deleteCallback={deleteEvent} eventsList={eventsList}/>}
+        />
+
+        <Route exact path="/events/create" 
+          element={<CreateEvent createCallback={getAllEvents} />} 
+        />
+
+        <Route exact path="/events/edit/:eventId" 
+          element={<EditEvent />} 
+        />
 
         {/* register */}
-        <Route exact path="/login" element={<LoginPage />} />
-        <Route exact path="/signup" element={<SignupPage />} />
+        <Route exact path="/login" 
+          element={<LoginPage />}
+        />
+
+        <Route exact path="/signup" 
+          element={<SignupPage />} 
+        />
         
         <Route path="*" element={<h1>404: Sorry, this route does not exist.</h1>} />
       </Routes>
