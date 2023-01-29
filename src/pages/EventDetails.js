@@ -60,7 +60,7 @@ export default function EventDetails(props) {
           <p><b>Location:</b> {event.country} / {event.city}</p>
           <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
           <p><b>Description: </b>{event.description}</p>
-          <p><b>By:</b> {event.author?.username}</p>
+          <Link style={{margin:"auto", display:"inline-block"}} to={`/profile/${event.author?.username}`}><p><b>By:</b> {event.author?.username}</p></Link>
 
           {/* only creator of the event can use the functionality edit/delete */}
           {event.author?.username === user?.username && 
