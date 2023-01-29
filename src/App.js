@@ -11,6 +11,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import AuthorProfile from './pages/AuthorProfile';
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
 
     <Routes>
         <Route exact path="/profile" element={<MyProfile eventsList={eventsList} />} />
+        <Route exact path="/profile/:username" element={<AuthorProfile/>}/>
+
         <Route exact path="/" element={<Homepage eventsList={eventsList} />} />
         <Route exact path="/events" element={<AllEventsList eventsList={eventsList} />} />
         <Route path="/events/:eventId" element={<EventDetails editCallback={getAllEvents}/>} />
