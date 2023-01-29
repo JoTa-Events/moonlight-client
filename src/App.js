@@ -14,6 +14,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import axios from 'axios';
 import './App.css';
+import IsPrivate from './components/IsPrivate';
 
 
 function App() {
@@ -49,11 +50,11 @@ function App() {
 
     <Routes>
         <Route exact path="/profile" 
-          element={<MyProfile eventsList={eventsList} deleteCallback={deleteEvent} />} 
+          element={<IsPrivate> <MyProfile eventsList={eventsList} deleteCallback={deleteEvent} /> </IsPrivate>} 
         />
 
         <Route exact path="/profile/:username" 
-          element={<AuthorProfile/>}
+          element={<AuthorProfile />}
         />
 
         <Route exact path="/" 
@@ -69,11 +70,11 @@ function App() {
         />
 
         <Route exact path="/events/create" 
-          element={<CreateEvent createCallback={getAllEvents} />} 
+          element={<IsPrivate> <CreateEvent createCallback={getAllEvents} /> </IsPrivate>} 
         />
 
         <Route exact path="/events/edit/:eventId" 
-          element={<EditEvent />} 
+          element={<IsPrivate> <EditEvent /> </IsPrivate> } 
         />
 
         {/* register */}

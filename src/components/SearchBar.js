@@ -29,7 +29,7 @@ export default function SearchBar(props) {
 
   const searchResultUsername = searchResultDescription.filter((event) =>
    
-  (event.author.username.toLowerCase().includes(queryStringUsername.toLowerCase()))
+  (event.author?.username.toLowerCase().includes(queryStringUsername.toLowerCase()))
 
   );
     

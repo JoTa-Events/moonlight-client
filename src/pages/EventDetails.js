@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 import ChatBox from '../components/ChatBox';
@@ -11,7 +11,6 @@ import "./pages-css/EventDetails.css"
 export default function EventDetails(props) {
 
   const {user} = useContext(AuthContext);
-  const navigate = useNavigate();
   const {eventId} = useParams();
   
   const [event, setEvent] = useState([]);
