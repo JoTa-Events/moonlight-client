@@ -15,7 +15,8 @@ button {
   padding: .5rem 1rem .5rem 1rem;
   border: none;
   border-radius: 5px;
-  margin-left: auto; 
+  margin-left: auto;
+  cursor: pointer;
 }
 
 /* error messages feedback */
