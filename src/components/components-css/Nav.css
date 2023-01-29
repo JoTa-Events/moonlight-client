@@ -3,13 +3,13 @@
     text-transform: uppercase;
     margin: 0 auto;
     padding: 1.5rem;
+    font-size: 12px;
 }
 
 nav a {
     color: #f7f9f4;
-    font-size: 12px;
-    letter-spacing: 2.5px;
     padding: 0px 15px;
+    letter-spacing: 2.5px;
 
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
@@ -152,9 +152,7 @@ nav a:hover {
 
 a {
     position: relative;
-    color: #f7f9f4;
     transition: all 200ms linear;
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     border-radius: 2px;
     padding: 5px 0;
@@ -173,10 +171,9 @@ a {
     -ms-flex-pack: distribute;
 }
 
-.dropdown-sub:checked+label,
-.dropdown-sub:not(:checked)+label {
+.dropdown-sub:checked + label,
+.dropdown-sub:not(:checked) + label {
     position: relative;
-    color: #f7f9f4;
     transition: all 200ms linear;
     font-weight: 500;
     border-radius: 2px;
@@ -205,11 +202,6 @@ a {
     transition: transform 200ms linear;
 }
 
-.dropdown-sub:checked+label:hover,
-.dropdown-sub:not(:checked)+label:hover {
-    color: #f7f9f4;
-}
-
 .section-dropdown-sub {
     position: relative;
     display: block;
@@ -229,5 +221,5 @@ a {
 }
 
 .section-dropdown a:hover {
-    letter-spacing: 4px;
+    letter-spacing: 4.5px;
 }
