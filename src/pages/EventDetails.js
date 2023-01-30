@@ -39,16 +39,12 @@ export default function EventDetails(props) {
   // get participants
   const getParticipants = () => {
     
-    
     if(!user){
        navigate(`/login`);
       
       return 
-    }
-    
-    
-
-
+    } 
+  
     const requestBody = { userId: user._id };
 
     axios
@@ -56,12 +52,16 @@ export default function EventDetails(props) {
       .then((response) => {
         getEvent();
       })
-      .catch((error) => console.log("Error getting event", error));
+      .catch((error) => console.log("Error getting event", error))
+      .finally(()=>{
+        setToggle(!toggle)
+      })
   }
   
   // chat toggle button
   const toggleEventChat = () => {
     setToggle(!toggle)
+    
   };
 
   
