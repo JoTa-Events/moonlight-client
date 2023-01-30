@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import converter from "number-to-words"
 import capitalize from "../utils/capitalize";
 export default function SearchBar(props) {
-  const { eventsList } = props;
+  const { eventsList, setIsSearching} = props;
   
   const [queryStringTitle, setQueryStringTitle] = useState("");
   const [queryStringDescription, setQueryStringDescription] = useState("");
@@ -15,8 +15,9 @@ export default function SearchBar(props) {
   const [queryStringDate,setQueryStringDate] = useState("")
   const [isSearchHidden,setIsSearchHidden]=useState(true)
 
- 
+  
 
+  
   const searchResultTitle = eventsList.filter((event) =>
     event.title.toLowerCase().includes(queryStringTitle.toLowerCase())
   );
@@ -51,6 +52,15 @@ export default function SearchBar(props) {
   const ShowHideSearch =()=>{
     setIsSearchHidden((prevValue)=>(!prevValue))
   }
+  useEffect(()=>{
+
+    if(searchResultDate.length<eventsList.length){
+      
+      setIsSearching(true)
+    }else{
+      setIsSearching(false)
+    }
+  },[queryStringTitle, queryStringDescription, queryStringUsername,queryStringDate])
 
   const renderList = () => {
     return (
