@@ -12,6 +12,7 @@ export default function Nav() {
       <div className="navbar-left">
         <NavLink to="/">Moonlight</NavLink>
         <NavLink to="/events">Events</NavLink>
+        <NavLink to="/chat">chat</NavLink>
       </div>
 
       <div className="navbar-right">
@@ -110,6 +111,7 @@ export default function Nav() {
                 </div>
               </>
             )}
+            
             {!isLoggedIn && (
               <>
                 <input type="checkbox" />
