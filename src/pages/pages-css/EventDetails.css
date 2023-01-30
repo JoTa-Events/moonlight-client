@@ -1,5 +1,4 @@
 /* event details page */
-/* container that holds details and chatbox */
 .event-details-container {
     text-align: center;
 
@@ -36,7 +35,7 @@
     margin: auto;
 }
 
-/* List of Events page */
+/* list of events page */
 .events-list-container {
     display: flex;
     flex-wrap: wrap;
@@ -70,4 +69,14 @@
 /* all events details page */
 .allEvents {
     margin: 0 2%;
+}
+
+/* homepage carousel of events of the week */
+.Homepage h1 {
+   padding: 2rem;
+}
+
+.events-container {
+    display: grid;
+
 }

@@ -1,8 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #ede5d8;
   font-family: 'Roboto';
-  font-size: 14px;
   height: 100%;
+  font-size: 14px;
 }
 
 a {
@@ -15,8 +21,7 @@ button {
   padding: .5rem 1rem .5rem 1rem;
   border: none;
   border-radius: 5px;
-  margin-left: auto;
-  cursor: pointer;
+  margin-left: auto; 
 }
 
 /* error messages feedback */
