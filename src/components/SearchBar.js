@@ -6,6 +6,7 @@ import SearchInputDate from "./SearchInputDate";
 import dayjs from "dayjs";
 import converter from "number-to-words";
 import capitalize from "../utils/capitalize";
+
 export default function SearchBar(props) {
   const { eventsList, setIsSearching} = props;
   
@@ -14,6 +15,9 @@ export default function SearchBar(props) {
   const [queryStringUsername,setQueryStringUsername] = useState("")
   const [queryStringDate,setQueryStringDate] = useState("")
   const [isSearchHidden,setIsSearchHidden]=useState(true)
+
+  
+
   
   const searchResultTitle = eventsList.filter((event) =>
     event.title.toLowerCase().includes(queryStringTitle.toLowerCase())
@@ -31,11 +35,21 @@ export default function SearchBar(props) {
       .includes(queryStringUsername.toLowerCase())
   );
 
-  }
-  
-  const ShowHideSearch =()=>{
-    setIsSearchHidden((prevValue)=>(!prevValue))
-  }
+const searchResultDate = searchResultUsername.filter((event) =>
+  dayjs(event.date).format("YYYY-MM-DD").includes(queryStringDate)
+);
+
+const clearSearch = () => {
+  setQueryStringTitle("");
+  setQueryStringDescription("");
+  setQueryStringUsername("");
+  setQueryStringDate("");
+};
+
+const ShowHideSearch = () => {
+  setIsSearchHidden((prevValue) => !prevValue);
+};
+
   useEffect(()=>{
 
     if(searchResultDate.length<eventsList.length){
@@ -108,8 +122,7 @@ export default function SearchBar(props) {
         queryStringDescription ||
         queryStringUsername ||
         queryStringDate) &&
-        (!eventsList ? "Loading......" : renderList()
-      )}
+        (!eventsList ? "Loading......" : renderList())}
     </>
   );
 }
