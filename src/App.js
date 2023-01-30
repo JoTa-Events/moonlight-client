@@ -49,7 +49,7 @@ function App() {
     <Nav />
 
     <Routes>
-        <Route exact path="/profile" 
+        <Route exact path="/my-profile" 
           element={<IsPrivate> <MyProfile eventsList={eventsList} deleteCallback={deleteEvent} /> </IsPrivate>} 
         />
 

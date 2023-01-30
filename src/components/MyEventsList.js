@@ -36,7 +36,7 @@ export default function MyEventsList(props){
                       {event.author?.username === user?.username && 
                           <div className='edit-delete'>
                             <Link to={`/events/edit/${event._id}`}>Edit</Link>
-                            <Link to="/profile" onClick={() => deleteCallback(event._id)}>Delete</Link>
+                            <Link to="/my-profile" onClick={() => deleteCallback(event._id)}>Delete</Link>
                           </div>
                       }
                     </div>
