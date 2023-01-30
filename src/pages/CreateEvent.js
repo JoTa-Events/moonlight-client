@@ -1,4 +1,4 @@
-import "./components-css/Form.css" // css
+import "./pages-css/Form.css" // css
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
