@@ -1,7 +1,7 @@
 import AllEventsList from './pages/AllEventsList';
-import CreateEvent from './components/CreateEvent';
+import CreateEvent from './pages/CreateEvent';
 import EventDetails from './pages/EventDetails';
-import EditEvent from './components/EditEvent';
+import EditEvent from './pages/EditEvent';
 import MyProfile from './pages/MyProfile';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -49,7 +49,7 @@ function App() {
     <Nav />
 
     <Routes>
-        <Route exact path="/profile" 
+        <Route exact path="/my-profile" 
           element={<IsPrivate> <MyProfile eventsList={eventsList} deleteCallback={deleteEvent} /> </IsPrivate>} 
         />
 

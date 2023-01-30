@@ -45,7 +45,7 @@ export default function Nav() {
                   <div className="section-dropdown">
                     <input className="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub" />
                     {/* profile link */}
-                    <NavLink to="/profile">
+                    <NavLink to="/my-profile">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-user-circle"

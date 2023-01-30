@@ -4,13 +4,13 @@ import EventInList from "./EventInList";
 export default function PastEvents(props) {
   const { eventsList, fromDate } = props;
 
-  const afterOneWeekEvents = eventsList?.filter((event) => {
+  const pastEvents = eventsList?.filter((event) => {
     const eventDate = dayjs(event.date);
 
     return eventDate.isBefore(fromDate);
   });
 
-  afterOneWeekEvents?.sort((a, b) => {
+  pastEvents?.sort((a, b) => {
     let dateA = dayjs(a.date);
     let dateB = dayjs(b.date);
     return dateB.diff(dateA, "day");
@@ -18,7 +18,7 @@ export default function PastEvents(props) {
 
   return (
     <div className="events-container">
-      {afterOneWeekEvents?.map((event) => (
+      {pastEvents?.map((event) => (
         <div className="event-inweek past-events" key={event._id}>
           <EventInList event={event} />
         </div>

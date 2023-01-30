@@ -1,16 +1,22 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/auth.context";
 import authForAPI from "../utils/authForAPI";
 import AddMessage from "./AddMessage";
 import "./components-css/ChatBox.css"
+
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function ChatBox(props) {
   const { eventId } = props;
   const [chatObj, setChatObj] = useState(null);
+  const { user } = useContext(AuthContext)
 
   const getChatFromAPI = () => {
+
+    if(!user) return
+
     axios
       .get(`${API_URL}/api/chats/${eventId}`, authForAPI())
       .then((response) => {

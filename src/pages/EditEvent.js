@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import authForAPI from "../utils/authForAPI";
-import "./components-css/Form.css";
+import "./pages-css/Form.css";
 
 // import arrays for countries and capital cities
 import cityArr from "../data/capitalCity";
