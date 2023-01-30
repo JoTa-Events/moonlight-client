@@ -6,7 +6,7 @@ import io from "socket.io-client"
 
 const socket = io.connect("http://localhost:5005")
 
-export default function Chat(props){
+export default function BasicChatChild(props){
 
     const [currentMessage, setCurrentMessage] = useState("")
     const [messageList,setMessageList]=useState([])

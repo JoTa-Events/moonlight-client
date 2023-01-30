@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import io from "socket.io-client"
-import Chat from "./Chat"
+import BasicChatChild from "./BasicChatChild"
 
 
 
 let socket;
 
-export default function ChatSocket2(){
+export default function BasicChat(){
  
     useEffect(()=>{
        socket = io.connect("http://localhost:5005")
@@ -50,7 +50,7 @@ export default function ChatSocket2(){
             <button onClick={joinRoom}>Join a Room</button>
           </>
         ) : (
-          <Chat username={username} socket={socket} room={room} />
+          <BasicChatChild username={username} socket={socket} room={room} />
         )}
       </>
     );

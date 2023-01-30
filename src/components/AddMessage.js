@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 import authForAPI from "../utils/authForAPI"
 import "./components-css/ChatBox.css"
@@ -8,36 +8,54 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export default function AddMessage(props){
 
-    const {eventId, getChatFromAPI} = props;
+    const {eventId,socket,sendMessage,setCurrentMessage,currentMessage,setMessageList} = props;
     const {user}  = useContext(AuthContext);
-    const [message, setMessage] = useState("");
     
+    //************socket.io********************* */
+    useEffect(()=>{
+        
+        // listens to the server
+        socket.on("clientListens",(data)=>{
+        
+          setMessageList((prev)=>{
+            return([...prev,data])
+           })
+        })
+      },[socket])
+    
+    
+    //********************************* */
+
+
     const handleSubmit=(e)=>{
+
         e.preventDefault()
+        
         const newMessage = {
-            message,
+            message:currentMessage,
             userId: user._id
         }
         
         axios.put(`${API_URL}/api/chats/${eventId}`, newMessage, authForAPI())
             .then(response=>{
-                console.log('New message created', response.data.messages.slice(-1)[0].message)
-                getChatFromAPI();
+                
+            }).catch(error=>{
+                console.log("there has being an error saving the message in the DB",error)
             })
 
-        setMessage("");
+        setCurrentMessage("");
     }
 
     return(
         <>
-            <form className="form-chat" onSubmit={handleSubmit}>
+            <form className="form-chat" onSubmit={(e)=>{handleSubmit(e);sendMessage(e)}}>
                 <input 
                     required
                     type="text"
                     placeholder="Type here..."
-                    name="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    name="currentMessage"
+                    value={currentMessage}
+                    onChange={(e) => setCurrentMessage(e.target.value)}
                 />
                 <button>Send</button>
             </form>

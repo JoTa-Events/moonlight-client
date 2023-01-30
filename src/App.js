@@ -15,8 +15,7 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import IsPrivate from './components/IsPrivate';
-import ChatSocket from './components/ChatSocket';
-import ChatSocket2 from './components/ChatSocket2';
+
 
 
 function App() {
@@ -87,11 +86,11 @@ function App() {
         <Route exact path="/signup" 
           element={<SignupPage />} 
         />
-        <Route path="/chat" element={<ChatSocket2/>}/>
+  
         <Route path="*" element={<h1>404: Sorry, this route does not exist.</h1>} />
       </Routes>
       
-      {/* <ChatSocket/> */}
+
     </div>
   );
 }
