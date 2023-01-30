@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
 import EventInList from "./EventInList";
 import SearchInputText from "./SearchInputText";
-import "./components-css/Search.css";
 import SearchInputDate from "./SearchInputDate";
-import dayjs from "dayjs";
 import converter from "number-to-words";
 import capitalize from "../utils/capitalize";
+import "./components-css/Search.css";
+import dayjs from "dayjs";
 
 export default function SearchBar(props) {
-  const { eventsList, setIsSearching} = props;
-  
+  const { eventsList, setIsSearching } = props;
+
   const [queryStringTitle, setQueryStringTitle] = useState("");
   const [queryStringDescription, setQueryStringDescription] = useState("");
-  const [queryStringUsername,setQueryStringUsername] = useState("")
-  const [queryStringDate,setQueryStringDate] = useState("")
-  const [isSearchHidden,setIsSearchHidden]=useState(true)
+  const [queryStringUsername, setQueryStringUsername] = useState("");
+  const [queryStringDate, setQueryStringDate] = useState("");
+  const [isSearchHidden, setIsSearchHidden] = useState(true);
 
-  
-
-  
   const searchResultTitle = eventsList.filter((event) =>
     event.title.toLowerCase().includes(queryStringTitle.toLowerCase())
   );
@@ -35,30 +32,33 @@ export default function SearchBar(props) {
       .includes(queryStringUsername.toLowerCase())
   );
 
-const searchResultDate = searchResultUsername.filter((event) =>
-  dayjs(event.date).format("YYYY-MM-DD").includes(queryStringDate)
-);
+  const searchResultDate = searchResultUsername.filter((event) =>
+    dayjs(event.date).format("YYYY-MM-DD").includes(queryStringDate)
+  );
 
-const clearSearch = () => {
-  setQueryStringTitle("");
-  setQueryStringDescription("");
-  setQueryStringUsername("");
-  setQueryStringDate("");
-};
+  const clearSearch = () => {
+    setQueryStringTitle("");
+    setQueryStringDescription("");
+    setQueryStringUsername("");
+    setQueryStringDate("");
+  };
 
-const ShowHideSearch = () => {
-  setIsSearchHidden((prevValue) => !prevValue);
-};
+  const ShowHideSearch = () => {
+    setIsSearchHidden((prevValue) => !prevValue);
+  };
 
-  useEffect(()=>{
-
-    if(searchResultDate.length<eventsList.length){
-      
-      setIsSearching(true)
-    }else{
-      setIsSearching(false)
+  useEffect(() => {
+    if (searchResultDate.length < eventsList.length) {
+      setIsSearching(true);
+    } else {
+      setIsSearching(false);
     }
-  },[queryStringTitle, queryStringDescription, queryStringUsername,queryStringDate])
+  }, [
+    queryStringTitle,
+    queryStringDescription,
+    queryStringUsername,
+    queryStringDate,
+  ]);
 
   const renderList = () => {
     return (

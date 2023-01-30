@@ -51,6 +51,7 @@ export default function SignupPage() {
             <form onSubmit={handleSignupSubmit}>
               <input
                 className="form-style"
+                autoComplete="off"
                 placeholder="Your Username"
                 id="username"
                 type="text"
@@ -61,6 +62,7 @@ export default function SignupPage() {
 
               <input
                 className="form-style"
+                autoComplete="off"
                 placeholder="Your Email"
                 id="email"
                 type="email"

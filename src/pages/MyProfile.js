@@ -1,8 +1,8 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "./pages-css/Profile.css";
+import MyProfileDetails from "../components/MyProfileDetails";
 import MyEventsList from "../components/MyEventsList";
 import MyChatsList from "../components/MyChatsList";
-import MyProfileDetails from "../components/MyProfileDetails";
+import "./pages-css/Profile.css";
 
 export default function MyProfile(props) {
   const { deleteCallback, eventsList } = props;

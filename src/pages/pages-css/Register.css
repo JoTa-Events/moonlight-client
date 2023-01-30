@@ -1,11 +1,7 @@
 h2 {
     font-size: 1.7rem;
     color: #f56457;
-    line-height: 2;
-}
-
-p {
-    line-height: 2;
+    line-height: 2.5;
 }
 
 .card-wrap {
@@ -40,7 +36,7 @@ p {
 }
 
 .form-style {
-    padding: 15px 20px;
+    padding: 15px 15px;
     height: 50px;
     width: 100%;
     margin-bottom: 10px;

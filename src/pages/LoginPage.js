@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import "./pages-css/Register.css";
+import "./pages-css/Register.css"
 
 export default function LoginPage(props) {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -73,10 +73,14 @@ export default function LoginPage(props) {
             </form>
 
             <Link
-              style={{ color: "#f7f9f4", lineHeight: "2.5", display: "inline-block"}}
+              style={{
+                color: "#f7f9f4",
+                lineHeight: "2.5",
+                display: "inline-block",
+              }}
               to={"/signup"}
             >
-              Don't have an account yet?
+              New to Moonlight? Sign up
             </Link>
 
             {errorMessage && <p className="error-message">{errorMessage}</p>}
