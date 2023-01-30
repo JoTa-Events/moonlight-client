@@ -1,50 +1,80 @@
-.container {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
+h2 {
+    font-size: 1.7rem;
+    color: #f56457;
+    line-height: 2;
+}
+
+p {
+    line-height: 2;
+}
+
+.card-wrap {
+    position: relative;
+    margin: auto;
     text-align: center;
-
+    width: 440px;
+    max-width: 100%;
+    height: 400px;
+    margin-top: 60px;
+    perspective: 800px;
 }
 
-.container a {
-    display: flex;
-    justify-content: center;
+.card-main {
+    width: 100%;
+    height: 100%;
+    background-color: #282c34;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 300%;
+    position: absolute;
+    border-radius: 5px;
 }
 
-.container h2{
+.center-wrap {
+    width: 100%;
+    position: absolute;
+    padding: 0 35px;
+    top: 50%;
+    transform: translate3d(0, -50%, 35px) perspective(100px);
+}
+
+.form-style {
+    padding: 15px 20px;
+    height: 50px;
+    width: 100%;
     margin-bottom: 10px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    color: #f7f9f4;
+    background-color: #1f2029;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
 }
 
-.container p {
-    margin-top: 10px;
+.form-style:focus,
+.form-style:active {
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
 }
 
-form {
-    width: 350px;
-    margin: 0 auto;
+.btn {
+    border-radius: 5px;
+    height: 45px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 30px;
+    letter-spacing: 1px;
     text-align: center;
-    padding: 20px;
-    border: 1px solid #282c34;
-    border-radius: 5px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #282c34;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.container button[type="submit"] {
-    width: 100%;
-    padding: 10px;
+    border: none;
     background-color: #f56457;
     color: #f7f9f4;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    box-shadow: 0 8px 24px 0 rgba(255, 235, 167, .2);
+}
+
+.btn:hover {
+    background-color: #f7f9f4;
+    color: #f56457;
+    box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
 }

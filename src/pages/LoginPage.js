@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import "./pages-css/Register.css"
+import "./pages-css/Register.css";
 
 export default function LoginPage(props) {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -39,38 +39,50 @@ export default function LoginPage(props) {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleLoginSubmit}>
-        <h2>Login</h2>
+    <div className="card-wrap">
+      <div className="card-wrapper">
+        <div className="card-main">
+          <div className="center-wrap">
+            <h2>Login</h2>
+            <form onSubmit={handleLoginSubmit}>
+              <input
+                className="form-style"
+                autoComplete="off"
+                placeholder="Your Username"
+                id="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleUsername}
+              />
 
-        <label htmlFor="username">Username:</label>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          value={username}
-          placeholder="Your username"
-          onChange={handleUsername}
-        />
+              <input
+                className="form-style"
+                placeholder="Your Password"
+                id="password"
+                type="password"
+                name="password"
+                value={password}
+                autoComplete="on"
+                onChange={handlePassword}
+              />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="**********"
-          value={password}
-          autoComplete="on"
-          onChange={handlePassword}
-        />
+              <button className="btn" type="submit">
+                Login
+              </button>
+            </form>
 
-        <button type="submit">Login</button>
+            <Link
+              style={{ color: "#f7f9f4", lineHeight: "2.5", display: "inline-block"}}
+              to={"/signup"}
+            >
+              Don't have an account yet?
+            </Link>
 
-        <p>Don't have an account yet?</p>
-        <Link to={"/signup"}>Sign up</Link>
-      </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

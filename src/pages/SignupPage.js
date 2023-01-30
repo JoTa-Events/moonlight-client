@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./pages-css/Register.css";
 
 export default function SignupPage() {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -42,43 +43,55 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSignupSubmit}>
-      <h2>Signup</h2>
-        <label htmlFor="email">Email:</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmail}
-        />
+    <div className="card-wrap">
+      <div className="card-wrapper">
+        <div className="card-main">
+          <div className="center-wrap">
+            <h2>Sign Up</h2>
+            <form onSubmit={handleSignupSubmit}>
+              <input
+                className="form-style"
+                placeholder="Your Username"
+                id="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleUsername}
+              />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+              <input
+                className="form-style"
+                placeholder="Your Email"
+                id="email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleEmail}
+              />
 
-        <label htmlFor="username">Username:</label>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsername}
-        />
+              <input
+                className="form-style"
+                placeholder="Your Password"
+                id="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+              />
 
-        <button type="submit">Sign Up</button>
+              <button className="btn" type="submit">
+                Sign Up
+              </button>
+            </form>
 
-        <p>Already have account?</p>
-        <Link to={"/login"}>Login</Link>
-      </form>
+            <Link style={{ color: "#f7f9f4", lineHeight: "2.5", display: "inline-block"}} to={"/login"}>
+              Already have an account?
+            </Link>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

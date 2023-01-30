@@ -13,16 +13,14 @@ import capitalize from "../utils/capitalize";
 export default function MyProfile({ eventsList, deleteCallback }) {
   const API_URL = process.env.REACT_APP_API_URL;
   const today = dayjs().startOf("day");
-  const [isFormHidden, setIsFormHidden] = useState(true);
   const { user } = useContext(AuthContext);
   const [avatar, setAvatar] = useState(null);
-  const [userData,setUserData]=useState(null)
+  const [userData,setUserData] = useState(null)
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-  const [isFormHidden,setIsFormHidden]=useState(true)
+  const [isFormHidden, setIsFormHidden] = useState(true)
   
   useEffect(()=>{
-  
-    axios.get(`${API_URL}/api/my-profile`,authForAPI())
+    axios.get(`${API_URL}/api/my-profile`, authForAPI())
       .then(response=>{
         setUserData(response.data)
       })
@@ -108,34 +106,46 @@ export default function MyProfile({ eventsList, deleteCallback }) {
 
   // ---------myprofile----------
 
-  const renderUserData = ()=>{
-    
-    return <div className="profile-details-container">
-      <div className="profile-img-container" >
-
-        <img className="profile-avatar" src={userData.avatar} alt="avatar" />
-      </div>
-      <h1>{capitalize(userData.username)}</h1>
-      <h3>email: {userData.email}</h3>
-      <h4>A Moonlight member for {dayjs(today).diff(userData.createdAt,"day")} days</h4>
-      <button hidden={!isFormHidden} onClick={hideDisplayForm}>Update avatar</button>
-      <div hidden={isFormHidden}>
-        <form onSubmit={handleSubmit}>
-          <input type="file" onChange={handleFileUpload} />
-          <button type="submit">Upload</button>
-        </form>
-        {avatar && <img className="profile-avatar" style={{width:"100px"}} src={avatar} alt="Uploaded-avatar" />}
-      </div>
-    );
-  };
-  const hideDisplayForm = () => {
-    setIsFormHidden((prevState) => {
-      return !prevState;
-    });
-  };
+  const renderUserData = () => {
+    return (
+      <div className="profile-details-container">
+        <div className="profile-img-container">
+          <img className="profile-avatar" src={userData.avatar} alt="avatar" />
+        </div>
+        <h1>{capitalize(userData.username)}</h1>
+        <h3>email: {userData.email}</h3>
+        <h4>
+          A Moonlight member for {dayjs(today).diff(userData.createdAt, "day")}{" "}
+          days
+        </h4>
+        <button hidden={!isFormHidden} onClick={hideDisplayForm}>
+          Update avatar
+        </button>
+        <div hidden={isFormHidden}>
+          <form onSubmit={handleSubmit}>
+            <input type="file" onChange={handleFileUpload} />
+            <button type="submit">Upload</button>
+          </form>
+          {avatar && (
+            <img
+              className="profile-avatar"
+              style={{ width: "100px" }}
+              src={avatar}
+              alt="Uploaded-avatar"
+            />
+          )}
+        </div>
+      </div>    )
+  }
+  const hideDisplayForm=()=>{
+    setIsFormHidden(prevState=>{
+      return !prevState
+    })
+  }
 
   const handleFileUpload = (e) => {
 
+    
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
      setIsUploadingImage(true);
@@ -148,13 +158,17 @@ export default function MyProfile({ eventsList, deleteCallback }) {
       .catch((error) => console.log("Error while uploading the file: ", error))
       .finally ( () => {
         
-        // setIsUploadingImage(false)
+         setIsUploadingImage(false)
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+     if (!e.target.form.checkValidity()){
+ 
+      return
+     }
     const requestBody = { avatar};
 
     axios
@@ -169,10 +183,17 @@ export default function MyProfile({ eventsList, deleteCallback }) {
         
         hideDisplayForm()
         setAvatar("")
-        
+        e.target.form.reset()
       });
   };
-
+  const handleCancel=(e)=>{
+    e.preventDefault()
+    e.target.form.reset()
+    setIsFormHidden(prevState=>{
+      return !prevState
+    })
+    setAvatar(null)
+  }
 
   return (
     <div className="profile">
