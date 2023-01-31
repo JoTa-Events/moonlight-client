@@ -132,14 +132,14 @@ export default function EventDetails(props) {
           )}
 
           {toggle && renderChat()}
+
+          <div style={{ margin: "50px auto" }}>
+            {event.location && <Map coords={event.location.coordinates} />}
+          </div>
+
         </div>
 
-       <div style={{margin: "50px auto"}}>
-        {event.location
-            && <Map coords={event.location.coordinates} />
-          }
-       </div>
-
+        
       </div>
     </>
   );
