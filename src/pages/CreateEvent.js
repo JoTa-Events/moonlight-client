@@ -1,4 +1,4 @@
-import "./pages-css/Form.css" // css
+import "./pages-css/Form.css"; // css
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +7,13 @@ import authForAPI from "../utils/authForAPI";
 import service from "../service";
 
 // default events image
-const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg';
+const DefaultImage =
+  "https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg";
 
 export default function CreateEvent(props) {
-
   const navigate = useNavigate();
-  const {user}  = useContext(AuthContext);
-  
+  const { user } = useContext(AuthContext);
+
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
@@ -24,7 +24,6 @@ export default function CreateEvent(props) {
 
   // uploading image
   const handleFileUpload = (e) => {
-
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
     setIsUploadingImage(true);
@@ -36,7 +35,7 @@ export default function CreateEvent(props) {
       })
       .catch((error) => console.log("Error while uploading the file: ", error))
       .finally(() => {
-        setIsUploadingImage(false)
+        setIsUploadingImage(false);
       });
   };
 
@@ -44,17 +43,30 @@ export default function CreateEvent(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const author = user._id
-    const requestBody = {title, date, description, author, image};
+    const author = user._id;
+    const requestBody = { title, date, description, author, image };
 
+    // get request: cities
     axios
-      .get(`https://nominatim.openstreetmap.org/search?city=${location}&format=json`)
+      .get(
+        `https://nominatim.openstreetmap.org/search?city=${location}&format=json`
+      )
       .then((response) => {
-        console.log(response.data);
-        const latitude = response.data[0].lat
-        const longitude = response.data[0].lon
-        requestBody.location = {"type": "point", "coordinates": [latitude, longitude]}
-        return axios.post(`${process.env.REACT_APP_API_URL}/api/events`, requestBody, authForAPI())
+        const latitude = response.data[0].lat;
+        const longitude = response.data[0].lon;
+        const city = response.data[0].display_name;
+
+        requestBody.location = {
+          type: "point",
+          coordinates: [latitude, longitude],
+          city
+        };
+
+        return axios.post(
+          `${process.env.REACT_APP_API_URL}/api/events`,
+          requestBody,
+          authForAPI()
+        );
       })
       .then((response) => {
         navigate("/events");
@@ -64,17 +76,15 @@ export default function CreateEvent(props) {
         setDate("");
         setLocation("");
         setDescription("");
-        setImage("")
+        setImage("");
 
         props.createCallback(requestBody);
-    })
-    .catch((error) => console.log(error));
-  }
-
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="FormEvent">
-
       <form className="form-box" onSubmit={handleSubmit}>
         <h1>Submit an event</h1>
         <label>
@@ -106,7 +116,7 @@ export default function CreateEvent(props) {
         <label>
           Location <b style={{ color: "#f56457" }}>*</b>
         </label>
-        <input 
+        <input
           required={true}
           placeholder="location"
           type="text"
@@ -146,8 +156,6 @@ export default function CreateEvent(props) {
           <button type="submit">Submit</button>
         )}
       </form>
-
     </div>
   );
 }
-

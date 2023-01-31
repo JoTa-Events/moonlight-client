@@ -91,7 +91,7 @@ export default function EventDetails(props) {
           </Link>
 
           <p>
-            <b>Location:</b> {event.location?.coordinates}
+            <b>Location:</b> {event.location?.city}
           </p>
           <p>
             <b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}
