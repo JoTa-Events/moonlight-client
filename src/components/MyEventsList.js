@@ -27,7 +27,7 @@ export default function MyEventsList(props){
                       <h3>{event.title}</h3>
                       <br />
                       <p>{event.description}</p>
-                      <p>{event.location}</p>
+                      
     
                       <div className="date">
                         <h5>{dayjs(event.date).format("ddd DD MMM YYYY")}</h5>
