@@ -12,9 +12,9 @@ export default function EventInList(props) {
           <div className="card-events-header">
             <img src={event.image} alt="" />
           </div>
-          <div className="card-events-body" style={{backgroundColor: "#282c34"}} >
-            <h4 style={{letterSpacing: "4px", color: "#f56457"}}>{dayjs(event.date).format("dddd DD MMM")}</h4>
-            <span style={{color: "#f7f9f4"}} >{event.title}</span>
+          <div className="card-events-body" >
+            <h4>{dayjs(event.date).format("dddd DD MMM")}</h4>
+            <span>{event.title}</span>
           </div>
         </div>
       </div>

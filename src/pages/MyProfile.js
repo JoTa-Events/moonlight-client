@@ -9,7 +9,7 @@ export default function MyProfile(props) {
 
   return (
     <div className="profile">
-      <Tabs className="Tabs">
+      <Tabs>
         <TabList>
           <Tab>My events</Tab>
           <Tab>Chats</Tab>

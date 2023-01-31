@@ -32,10 +32,6 @@ nav a:hover {
     float: right;
 }
 
-nav label, nav a {
-    font-weight: 700;
-}
-
 /* dropdrown box - nav bar */
 .sec-center {
     position: relative;
