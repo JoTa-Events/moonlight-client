@@ -28,16 +28,16 @@ export default function MyEventsList(props) {
                 {event.author?.username === user?.username && (
                   <div className="edit-delete">
                     <Link to={`/events/${event._id}`}>
-                      <IconDots width={23} />
+                      <IconDots style={{strokeWidth: "1.5", width: "23"}}  />
                     </Link>
                     <Link to={`/events/edit/${event._id}`}>
-                      <IconEdit width={23} />
+                      <IconEdit style={{strokeWidth: "1.5", width: "23"}} />
                     </Link>
                     <Link
                       to="/my-profile"
                       onClick={() => deleteCallback(event._id)}
                     >
-                      <IconTrash width={23} />
+                      <IconTrash style={{strokeWidth: "1.5", width: "23"}} />
                     </Link>
                   </div>
                 )}

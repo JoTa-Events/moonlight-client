@@ -38,7 +38,7 @@ export default function Nav() {
                   />
                   {/* dropdown */}
                   <label className="for-dropdown" htmlFor="dropdown">
-                    <IconHome style={{ marginRight: "10px"}} />
+                    <IconHome style={{ marginRight: "10px", strokeWidth: "1"}} />
                     {user.username}
                   </label>
                   <div className="section-dropdown">
@@ -50,17 +50,17 @@ export default function Nav() {
                     />
                     {/* profile link */}
                     <NavLink to="/my-profile">
-                      <IconUserCircle />
+                      <IconUserCircle style={{strokeWidth: "1"}} />
                       Profile
                     </NavLink>
                     {/* create event link */}
                     <NavLink to="/events/create">
-                      <IconCirclePlus />
+                      <IconCirclePlus style={{strokeWidth: "1"}} />
                       Submit event
                     </NavLink>
                     {/* Logout */}
                     <NavLink to="/" onClick={logOutUser}>
-                      <IconLogout />
+                      <IconLogout style={{strokeWidth: "1"}} />
                       Logout
                     </NavLink>
                   </div>
@@ -81,19 +81,19 @@ export default function Nav() {
                   {/* dropdown */}
                   <label className="for-dropdown" htmlFor="dropdown">
                     <IconHomePlus
-                      style={{ marginRight: "10px", width: "25" }}
+                      style={{ marginRight: "10px", strokeWidth: "1" }}
                     />
                     Register
                   </label>
                   <div className="section-dropdown">
                     {/* signup */}
                     <NavLink to="/signup">
-                      <IconUserPlus />
+                      <IconUserPlus style={{strokeWidth: "1"}} />
                       Signup
                     </NavLink>
                     {/* login */}
                     <NavLink to="/login">
-                      <IconLogin />
+                      <IconLogin style={{strokeWidth: "1"}} />
                       Login
                     </NavLink>
                   </div>

@@ -4,14 +4,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authForAPI from "../utils/authForAPI";
-import service from "../service"
-
-// importing arrays for countries and capital cities
-import cityArr from "../data/capitalCity"
-import countryArr from "../data/countries"
+import service from "../service";
 
 // default events image
-const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1674988672/moonlight-default-img/photo-1673109116896-607e7ccbe33b_blebd5.jpg';
+const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg';
 
 export default function CreateEvent(props) {
 
@@ -20,14 +16,12 @@ export default function CreateEvent(props) {
   
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(DefaultImage);
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
-  
   // uploading image
   const handleFileUpload = (e) => {
 
@@ -51,83 +45,107 @@ export default function CreateEvent(props) {
     e.preventDefault();
 
     const author = user._id
-    const requestBody = { title, date, country, city, description, author, image};
+    const requestBody = {title, date, description, author, image};
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/events`, requestBody, authForAPI())
+      .get(`https://nominatim.openstreetmap.org/search?city=${location}&format=json`)
       .then((response) => {
-          navigate("/events");
-          // resetting form fields
-          setTitle("");
-          setDate("");
-          setCountry("");
-          setCity("")
-          setDescription("");
-          setImage("")
-
-          props.createCallback(requestBody);
+        console.log(response.data);
+        const latitude = response.data[0].lat
+        const longitude = response.data[0].lon
+        requestBody.location = {"type": "point", "coordinates": [latitude, longitude]}
+        return axios.post(`${process.env.REACT_APP_API_URL}/api/events`, requestBody, authForAPI())
       })
-      .catch((error) => console.log(error));
+      .then((response) => {
+        navigate("/events");
+
+        // resetting form fields
+        setTitle("");
+        setDate("");
+        setLocation("");
+        setDescription("");
+        setImage("")
+
+        props.createCallback(requestBody);
+    })
+    .catch((error) => console.log(error));
   }
 
 
   return (
     <div className="FormEvent">
 
-      <form className="form-box" onSubmit={handleSubmit} >
-      <h1>Submit an event</h1>
-        <label>Title <b style={{color: "#f56457"}}>*</b></label>
-        <input required={true}
+      <form className="form-box" onSubmit={handleSubmit}>
+        <h1>Submit an event</h1>
+        <label>
+          Title <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input
+          required={true}
           type="text"
           name="title"
           value={title}
-          onChange={(e) => {setTitle(e.target.value);}}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
         />
 
-        <label>Date <b style={{color: "#f56457"}}>*</b></label>
-        <input required={true}
+        <label>
+          Date <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input
+          required={true}
           type="date"
           name="date"
           value={date}
-          onChange={(e) => {setDate(e.target.value);}}
+          onChange={(e) => {
+            setDate(e.target.value);
+          }}
         />
 
-        <label>Country</label>
-        <select  name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
-          <option value="">Select one</option>
-          {countryArr.map((country,index )=> 
-            <option key={index} value={country}>{country}</option>
-          )}
-        </select>
+        <label>
+          Location <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input 
+          required={true}
+          placeholder="location"
+          type="text"
+          name="location"
+          value={location}
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
+        />
 
-        <label>City</label>
-        <select  name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
-          <option value="">Select one</option>
-          {cityArr.map((city,index) =>
-            <option key={index} value={city}>{city}</option>
-          )}
-        </select>
-
-        <label>Description <b style={{color: "#f56457"}}>*</b></label>
-        <input required={true}
+        <label>
+          Description <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input
+          required={true}
           as="textarea"
           rows={5}
           name="description"
           value={description}
-          onChange={(e) => {setDescription(e.target.value);}}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         />
 
         <label>Upload Image</label>
-        <input style={{backgroundColor: "white"}}
-          type="file" 
-          onChange={(e) => handleFileUpload(e)} 
-          />
+        <input
+          style={{ backgroundColor: "white" }}
+          type="file"
+          onChange={(e) => handleFileUpload(e)}
+        />
 
-        { isUploadingImage 
-          ? <button type="submit" disabled>Uploading</button>
-          : <button type="submit">Submit</button>
-        }
-        </form>
+        {isUploadingImage ? (
+          <button type="submit" disabled>
+            Uploading
+          </button>
+        ) : (
+          <button type="submit">Submit</button>
+        )}
+      </form>
 
     </div>
   );

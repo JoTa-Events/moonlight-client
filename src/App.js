@@ -16,8 +16,6 @@ import axios from 'axios';
 import './App.css';
 import IsPrivate from './components/IsPrivate';
 
-
-
 function App() {
 
   const [eventsList, setEventsList] = useState([]);
