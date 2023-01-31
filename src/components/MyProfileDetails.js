@@ -96,11 +96,13 @@ export default function MyProfileDetails(props) {
         </div>
 
         <h1>{capitalize(userData.username)}</h1>
-        <h4>email: {userData.email}</h4>
+        <h4>Email: {userData.email}</h4>
         <span>
           A Moonlight member for <b>{dayjs(today).diff(userData.createdAt, "day")}</b> days
         </span>
-        <br />
+
+        <br /><br />
+        
         <button hidden={!isFormHidden} onClick={handleDisplayForm}>
           Update avatar
         </button>

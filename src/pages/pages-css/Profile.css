@@ -50,7 +50,7 @@
 .card {
     background-color: #f7f9f4;
     overflow: hidden;
-    width: 275px;
+    width: 255px;
     flex: 1 1 100px;
 }
 
@@ -76,6 +76,7 @@
 /* List of Chats in Profile */
 .chat-container {
     text-align: center;
+    padding-top: 2.5rem;
 }
 
 .chat-list {
@@ -108,10 +109,9 @@
 
 /* author's profile */
 .AuthorProfile {
-    display: block;
-
-    padding-top: 1.5rem;
+    color: #282c34;
     text-align: center;
+    padding: 1.5rem;
 }
 
 .AuthorProfile img {
@@ -120,7 +120,14 @@
 }
 
 .author-profile-events {
-    display: flex;
-    justify-content: center ;
-    align-content: center;
+    margin: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax (300px, 1fr));    
 }
+
+.author-profile-events h2 {
+    color: #282c34;
+    text-align: center;
+    padding-top: 1.5rem;
+}
+

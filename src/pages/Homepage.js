@@ -10,11 +10,8 @@ export default function Homepage(props) {
 
   return (
     <div className="Homepage">
-      <h1>Homepage</h1>
-      <hr/>
-      <h2>What's popping?</h2>
 
-      <h2>Events of next 7 days</h2>      
+      <h1>What's on this week</h1>      
       <EventsThisWeek eventsList={eventsList} />
       <hr />
       <h2>Events after {dayjs(nextWeek).format("ddd DD MMM")}</h2>

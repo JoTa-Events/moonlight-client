@@ -7,6 +7,7 @@ import ChatBox from "../components/ChatBox";
 import authForAPI from "../utils/authForAPI";
 import dayjs from "dayjs";
 import "./pages-css/EventDetails.css";
+import Map from "../components/Map";
 
 export default function EventDetails(props) {
   const { user } = useContext(AuthContext);
@@ -86,13 +87,11 @@ export default function EventDetails(props) {
             style={{ margin: "auto", display: "inline-block" }}
             to={`/profile/${event.author?.username}`}
           >
-            <p>
-              <b>By:</b> {event.author?.username}
-            </p>
+            <b>By:</b> {event.author?.username}
           </Link>
 
           <p>
-            <b>Location:</b> {event.country} / {event.city}
+            <b>Location:</b> {event.location?.coordinates}
           </p>
           <p>
             <b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}
@@ -134,6 +133,13 @@ export default function EventDetails(props) {
 
           {toggle && renderChat()}
         </div>
+
+       <div style={{margin: "50px auto"}}>
+        {event.location
+            && <Map coords={event.location.coordinates} />
+          }
+       </div>
+
       </div>
     </>
   );

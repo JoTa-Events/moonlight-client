@@ -6,12 +6,8 @@ import { AuthContext } from "../context/auth.context";
 import authForAPI from "../utils/authForAPI";
 import service from "../service"
 
-// importing arrays for countries and capital cities
-import cityArr from "../data/capitalCity"
-import countryArr from "../data/countries"
-
 // default events image
-const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1674988672/moonlight-default-img/photo-1673109116896-607e7ccbe33b_blebd5.jpg';
+const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg';
 
 export default function CreateEvent(props) {
 
@@ -20,8 +16,9 @@ export default function CreateEvent(props) {
   
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  const [location, setLocation] = useState([]);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(DefaultImage);
 
@@ -51,17 +48,19 @@ export default function CreateEvent(props) {
     e.preventDefault();
 
     const author = user._id
-    const requestBody = { title, date, country, city, description, author, image};
+    const requestBody = {title, date, location: {"type": "point", "coordinates": [latitude, longitude]}, description, author, image};
 
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/events`, requestBody, authForAPI())
       .then((response) => {
           navigate("/events");
+
           // resetting form fields
           setTitle("");
           setDate("");
-          setCountry("");
-          setCity("")
+          setLocation("");
+          setLatitude("");
+          setLongitude("");
           setDescription("");
           setImage("")
 
@@ -92,21 +91,20 @@ export default function CreateEvent(props) {
           onChange={(e) => {setDate(e.target.value);}}
         />
 
-        <label>Country</label>
-        <select  name="country" value={country} onChange={(e) => {setCountry(e.target.value); }}>
-          <option value="">Select one</option>
-          {countryArr.map((country,index )=> 
-            <option key={index} value={country}>{country}</option>
-          )}
-        </select>
+        <label>Location</label>
+        <input placeholder="latitude"
+          type="number" step="0.01" 
+          name="latitude"
+          value={latitude}
+          onChange={(e) => {setLatitude(e.target.value);}}
+        />
 
-        <label>City</label>
-        <select  name="city" value={city} onChange={(e) => {setCity(e.target.value); }}>
-          <option value="">Select one</option>
-          {cityArr.map((city,index) =>
-            <option key={index} value={city}>{city}</option>
-          )}
-        </select>
+        <input placeholder="longitude"
+          type="number" step="0.01"
+          name="longitude"
+          value={longitude}
+          onChange={(e) => {setLongitude(e.target.value);}}
+        />
 
         <label>Description <b style={{color: "#f56457"}}>*</b></label>
         <input required={true}

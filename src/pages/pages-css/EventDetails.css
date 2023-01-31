@@ -4,8 +4,8 @@
 
     display: flex;
     flex-wrap: wrap;
-
-    margin: 0 5%;
+    
+    margin: 0 auto;
     overflow: auto;
     resize: none;
 }
@@ -14,6 +14,7 @@
 .event-details {
     margin: 0 auto;
     overflow: hidden;
+    height: 600px;
     width: min(100% - 15px, 600px);
 }
 
@@ -37,15 +38,13 @@
 
 /* list of events page */
 .events-list-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
 }
 
 .card-events-list {
     background-color: #f7f9f4;
     overflow: hidden;
-    width: 275px;
-    flex: 1 1 100px;
+    width: 250px;
 }
 
 .card-events-header img {
@@ -63,6 +62,8 @@
 }
 
 .card-events-body h4 {
+    color: #f56457;
+    letter-spacing: 1.5px;
     margin-bottom: 5%;
 }
 
