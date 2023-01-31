@@ -36,6 +36,18 @@ export default function EditEvent() {
       });
   };
 
+  const getStringUntilComa = (address) => {
+    let newString = "";
+    for(let i = 0; i < address.length; i++){
+      if(address[i] !== ","){
+        newString = newString + address[i];
+      } else {
+        break;
+      }
+    }
+    return newString;
+  }
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
@@ -56,10 +68,12 @@ export default function EditEvent() {
 
     const requestBody = { title, date, description, image };
 
+    let cityToSend = getStringUntilComa(location);
+
     // get request: cities
     axios
       .get(
-        `https://nominatim.openstreetmap.org/search?city=${location}&format=json`
+        `https://nominatim.openstreetmap.org/search?city=${cityToSend}&format=json`
       )
       .then((response) => {
         const latitude = response.data[0].lat;
@@ -118,7 +132,7 @@ export default function EditEvent() {
         </label>
         <input
           required={true}
-          placeholder="location"
+          placeholder="city"
           type="text"
           name="location"
           value={location}
@@ -130,9 +144,9 @@ export default function EditEvent() {
         <label>
           Description <b style={{ color: "#f56457" }}>*</b>
         </label>
-        <input
+        <textarea
           required={true}
-          as="textarea"
+          
           rows={5}
           name="description"
           value={description}
