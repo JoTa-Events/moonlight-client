@@ -1,113 +1,140 @@
-import axios from 'axios';
-import { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
+import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
-import ChatBox from '../components/ChatBox';
-import authForAPI from '../utils/authForAPI';
-import dayjs from 'dayjs';
-import "./pages-css/EventDetails.css"
+import ChatBox from "../components/ChatBox";
+import authForAPI from "../utils/authForAPI";
+import dayjs from "dayjs";
+import "./pages-css/EventDetails.css";
 
 export default function EventDetails(props) {
-  
-  const {user} = useContext(AuthContext);
-  const {eventId} = useParams();
-  
+  const { user } = useContext(AuthContext);
+  const { eventId } = useParams();
+
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
-  
+
   const today = dayjs().startOf("day");
-  const navigate = useNavigate()
-  
-  const isUserInEvent = event.participants?.includes(user?._id) 
-  const isAnOldEvent = dayjs(event.date).format("YYYY-MM-DD") < today.format("YYYY-MM-DD")
-  
-  
+  const navigate = useNavigate();
+
+  const isUserInEvent = event.participants?.includes(user?._id);
+  const isAnOldEvent =
+    dayjs(event.date).format("YYYY-MM-DD") < today.format("YYYY-MM-DD");
+
   const getEvent = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
       .then((response) => {
-          setEvent(response.data);
-        })
+        setEvent(response.data);
+      })
       .catch((error) => console.log("Error getting event", error));
   };
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     getEvent();
-  }, [] );
+  }, []);
 
   // get participants
   const getParticipants = () => {
-    
-    if(!user){
-       navigate(`/login`);
-      
-      return 
-    } 
-  
+    if (!user) {
+      navigate(`/login`);
+
+      return;
+    }
+
     const requestBody = { userId: user._id };
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/events/${eventId}/participants`, requestBody, authForAPI())
+      .put(
+        `${process.env.REACT_APP_API_URL}/api/events/${eventId}/participants`,
+        requestBody,
+        authForAPI()
+      )
       .then((response) => {
         getEvent();
       })
       .catch((error) => console.log("Error getting event", error))
-      .finally(()=>{
-        setToggle(!toggle)
-      })
-  }
-  
-  // chat toggle button
-  const toggleEventChat = () => {
-    setToggle(!toggle)
-    
+      .finally(() => {
+        setToggle(!toggle);
+      });
   };
 
-  
- 
+  // chat toggle button
+  const toggleEventChat = () => {
+    setToggle(!toggle);
+  };
 
-  const renderChat=()=>{
-    return <ChatBox  eventId={eventId} /> 
-  }
+  const renderChat = () => {
+    return <ChatBox eventId={eventId} />;
+  };
 
   return (
     <>
-      <div className='event-details-container' style={{display: "flex", marginTop: "50px" }}>
-        <div className='event-details'>
-          <img src={event.image} alt="" style={{ margin: "auto", width: "auto", height: "350px" }} />
+      <div
+        className="event-details-container"
+        style={{ display: "flex", marginTop: "50px" }}
+      >
+        <div className="event-details">
+          <img
+            src={event.image}
+            alt=""
+            style={{ margin: "auto", width: "auto", height: "350px" }}
+          />
           <h1>{event.title}</h1>
-          <Link style={{margin:"auto", display:"inline-block"}} to={`/profile/${event.author?.username}`}><p><b>By:</b> {event.author?.username}</p></Link>
+          <Link
+            style={{ margin: "auto", display: "inline-block" }}
+            to={`/profile/${event.author?.username}`}
+          >
+            <p>
+              <b>By:</b> {event.author?.username}
+            </p>
+          </Link>
 
-          <p><b>Location:</b> {event.country} / {event.city}</p>
-          <p><b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}</p>
-          <p><b>Description: </b>{event.description}</p>
-
+          <p>
+            <b>Location:</b> {event.country} / {event.city}
+          </p>
+          <p>
+            <b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}
+          </p>
+          <p>
+            <b>Description: </b>
+            {event.description}
+          </p>
+          <br />
           {/* join event button */}
-          
-          <h3>Attending (<b style={{color: "#f56457"}}>{event.participants?.length}</b>)</h3>
-          { isUserInEvent || isAnOldEvent ? "" : <button onClick={getParticipants}>Join Event</button>  }
-           
+          <h3>
+            Attending (
+            <b style={{ color: "#f56457" }}>{event.participants?.length}</b>)
+          </h3>
+          {isUserInEvent || isAnOldEvent ? (
+            ""
+          ) : (
+            <button onClick={getParticipants}>Join Event</button>
+          )}
 
           {/* only creator of the event can use the functionality edit/delete */}
-          {event.author?.username === user?.username && 
-              <div className='edit-delete'>
-                <Link to={`/events/edit/${event._id}`}>Edit</Link>
-                <Link to="/events" onClick={() => props.deleteCallback(eventId)}>Delete</Link>
-              </div>
-          }
-
+          {event.author?.username === user?.username && (
+            <div className="edit-delete">
+              <Link to={`/events/edit/${event._id}`}>Edit</Link>
+              <Link to="/events" onClick={() => props.deleteCallback(eventId)}>
+                Delete
+              </Link>
+            </div>
+          )}
         </div>
-        <div className='ChatBox'>
-          
-          {isUserInEvent ? (<button onClick={toggleEventChat}>{toggle ? 'Hide Chat' : "Show Chat"}</button>) : ""}
-                
+        <div className="ChatBox">
+          {isUserInEvent ? (
+            <button onClick={toggleEventChat}>
+              {toggle ? "Hide Chat" : "Show Chat"}
+            </button>
+          ) : (
+            ""
+          )}
+
           {toggle && renderChat()}
-
         </div>
-
       </div>
     </>
   );
 }
-  
