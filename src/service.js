@@ -4,7 +4,7 @@ import axios from "axios";
 
 const service = axios.create({
   // make sure you use PORT = 5005 (the port where our server is running)
-  baseURL: "http://localhost:5005/api",
+  baseURL: process.env.REACT_APP_API_URL
   // withCredentials: true // => you might need this when having the users in the app
 });
 
@@ -14,7 +14,7 @@ const errorHandler = (err) => {
 
 const uploadImage = (file) => {
   return service
-    .post("/upload", file)
+    .post("/api/upload", file)
     .then((res) => res.data)
     .catch(errorHandler);
 };
