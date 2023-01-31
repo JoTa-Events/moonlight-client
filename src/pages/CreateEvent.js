@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authForAPI from "../utils/authForAPI";
-import service from "../service"
+import service from "../service";
 
 // default events image
 const DefaultImage = 'https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg';
@@ -16,15 +16,12 @@ export default function CreateEvent(props) {
   
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [location, setLocation] = useState([]);
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(DefaultImage);
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
-  
   // uploading image
   const handleFileUpload = (e) => {
 
@@ -48,84 +45,107 @@ export default function CreateEvent(props) {
     e.preventDefault();
 
     const author = user._id
-    const requestBody = {title, date, location: {"type": "point", "coordinates": [latitude, longitude]}, description, author, image};
+    const requestBody = {title, date, description, author, image};
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/events`, requestBody, authForAPI())
+      .get(`https://nominatim.openstreetmap.org/search?city=${location}&format=json`)
       .then((response) => {
-          navigate("/events");
-
-          // resetting form fields
-          setTitle("");
-          setDate("");
-          setLocation("");
-          setLatitude("");
-          setLongitude("");
-          setDescription("");
-          setImage("")
-
-          props.createCallback(requestBody);
+        console.log(response.data);
+        const latitude = response.data[0].lat
+        const longitude = response.data[0].lon
+        requestBody.location = {"type": "point", "coordinates": [latitude, longitude]}
+        return axios.post(`${process.env.REACT_APP_API_URL}/api/events`, requestBody, authForAPI())
       })
-      .catch((error) => console.log(error));
+      .then((response) => {
+        navigate("/events");
+
+        // resetting form fields
+        setTitle("");
+        setDate("");
+        setLocation("");
+        setDescription("");
+        setImage("")
+
+        props.createCallback(requestBody);
+    })
+    .catch((error) => console.log(error));
   }
 
 
   return (
     <div className="FormEvent">
 
-      <form className="form-box" onSubmit={handleSubmit} >
-      <h1>Submit an event</h1>
-        <label>Title <b style={{color: "#f56457"}}>*</b></label>
-        <input required={true}
+      <form className="form-box" onSubmit={handleSubmit}>
+        <h1>Submit an event</h1>
+        <label>
+          Title <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input
+          required={true}
           type="text"
           name="title"
           value={title}
-          onChange={(e) => {setTitle(e.target.value);}}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
         />
 
-        <label>Date <b style={{color: "#f56457"}}>*</b></label>
-        <input required={true}
+        <label>
+          Date <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input
+          required={true}
           type="date"
           name="date"
           value={date}
-          onChange={(e) => {setDate(e.target.value);}}
+          onChange={(e) => {
+            setDate(e.target.value);
+          }}
         />
 
-        <label>Location</label>
-        <input placeholder="latitude"
-          type="number" step="0.01" 
-          name="latitude"
-          value={latitude}
-          onChange={(e) => {setLatitude(e.target.value);}}
+        <label>
+          Location <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input 
+          required={true}
+          placeholder="location"
+          type="text"
+          name="location"
+          value={location}
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
         />
 
-        <input placeholder="longitude"
-          type="number" step="0.01"
-          name="longitude"
-          value={longitude}
-          onChange={(e) => {setLongitude(e.target.value);}}
-        />
-
-        <label>Description <b style={{color: "#f56457"}}>*</b></label>
-        <input required={true}
+        <label>
+          Description <b style={{ color: "#f56457" }}>*</b>
+        </label>
+        <input
+          required={true}
           as="textarea"
           rows={5}
           name="description"
           value={description}
-          onChange={(e) => {setDescription(e.target.value);}}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         />
 
         <label>Upload Image</label>
-        <input style={{backgroundColor: "white"}}
-          type="file" 
-          onChange={(e) => handleFileUpload(e)} 
-          />
+        <input
+          style={{ backgroundColor: "white" }}
+          type="file"
+          onChange={(e) => handleFileUpload(e)}
+        />
 
-        { isUploadingImage 
-          ? <button type="submit" disabled>Uploading</button>
-          : <button type="submit">Submit</button>
-        }
-        </form>
+        {isUploadingImage ? (
+          <button type="submit" disabled>
+            Uploading
+          </button>
+        ) : (
+          <button type="submit">Submit</button>
+        )}
+      </form>
 
     </div>
   );
