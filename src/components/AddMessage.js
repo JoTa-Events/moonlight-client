@@ -57,7 +57,7 @@ export default function AddMessage(props){
                     value={currentMessage}
                     onChange={(e) => setCurrentMessage(e.target.value)}
                 />
-                <button>Send</button>
+                <button className="red-btn">Send</button>
             </form>
         </>
     )

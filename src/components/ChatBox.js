@@ -1,9 +1,11 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
+import ScrollToBottom from "react-scroll-to-bottom";
 import { io } from "socket.io-client";
 import { AuthContext } from "../context/auth.context";
 import authForAPI from "../utils/authForAPI";
+import capitalize from "../utils/capitalize";
 import AddMessage from "./AddMessage";
 import "./components-css/ChatBox.css"
 
@@ -83,22 +85,46 @@ export default function ChatBox(props) {
     getChatFromAPI();
   }, []);
 
+   
   const renderChat = () => {
     return (
       <div className="chatbox">
+      
         <div className="chatbox-head"><span>Live-Chat</span></div>
-          <div  className="chat-messages messeges-list">
-            {chatObj.messages.map((message) => (
-                <p className="message" key={message._id}>
-                <b>{message.author?.username}:</b> {message.message}
-                </p>
-            ))}
-            {messageList.map((message,index) => (
-              <p className="message" key={index}>
-                <b>{message.author}:</b> {message.message}
-                </p>
-            ))}
-          </div>
+         
+           <ScrollToBottom className="scroll-to-bottom-chat" >
+
+            {chatObj.messages.map((message) => {
+              let leftOrRight =""
+                if(user.username===message.author.username){
+                    leftOrRight="message-right"
+                }         
+              return(
+                <div className="message-container" id={leftOrRight} key={message._id}>
+                  <p className="message-author"><b>{capitalize(message.author?.username)}</b></p>
+                  <p className="message-text">
+                  {message.message}
+                  </p>
+               
+              </div>
+            )})}
+       
+            {messageList.map((message,index) => {
+              let leftOrRight =""
+                if(user.username===message.author){
+                    leftOrRight="message-right"
+                }         
+              return(
+                <div className="message-container" id={leftOrRight} key={index}>
+                  <p className="message-author"><b>{capitalize(message.author)}</b></p>
+                  <p className="message-text">
+                  {message.message}
+                  </p>
+               
+              </div>
+            )})}
+           </ScrollToBottom>
+         
         <div className="chatbox-footer">
             <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
         </div>
@@ -111,6 +137,7 @@ export default function ChatBox(props) {
     <div className="Chat-container">
       <div className="all-messages-container">
         {!chatObj ? "" : renderChat()}
+        
       </div>
     </div>
   );
