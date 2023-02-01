@@ -5,6 +5,7 @@ import { AuthContext } from "../context/auth.context";
 
 import ChatBox from "../components/ChatBox";
 import authForAPI from "../utils/authForAPI";
+import capitalize from "../utils/capitalize";
 import Map from "../components/Map";
 import dayjs from "dayjs";
 import "./pages-css/EventDetails.css";
@@ -18,6 +19,8 @@ export default function EventDetails(props) {
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
 
+  const [reRender,setReRender] = useState(false)
+  
   const today = dayjs().startOf("day");
   const navigate = useNavigate();
 
@@ -31,12 +34,18 @@ export default function EventDetails(props) {
       .then((response) => {
         setEvent(response.data);
       })
-      .catch((error) => console.log("Error getting event", error));
+      .catch((error) => {
+        console.log("Error getting event", error)
+        navigate("*")
+      });
   };
 
   useEffect(() => {
+
     getEvent();
-  }, []);
+    console.log(`howmanytimerenders`)
+    setToggle(false)
+  }, [reRender]);
 
   // get participants
   const getParticipants = () => {
@@ -66,11 +75,11 @@ export default function EventDetails(props) {
 
   // chat toggle button
   const toggleEventChat = () => {
-    setToggle(!toggle);
+    setToggle(prevToggle=>!prevToggle);
   };
 
   const renderChat = () => {
-    return <ChatBox eventId={eventId} />;
+    return <ChatBox setReRender={setReRender} eventId={eventId} />;
   };
 
   return (
@@ -104,7 +113,7 @@ export default function EventDetails(props) {
           </p>
 
           <Link to={`/profile/${event.author?.username}`}>
-            {event.author?.username} (AVATAR HERE)
+            {event.author && capitalize(event.author?.username)} (AVATAR HERE)
           </Link>
         </div>
 

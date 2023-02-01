@@ -12,7 +12,7 @@ export default function SearchBar(props) {
   const { eventsList, setIsSearching } = props;
 
   const [queryStringTitle, setQueryStringTitle] = useState("");
-  const [queryStringDescription, setQueryStringDescription] = useState("");
+  const [queryStringLocation, setQueryStringLocation] = useState("");
   const [queryStringUsername, setQueryStringUsername] = useState("");
   const [queryStringDate, setQueryStringDate] = useState("");
   const [isSearchHidden, setIsSearchHidden] = useState(true);
@@ -21,13 +21,11 @@ export default function SearchBar(props) {
     event.title.toLowerCase().includes(queryStringTitle.toLowerCase())
   );
 
-  const searchResultDescription = searchResultTitle.filter((event) =>
-    event.description
-      .toLowerCase()
-      .includes(queryStringDescription.toLowerCase())
+  const searchResultLocation = searchResultTitle.filter((event) =>
+    event.location?.city.toLowerCase().includes(queryStringLocation.toLowerCase())
   );
 
-  const searchResultUsername = searchResultDescription.filter((event) =>
+  const searchResultUsername = searchResultLocation.filter((event) =>
     event.author?.username
       .toLowerCase()
       .includes(queryStringUsername.toLowerCase())
@@ -39,7 +37,7 @@ export default function SearchBar(props) {
 
   const clearSearch = () => {
     setQueryStringTitle("");
-    setQueryStringDescription("");
+    setQueryStringLocation("");
     setQueryStringUsername("");
     setQueryStringDate("");
   };
@@ -56,7 +54,7 @@ export default function SearchBar(props) {
     }
   }, [
     queryStringTitle,
-    queryStringDescription,
+    queryStringLocation,
     queryStringUsername,
     queryStringDate,
   ]);
@@ -101,9 +99,9 @@ export default function SearchBar(props) {
               queryString={queryStringUsername}
             />
             <SearchInputText
-              eventKey={"description"}
-              setQueryString={setQueryStringDescription}
-              queryString={queryStringDescription}
+              eventKey={"location"}
+              setQueryString={setQueryStringLocation}
+              queryString={queryStringLocation}
             />
             <SearchInputDate
               eventKey={"date"}
@@ -125,7 +123,7 @@ export default function SearchBar(props) {
         </div>
 
         {(queryStringTitle ||
-          queryStringDescription ||
+          queryStringLocation ||
           queryStringUsername ||
           queryStringDate) &&
           (!eventsList ? "Loading......" : renderList())}

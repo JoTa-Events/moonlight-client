@@ -1,8 +1,9 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/auth.context";
+import { useLocation, useNavigate } from "react-router";
 import { io } from "socket.io-client";
+import { AuthContext } from "../context/auth.context";
 import ScrollToBottom from "react-scroll-to-bottom";
 import authForAPI from "../utils/authForAPI";
 import capitalize from "../utils/capitalize";
@@ -15,11 +16,14 @@ let socket;
 
 export default function ChatBox(props) {
 
-  const { eventId } = props;
+  const { eventId, setReRender } = props;
   const [chatObj, setChatObj] = useState(null);
   const { user } = useContext(AuthContext)
+  
+  const navigate = useNavigate();
+  const location = useLocation()
 
-  /************** socket io ****************/
+  /**************socket io****************/
   const [isConnected, setIsConnected] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("")
   const [messageList,setMessageList]=useState([])
@@ -96,6 +100,28 @@ export default function ChatBox(props) {
     getChatFromAPI();
   }, []);
 
+   const leaveEvent=()=>{
+    if (!user) {
+      navigate(`/login`);
+
+      return;
+    }
+        
+    axios.delete(`${API_URL}/api/events/${eventId}/participants`,authForAPI())
+      .then(response=>{
+        console.log(user.username,"Leave the event")
+                
+      })
+      .catch(error=>{
+        console.log("Error leaving the event", error)
+
+      })
+      .finally(()=>{
+        setReRender(prevState=>!prevState)
+        navigate(location.pathname)
+      })
+    
+   }
    
   const renderChat = () => {
     return (
@@ -135,11 +161,11 @@ export default function ChatBox(props) {
         <div className="chatbox-footer">
           <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
         </div>
-        
+        <button onClick={leaveEvent}>leave Event</button>
       </div>
     );
   };
-
+  
   return (
     <div>
         {!chatObj ? "" : renderChat()}

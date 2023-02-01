@@ -9,17 +9,19 @@ import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
 import AuthorProfile from './pages/AuthorProfile';
 import authForAPI from './utils/authForAPI';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import axios from 'axios';
 import './App.css';
 import IsPrivate from './components/IsPrivate';
+import capitalize from './utils/capitalize';
+import { AuthContext } from './context/auth.context';
 
 function App() {
 
   const [eventsList, setEventsList] = useState([]);
-
+  const{user} = useContext(AuthContext)
   const getAllEvents = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events`)
@@ -85,7 +87,7 @@ function App() {
           element={<SignupPage />} 
         />
   
-        <Route path="*" element={<h1>404: Sorry, this route does not exist.</h1>} />
+        <Route path="*" element={<h1>404: Sorry {user ? capitalize(user.username):""}, this route does not exist.</h1>} />
       </Routes>
       
 
