@@ -1,6 +1,7 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { io } from "socket.io-client";
 import { AuthContext } from "../context/auth.context";
@@ -13,11 +14,11 @@ import "./components-css/ChatBox.css"
 const API_URL = process.env.REACT_APP_API_URL;
 let socket;
 export default function ChatBox(props) {
-  const { eventId } = props;
+  const { eventId, setReRender } = props;
   const [chatObj, setChatObj] = useState(null);
   const { user } = useContext(AuthContext)
-
-
+  const navigate = useNavigate();
+  const location = useLocation()
 
   /**************socket io****************/
   const [isConnected, setIsConnected] = useState(false);
@@ -95,6 +96,28 @@ export default function ChatBox(props) {
     getChatFromAPI();
   }, []);
 
+   const leaveEvent=()=>{
+    if (!user) {
+      navigate(`/login`);
+
+      return;
+    }
+        
+    axios.delete(`${API_URL}/api/events/${eventId}/participants`,authForAPI())
+      .then(response=>{
+        console.log(user.username,"Leave the event")
+                
+      })
+      .catch(error=>{
+        console.log("Error leaving the event", error)
+
+      })
+      .finally(()=>{
+        setReRender(prevState=>!prevState)
+        navigate(location.pathname)
+      })
+    
+   }
    
   const renderChat = () => {
     return (
@@ -138,11 +161,11 @@ export default function ChatBox(props) {
         <div className="chatbox-footer">
             <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
         </div>
-        
+        <button onClick={leaveEvent}>leave Event</button>
       </div>
     );
   };
-
+  
   return (
     <div>
         {!chatObj ? "" : renderChat()}

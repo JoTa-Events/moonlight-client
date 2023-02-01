@@ -16,6 +16,8 @@ export default function EventDetails(props) {
 
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
+
+  const [reRender,setReRender] = useState(false)
   
   const today = dayjs().startOf("day");
   const navigate = useNavigate();
@@ -37,8 +39,11 @@ export default function EventDetails(props) {
   };
 
   useEffect(() => {
+
     getEvent();
-  }, []);
+    console.log(`howmanytimerenders`)
+    setToggle(false)
+  }, [reRender]);
 
   // get participants
   const getParticipants = () => {
@@ -68,11 +73,11 @@ export default function EventDetails(props) {
 
   // chat toggle button
   const toggleEventChat = () => {
-    setToggle(!toggle);
+    setToggle(prevToggle=>!prevToggle);
   };
 
   const renderChat = () => {
-    return <ChatBox eventId={eventId} />;
+    return <ChatBox setReRender={setReRender} eventId={eventId} />;
   };
 
   return (
