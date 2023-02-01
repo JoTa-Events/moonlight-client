@@ -58,6 +58,7 @@ export default function EventDetails(props) {
       .catch((error) => console.log("Error getting event", error))
       .finally(() => {
         setToggle(!toggle);
+        props.getAllEvents()
       });
   };
 
