@@ -114,11 +114,11 @@ export default function CreateEvent(props) {
         />
 
         <label>
-          Location <b style={{ color: "#f56457" }}>*</b>
+          City <b style={{ color: "#f56457" }}>*</b>
         </label>
         <input
           required={true}
-          placeholder="location"
+          autoComplete="off"
           type="text"
           name="location"
           value={location}
@@ -132,6 +132,7 @@ export default function CreateEvent(props) {
         </label>
         <input
           required={true}
+          autoComplete="off"
           as="textarea"
           rows={5}
           name="description"
