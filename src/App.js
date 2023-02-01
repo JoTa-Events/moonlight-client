@@ -65,7 +65,7 @@ function App() {
         />
 
         <Route path="/events/:eventId" 
-          element={<EventDetails deleteCallback={deleteEvent} eventsList={eventsList}/>}
+          element={<EventDetails deleteCallback={deleteEvent} getAllEvents={getAllEvents} eventsList={eventsList}/>}
         />
 
         <Route exact path="/events/create" 
