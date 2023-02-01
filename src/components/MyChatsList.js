@@ -71,8 +71,8 @@ export default function MyChatsList(props) {
           </TabList>
         </>
         {myChatsToDisplay.map((event) => (
-          <div key={event._id} className="ChatBox">
-            <TabPanel>
+          <div key={event._id} >
+            <TabPanel key={event._id}>
               <ChatBox eventId={event._id} />
             </TabPanel>
           </div>
