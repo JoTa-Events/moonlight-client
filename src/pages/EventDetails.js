@@ -8,6 +8,7 @@ import authForAPI from "../utils/authForAPI";
 import dayjs from "dayjs";
 import "./pages-css/EventDetails.css";
 import Map from "../components/Map";
+import capitalize from "../utils/capitalize";
 
 export default function EventDetails(props) {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,7 @@ export default function EventDetails(props) {
 
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
-
+  
   const today = dayjs().startOf("day");
   const navigate = useNavigate();
 
@@ -29,7 +30,10 @@ export default function EventDetails(props) {
       .then((response) => {
         setEvent(response.data);
       })
-      .catch((error) => console.log("Error getting event", error));
+      .catch((error) => {
+        console.log("Error getting event", error)
+        navigate("*")
+      });
   };
 
   useEffect(() => {
@@ -86,7 +90,7 @@ export default function EventDetails(props) {
             style={{ margin: "auto", display: "inline-block" }}
             to={`/profile/${event.author?.username}`}
           >
-            <b>By:</b> {event.author?.username}
+            <b>By:</b> {event.author && capitalize(event.author?.username)}
           </Link>
 
           <p>
