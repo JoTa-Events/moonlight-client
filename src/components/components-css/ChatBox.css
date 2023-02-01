@@ -2,8 +2,7 @@
     height: 600px;
     width: 500px;
     overflow: hidden;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
     background-color: #1c1e21;
 }
 
@@ -55,10 +54,10 @@
     text-align: start;
 
     width: fit-content;
-    padding: 5px 15px;
+    padding: 7px 15px;
     margin: 10px 10px;
 
-    border-radius: 20px;
+    border-radius: 15px;
     clear: both;
 }
 

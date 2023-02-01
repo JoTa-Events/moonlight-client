@@ -3,6 +3,8 @@
 
     display: flex;
     flex-wrap: wrap;
+    
+
     width: 80%;
     margin: 50px auto;
     overflow: auto;
@@ -12,7 +14,6 @@
 .event-details {
     word-wrap: break-word;
     text-align: start;
-    height: fit-content;
     padding: 2.5rem;
 }
 
@@ -29,14 +30,13 @@
 
 .ChatBox,
 .event-details {
-    margin: 0 auto;
+    margin-top: auto;
     overflow: hidden;
-    height: 700px;
+    height: 600px;
     width: min(100% - 15px, 600px);
-    display: inline;
 }
 
-.event-details-container img {
+.event-details img {
     margin: auto;
     width: auto;
     height: 350px;
