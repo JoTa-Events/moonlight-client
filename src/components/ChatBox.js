@@ -134,11 +134,8 @@ export default function ChatBox(props) {
   };
 
   return (
-    <div className="chat-container">
-      <div className="all-messages-container">
+    <div>
         {!chatObj ? "" : renderChat()}
-        
-      </div>
     </div>
   );
 }

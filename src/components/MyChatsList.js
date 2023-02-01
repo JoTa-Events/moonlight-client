@@ -51,31 +51,29 @@ export default function MyChatsList(props) {
   const renderMyChats = () => {
     return (
       <Tabs className="chat-container">
-        <>
+
           <TabList className="chat-list">
             {futureEvents.map((event) => (
-              <Tab key={event._id}>{event.title}</Tab>
+              <Tab key={event._id}
+                style={{width: "100%"}}
+              >{event.title}</Tab>
             ))}
 
             {pastEvents.map((event) => (
               <Tab
-                style={{
-                  backgroundColor: "DarkGray",
-                }}
+                style={{backgroundColor: "DarkGray", width: "100%"}}
                 key={event._id}
               >
                 {event.title}
               </Tab>
             ))}
           </TabList>
-        </>
-        <div className="chat-panel">
+
           {myChatsToDisplay.map((event) => (
             <TabPanel key={event._id}>
               <ChatBox eventId={event._id} />
             </TabPanel>
           ))}
-        </div>
       </Tabs>
     );
   };

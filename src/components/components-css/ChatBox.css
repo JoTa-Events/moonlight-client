@@ -1,55 +1,59 @@
-
 .chatbox {
-    border: 1px solid #282c34;
     height: 600px;
-    border-radius: 5px;
+    width: 500px;
     overflow: hidden;
     background-color: #282c34;
+    border: 1px solid #282c34;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .chatbox-head {
-    text-align: start;
     color: #f7f9f4;
-    background:#f56457;
-    padding: 15px;
+    background: #f56457;
+    text-align: start;
+    text-transform: capitalize;
+    padding: .7rem;
 }
 
 .chat-messages {
-    height: 420px;
-    
+    /* height: 420px; */
     padding: 5px 10px;
- 
 }
-.scroll-to-bottom-chat{
+
+/* scroll to bottom of chat functionality  */
+.scroll-to-bottom-chat {
     background: #282c34;
     height: 420px;
-
-    
 }
+
 .scroll-to-bottom-chat *::-webkit-scrollbar {
     width: 15px;
-  }
+}
+
 .scroll-to-bottom-chat *::-webkit-scrollbar-track {
-    background-color:  #282c34;
+    background-color: #282c34;
     border-radius: 5px;
-  }
-.scroll-to-bottom-chat *::-webkit-scrollbar-thumb{
+}
+
+.scroll-to-bottom-chat *::-webkit-scrollbar-thumb {
     background-color: #f56457;
     border-radius: 5px;
 }
-.scroll-to-bottom-chat *::-webkit-scrollbar-thumb:hover{
+
+.scroll-to-bottom-chat *::-webkit-scrollbar-thumb:hover {
     background-color: #f7f9f4;
-    
+
 }
 
 .message-container {
-    
-    
     background: #f7f9f4;
     font-size: 16px;
-    
+    text-transform: capitalize;
+text-align: start;
+
     border-radius: 20px;
-   
+
     padding: 5px 15px;
     margin: 15px 10px;
 
@@ -57,19 +61,20 @@
     max-width: fit-content;
 
     clear: both;
- 
+
 }
-#message-right{
-  float: right;
- 
-}
-.message-author{
+
+#message-right {
+    float: right;
     
+}
+
+.message-author {
     font-size: 12px;
 }
 
-.message-text{
-   padding-left: 20px;
+.message-text {
+    padding-left: 20px;
     margin: 5px 5px;
 }
 
@@ -77,15 +82,13 @@
     background-color: #282c34;
     display: flex;
     margin-top: auto;
-
-    
 }
 
 /* add message component */
 .form-chat {
     width: min(100% - 20px, 600px);
     margin-inline: auto;
-    position: relative; 
+    position: relative;
     text-align: start;
 }
 
@@ -93,19 +96,20 @@
     display: block;
     width: 100%;
     padding: .5rem .8rem .5rem .8rem;
-    margin: .5vw 0 ;
+    margin: .5vw 0;
     border: none;
     border-radius: 5px;
 }
 
-.red-btn{
-    color:#f7f9f4;
-    background:#f56457;
-    
+.red-btn {
+    color: #f7f9f4;
+    background: #f56457;
+
 }
+
 .red-btn:hover {
     cursor: pointer;
-    color:#282c34;
-    
+    color: #282c34;
+
     background-color: #f7f9f4;
 }
