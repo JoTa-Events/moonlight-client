@@ -47,7 +47,7 @@ export default function MyProfileDetails(props) {
       });
   };
 
-    // handle buttons //
+  // handle buttons //
   //update avatar in our DataBase
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,11 +98,13 @@ export default function MyProfileDetails(props) {
         <h1>{capitalize(userData.username)}</h1>
         <h4>Email: {userData.email}</h4>
         <span>
-          A Moonlight member for <b>{dayjs(today).diff(userData.createdAt, "day")}</b> days
+          A Moonlight member for{" "}
+          <b>{dayjs(today).diff(userData.createdAt, "day")}</b> days
         </span>
 
-        <br /><br />
-        
+        <br />
+        <br />
+
         <button hidden={!isFormHidden} onClick={handleDisplayForm}>
           Update avatar
         </button>
@@ -121,7 +123,14 @@ export default function MyProfileDetails(props) {
               </button>
             )}
 
-            <button onClick={(e) => {handleCancel(e);}}> x </button>
+            <button
+              onClick={(e) => {
+                handleCancel(e);
+              }}
+            >
+              {" "}
+              x{" "}
+            </button>
           </form>
 
           {avatar && (

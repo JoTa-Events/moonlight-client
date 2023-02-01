@@ -3,21 +3,21 @@ import { useState } from "react";
 import FutureEvents from "../components/FutureEvents";
 import PastEvents from "../components/PastEvents";
 import SearchBar from "../components/SearchBar";
-import "./pages-css/EventDetails.css"
+import "./pages-css/AllEvents.css";
 
 export default function AllEventsList(props) {
-  const { eventsList } = props;
+
   const today = dayjs().startOf("day");
-  const [ isSearching, setIsSearching ] = useState(false)
-  
+  const { eventsList } = props;
+  const [isSearching, setIsSearching] = useState(false);
+
   return (
-    <div className="allEvents">
-      <SearchBar
+    <div className="all-events-container">
+      <SearchBar className="search-bar"
         eventKey={"title"}
         setIsSearching={setIsSearching}
         eventsList={eventsList}
       />
-      <hr />
 
       {!isSearching && (
         <>

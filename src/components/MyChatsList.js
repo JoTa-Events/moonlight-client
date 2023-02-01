@@ -53,7 +53,7 @@ export default function MyChatsList(props) {
         <>
           <TabList className="chat-list">
             {futureEvents.map((event) => (
-              <Tab style={{ border: ".5px solid #282c34" }} key={event._id}>
+              <Tab key={event._id}>
                 {event.title}
               </Tab>
             ))}
@@ -61,7 +61,6 @@ export default function MyChatsList(props) {
             {pastEvents.map((event) => (
               <Tab
                 style={{
-                  border: ".5px solid #282c34",
                   backgroundColor: "DarkGray",
                 }}
                 key={event._id}
@@ -72,8 +71,8 @@ export default function MyChatsList(props) {
           </TabList>
         </>
         {myChatsToDisplay.map((event) => (
-          <div key={event._id} className="ChatBox">
-            <TabPanel>
+          <div key={event._id} >
+            <TabPanel key={event._id}>
               <ChatBox eventId={event._id} />
             </TabPanel>
           </div>
