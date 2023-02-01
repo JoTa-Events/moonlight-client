@@ -8,11 +8,6 @@
     text-transform: uppercase;
 }
 
-/* search bar settings */
-.search-bar {
-    padding: 25px;
-}
-
 /* past events opacity cards */
 .past-events {
     opacity: 0.6;

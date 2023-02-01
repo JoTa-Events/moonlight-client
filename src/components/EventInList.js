@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+
 import "./components-css/Card.css";
-import "../pages/pages-css/EventDetails.css";
 
 export default function EventInList(props) {
   const { event } = props;

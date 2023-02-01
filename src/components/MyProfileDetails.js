@@ -48,7 +48,7 @@ export default function MyProfileDetails(props) {
   };
 
   // handle buttons //
-  //update avatar in our DataBase
+  // update avatar in our DataBase
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -78,14 +78,14 @@ export default function MyProfileDetails(props) {
     });
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    e.target.form.reset();
-    setIsFormHidden((prevState) => {
-      return !prevState;
-    });
-    setAvatar(null);
-  };
+  // const handleCancel = (e) => {
+  //   e.preventDefault();
+  //   e.target.form.reset();
+  //   setIsFormHidden((prevState) => {
+  //     return !prevState;
+  //   });
+  //   setAvatar(null);
+  // };
 
   //render the page
   const renderUserData = () => {
@@ -93,7 +93,7 @@ export default function MyProfileDetails(props) {
       <div className="profile-details-container">
         <div className="profile-img-container">
           <form onSubmit={handleSubmit}>
-            <label for="fileField">
+            <label htmlFor="fileField">
               <img
                 className="profile-avatar"
                 src={userData?.avatar}
@@ -105,7 +105,7 @@ export default function MyProfileDetails(props) {
               required
               id="fileField"
               type="file"
-              hidden="true"
+              hidden={true}
               onChange={handleFileUpload}
             />
 
@@ -120,7 +120,6 @@ export default function MyProfileDetails(props) {
               </button>
             )}
           </form>
-
         </div>
 
         <h1>{capitalize(userData.username)}</h1>
