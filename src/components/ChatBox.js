@@ -14,7 +14,7 @@ import "./components-css/ChatBox.css"
 const API_URL = process.env.REACT_APP_API_URL;
 let socket;
 export default function ChatBox(props) {
-  const { eventId, setReRender } = props;
+  const { eventId, setReRender, getAllEvents } = props;
   const [chatObj, setChatObj] = useState(null);
   const { user } = useContext(AuthContext)
   const navigate = useNavigate();
@@ -106,7 +106,7 @@ export default function ChatBox(props) {
     axios.delete(`${API_URL}/api/events/${eventId}/participants`,authForAPI())
       .then(response=>{
         console.log(user.username,"Leave the event")
-                
+        getAllEvents()        
       })
       .catch(error=>{
         console.log("Error leaving the event", error)

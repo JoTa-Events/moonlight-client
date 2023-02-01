@@ -13,7 +13,7 @@ import capitalize from "../utils/capitalize";
 export default function EventDetails(props) {
   const { user } = useContext(AuthContext);
   const { eventId } = useParams();
-
+  
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
 
@@ -41,7 +41,7 @@ export default function EventDetails(props) {
   useEffect(() => {
 
     getEvent();
-    console.log(`howmanytimerenders`)
+    
     setToggle(false)
   }, [reRender]);
 
@@ -77,7 +77,7 @@ export default function EventDetails(props) {
   };
 
   const renderChat = () => {
-    return <ChatBox setReRender={setReRender} eventId={eventId} />;
+    return <ChatBox getAllEvents={props.getAllEvents} setReRender={setReRender} eventId={eventId} />;
   };
 
   return (
