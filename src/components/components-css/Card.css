@@ -39,3 +39,22 @@
     display: flex;
     overflow-x: scroll;
 }
+
+
+.card-header{
+    position: relative;
+    overflow: hidden;
+}
+.popular-medal {
+    font-size: 1rem;
+    position: absolute;
+    background-color:#f56457;
+    color: black;
+    
+    transform: translateX(-52%) rotate(-47deg) translateY(105%) rotate(0deg);
+    transform-origin: center top; 
+    padding: 0.5rem 4rem;
+    
+
+    
+}
