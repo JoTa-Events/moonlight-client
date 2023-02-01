@@ -1,0 +1,24 @@
+
+.AuthorProfile {
+    color: #282c34;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.AuthorProfile img {
+    width: 300px;
+    border: 1px solid #282c34;
+    border-radius: 5px;
+}
+
+.author-profile-events {
+    margin: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax (300px, 1fr));    
+}
+
+.author-profile-events h2 {
+    color: #282c34;
+    text-align: center;
+    padding-top: 1.5rem;
+}

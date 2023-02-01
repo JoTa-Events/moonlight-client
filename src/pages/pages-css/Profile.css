@@ -1,4 +1,4 @@
-/* Tab Container */
+/* tabs container */
 .profile {
     color: #282c34;
     text-transform: uppercase;
@@ -39,28 +39,23 @@
 
 .react-tabs__tab-panel--selected {
     display: block;
-    text-align: center;
+    
 }
 
-/* List of Chats in Profile */
-.chat-container {
-    text-align: center;
-    padding-top: 2.5rem;
+/* list of events in my-profile */
+.my-events {
+    margin: 25px 25px;
 }
 
-.chat-list {
-    width: 150px;
-    margin-left: 30%;
+.my-events .container {
+    gap: 35px;
 }
 
-.chat-list,
-.ChatBox {
-    float: left;
-}
 
 /* profile */
 .profile-details-container {
     text-transform: none;
+    text-align: center;
 }
 
 .profile-img-container {
@@ -75,29 +70,3 @@
     border-radius: 5px;
     overflow: hidden;
 }
-
-/* author's profile */
-.AuthorProfile {
-    color: #282c34;
-    text-align: center;
-    padding: 1.5rem;
-}
-
-.AuthorProfile img {
-    width: 300px;
-    border: 1px solid #282c34;
-    border-radius: 5px;
-}
-
-.author-profile-events {
-    margin: 0 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax (300px, 1fr));    
-}
-
-.author-profile-events h2 {
-    color: #282c34;
-    text-align: center;
-    padding-top: 1.5rem;
-}
-

@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
 import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
-import { AuthContext } from "../context/auth.context";
 import ChatBox from "./ChatBox";
+import "../pages/pages-css/Profile.css";
 
 export default function MyChatsList(props) {
   const { eventsList } = props;
@@ -53,9 +54,7 @@ export default function MyChatsList(props) {
         <>
           <TabList className="chat-list">
             {futureEvents.map((event) => (
-              <Tab key={event._id}>
-                {event.title}
-              </Tab>
+              <Tab key={event._id}>{event.title}</Tab>
             ))}
 
             {pastEvents.map((event) => (
@@ -70,13 +69,13 @@ export default function MyChatsList(props) {
             ))}
           </TabList>
         </>
-        {myChatsToDisplay.map((event) => (
-          <div key={event._id} >
+        <div className="chat-panel">
+          {myChatsToDisplay.map((event) => (
             <TabPanel key={event._id}>
               <ChatBox eventId={event._id} />
             </TabPanel>
-          </div>
-        ))}
+          ))}
+        </div>
       </Tabs>
     );
   };
