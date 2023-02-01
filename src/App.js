@@ -84,10 +84,11 @@ function App() {
         <Route exact path="/signup" 
           element={<SignupPage />} 
         />
-        
+  
         <Route path="*" element={<h1>404: Sorry, this route does not exist.</h1>} />
       </Routes>
       
+
     </div>
   );
 }

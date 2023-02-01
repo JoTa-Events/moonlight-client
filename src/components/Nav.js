@@ -67,6 +67,7 @@ export default function Nav() {
                 </div>
               </>
             )}
+            
             {!isLoggedIn && (
               <>
                 <input type="checkbox" />
