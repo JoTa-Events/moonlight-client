@@ -1,5 +1,5 @@
 .wrapper {
-    background-color: #282c34;
+    background-color: #000;
     text-transform: uppercase;
     margin: 0 auto;
     padding: 1.5rem;
@@ -7,7 +7,7 @@
 }
 
 nav a {
-    color: #f7f9f4;
+    color: #fafafa;
     padding: 0px 15px;
     letter-spacing: 2.5px;
 
@@ -71,7 +71,6 @@ nav a:hover {
     text-align: center;
     background-color: #f56457;
     cursor: pointer;
-    color: #282c34;
 }
 
 .dropdown:checked+label:before,
@@ -105,7 +104,7 @@ nav a:hover {
 .section-dropdown {
     position: absolute;
     padding: 5px;
-    background-color: #282c34;
+    background-color: #000000;
     top: 40px;
     left: 0;
     width: 100%;
@@ -143,7 +142,7 @@ nav a:hover {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid #282c34;
+    border-bottom: 8px solid #000;
     content: '';
     display: block;
     z-index: 2;

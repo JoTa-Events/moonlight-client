@@ -73,10 +73,7 @@ export default function EventDetails(props) {
 
   return (
     <>
-      <div
-        className="event-details-container"
-        style={{ display: "flex", marginTop: "50px" }}
-      >
+      <div className="event-details-container">
         <div className="event-details">
           <img
             src={event.image}
@@ -84,6 +81,7 @@ export default function EventDetails(props) {
             style={{ margin: "auto", width: "auto", height: "350px" }}
           />
           <h1>{event.title}</h1>
+          
           <Link
             style={{ margin: "auto", display: "inline-block" }}
             to={`/profile/${event.author?.username}`}
@@ -123,6 +121,7 @@ export default function EventDetails(props) {
             </div>
           )}
         </div>
+        
         <div className="ChatBox">
           {isUserInEvent ? (
             <button onClick={toggleEventChat}>
@@ -134,7 +133,7 @@ export default function EventDetails(props) {
 
           {toggle && renderChat()}
 
-          <div style={{ margin: "50px auto" }}>
+          <div className="map">
             {event.location && <Map coords={event.location.coordinates} />}
           </div>
 

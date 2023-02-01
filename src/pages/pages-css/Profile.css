@@ -1,6 +1,6 @@
 /* tabs container */
 .profile {
-    color: #282c34;
+    color: #fafafa;
     text-transform: uppercase;
     margin: 25px 25px;
 }
@@ -13,8 +13,8 @@
     width: 50%;
     margin: auto;
     display: flex;
-
-    border: 1px solid #282c34;
+    
+    border: 1px solid #000;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -29,8 +29,8 @@
 }
 
 .react-tabs__tab--selected {
-    background: #282c34;
-    color: #f7f9f4;
+    background: #000;
+    color: #fafafa;
 }
 
 .react-tabs__tab-panel {
@@ -67,7 +67,7 @@
     height: 600px;
     overflow-y: scroll;
 
-    border: 1px solid #282c34;
+    border: 1px solid #000;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -86,7 +86,7 @@
 
 .profile-avatar {
     width: 300px;
-    border: .5px solid #282c34;
+    border: .1rem solid #000;
     border-radius: 5px;
     overflow: hidden;
 }

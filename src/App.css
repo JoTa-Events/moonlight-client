@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:100,300,700");
+
 * {
   margin: 0;
   padding: 0;
@@ -5,15 +7,19 @@
 }
 
 body {
-  background-color: #ede5d8;
+  background-color: #121212;
   font-family: 'Roboto';
   height: 100%;
   font-size: 14px;
 }
 
-a {
+a, p, h1 {
   text-decoration: none;
-  color: #282c34;
+  color: #fafafa;
+}
+
+h2 {
+  color: #f56457
 }
 
 /* all buttons */

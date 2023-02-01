@@ -6,8 +6,9 @@ import FutureEvents from "../components/FutureEvents";
 import PastEvents from "../components/PastEvents";
 import capitalize from "../utils/capitalize";
 
-export default function AuthorProfile() {
+import "./pages-css/AuthorProfile.css";
 
+export default function AuthorProfile() {
   const API_URL = process.env.REACT_APP_API_URL;
   const [authorData, setAuthorData] = useState(null);
   const { username } = useParams();
@@ -45,7 +46,8 @@ export default function AuthorProfile() {
           <h1>{capitalize(authorData.author.username)}</h1>
           <p>
             A Moonlight member for{" "}
-            <b>{dayjs(today).diff(authorData.author.createdAt, "day")}</b> day(s)
+            <b>{dayjs(today).diff(authorData.author.createdAt, "day")}</b>{" "}
+            day(s)
           </p>
         </div>
       </div>

@@ -4,7 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     
-    margin: 0 auto;
+    margin: 50px auto;
     overflow: auto;
     resize: none;
 }
@@ -25,6 +25,10 @@
     margin-bottom: 15px;
 }
 
+.event-details h3 {
+   color: #fafafa;
+}
+
 .event-details {
     word-wrap: break-word;
     height: fit-content;
@@ -35,3 +39,6 @@
     margin: auto;
 }
 
+.map {
+    margin-top: 3rem;
+}

@@ -38,15 +38,15 @@ export default function EditEvent() {
 
   const getStringUntilComa = (address) => {
     let newString = "";
-    for(let i = 0; i < address.length; i++){
-      if(address[i] !== ","){
+    for (let i = 0; i < address.length; i++) {
+      if (address[i] !== ",") {
         newString = newString + address[i];
       } else {
         break;
       }
     }
     return newString;
-  }
+  };
 
   useEffect(() => {
     axios
@@ -57,10 +57,9 @@ export default function EditEvent() {
         setDate(dayjs(event.date).format("YYYY-MM-DD"));
         setLocation(event.location.city);
         setDescription(event.description);
-        setImage(event.image)
+        setImage(event.image);
       })
       .catch((error) => console.log(error));
-
   }, [eventId]);
 
   const handleSubmit = (e) => {
@@ -83,14 +82,14 @@ export default function EditEvent() {
         requestBody.location = {
           type: "point",
           coordinates: [latitude, longitude],
-          city
+          city,
         };
-        
+
         return axios.put(
           `${process.env.REACT_APP_API_URL}/api/events/${eventId}`,
           requestBody,
           authForAPI()
-        )
+        );
       })
       .then((response) => {
         navigate(`/events/${eventId}`);
@@ -128,7 +127,7 @@ export default function EditEvent() {
         />
 
         <label>
-          Location <b style={{ color: "#f56457" }}>*</b>
+          City <b style={{ color: "#f56457" }}>*</b>
         </label>
         <input
           required={true}
@@ -146,7 +145,6 @@ export default function EditEvent() {
         </label>
         <textarea
           required={true}
-          
           rows={5}
           name="description"
           value={description}
