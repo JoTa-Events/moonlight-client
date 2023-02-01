@@ -1,25 +1,25 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
-import { io } from "socket.io-client";
 import { AuthContext } from "../context/auth.context";
+import { io } from "socket.io-client";
+import ScrollToBottom from "react-scroll-to-bottom";
 import authForAPI from "../utils/authForAPI";
 import capitalize from "../utils/capitalize";
 import AddMessage from "./AddMessage";
-import "./components-css/ChatBox.css"
 
+import "./components-css/ChatBox.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
 let socket;
+
 export default function ChatBox(props) {
+
   const { eventId } = props;
   const [chatObj, setChatObj] = useState(null);
   const { user } = useContext(AuthContext)
 
-
-
-  /**************socket io****************/
+  /************** socket io ****************/
   const [isConnected, setIsConnected] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("")
   const [messageList,setMessageList]=useState([])
@@ -44,6 +44,7 @@ export default function ChatBox(props) {
     
   },[])
   console.log("isConnected",isConnected);
+
   // useEffect(()=>{
   
   //   socket.on("clientListens",(data)=>{
@@ -70,17 +71,17 @@ export default function ChatBox(props) {
       console.log("currentMessage",messageData)
 
       //store the message sent, in a state to display it in the chat
-       setMessageList((prev)=>{
+      setMessageList((prev)=>{
         return([...prev,messageData])
-       })
+      })
     }
   }
+
   /*************************************/
   
   const getChatFromAPI = () => {
 
     if(!user) return
-
     axios
       .get(`${API_URL}/api/chats/${eventId}`, authForAPI())
       .then((response) => {
@@ -99,44 +100,40 @@ export default function ChatBox(props) {
   const renderChat = () => {
     return (
       <div className="chatbox">
-      
         <div className="chatbox-head"><span>Live-Chat</span></div>
          
-           <ScrollToBottom className="scroll-to-bottom-chat" >
+          <ScrollToBottom className="scroll-to-bottom-chat" >
 
             {chatObj.messages.map((message) => {
               let leftOrRight =""
-                if(user.username===message.author.username){
-                    leftOrRight="message-right"
-                }         
+              if(user.username === message.author.username){
+                  leftOrRight="message-right"
+              }         
               return(
                 <div className="message-container" id={leftOrRight} key={message._id}>
                   <p className="message-author"><b>{capitalize(message.author?.username)}</b></p>
-                  <p className="message-text">
-                  {message.message}
-                  </p>
-               
-              </div>
-            )})}
+                  <p className="message-text">{message.message}</p>
+                </div>
+              )
+            })}
        
             {messageList.map((message,index) => {
-              let leftOrRight =""
-                if(user.username===message.author){
-                    leftOrRight="message-right"
-                }         
+              let leftOrRight = ""
+              if(user.username===message.author){
+                leftOrRight="message-right"
+              }         
               return(
                 <div className="message-container" id={leftOrRight} key={index}>
                   <p className="message-author"><b>{capitalize(message.author)}</b></p>
-                  <p className="message-text">
-                  {message.message}
-                  </p>
-               
-              </div>
-            )})}
-           </ScrollToBottom>
+                  <p className="message-text">{message.message}</p>
+                </div>
+              )
+            })}
+            
+          </ScrollToBottom>
          
         <div className="chatbox-footer">
-            <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
+          <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
         </div>
         
       </div>

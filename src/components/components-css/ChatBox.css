@@ -2,16 +2,23 @@
     height: 600px;
     width: 500px;
     overflow: hidden;
-    background-color: #1c1e21;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    background-color: #1c1e21;
 }
 
 .chatbox-head {
+    color: #fafafa;
     background: #f56457;
     text-align: start;
-    text-transform: capitalize;
-    padding: .7rem;
+    padding: .65rem;
+}
+
+.chatbox-footer {
+    border-top: .1rem solid #000;
+    display: inline-flexbox;
+    height: 100px;
+    padding-top: 2rem;
 }
 
 .chat-messages {
@@ -45,17 +52,13 @@
 
 .message-container {
     background: #fafafa;
-    text-transform: capitalize;
     text-align: start;
 
-    border-radius: 20px;
-
+    width: fit-content;
     padding: 5px 15px;
-    margin: 15px 10px;
+    margin: 10px 10px;
 
-    width: max-content;
-    max-width: fit-content;
-
+    border-radius: 20px;
     clear: both;
 }
 
@@ -73,12 +76,6 @@
     padding-left: 20px;
     margin: 5px 5px;
     color: #000;
-}
-
-.chatbox-footer {
-    background-color: #1c1e21;
-    display: flex;
-    margin-top: auto;
 }
 
 /* add message component */

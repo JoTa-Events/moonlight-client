@@ -8,7 +8,7 @@ import service from "../service";
 
 // default events image
 const DefaultImage =
-  "https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg";
+  "https://res.cloudinary.com/douen1dwv/image/upload/v1675274952/moonlight-default-img/pexels-photo-2111016_jcx0mt.jpg";
 
 export default function CreateEvent(props) {
   const navigate = useNavigate();
