@@ -129,16 +129,20 @@ export default function EventDetails(props) {
             {""}Join Event
             </button>
           )}
+
+          {isUserInEvent ? (
+          <button onClick={toggleEventChat}>
+            {toggle ? "Hide Chat" : "Show Chat"}
+          </button> ) : ( "" )}
         </div>
 
+        
 
       </div>
         
       <div className="ChatBox">
-      {isUserInEvent ? (
-        <button onClick={toggleEventChat}>
-          {toggle ? "Hide Chat" : "Show Chat"}
-        </button> ) : ( "" )}
+
+      
 
         {toggle && renderChat()}
 
