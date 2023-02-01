@@ -29,8 +29,8 @@
 }
 
 .react-tabs__tab--selected {
-    background: #f56457;
-    color: #282c34;
+    background: #282c34;
+    color: #f7f9f4;
 }
 
 .react-tabs__tab-panel {
@@ -86,6 +86,7 @@
 .AuthorProfile img {
     width: 300px;
     border: 1px solid #282c34;
+    border-radius: 5px;
 }
 
 .author-profile-events {

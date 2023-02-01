@@ -12,9 +12,9 @@ export default function MyProfile(props) {
     <div className="profile">
       <Tabs>
         <TabList>
-          <Tab>My events</Tab>
+          <Tab>Events</Tab>
           <Tab>Chats</Tab>
-          <Tab>My Profile</Tab>
+          <Tab>Profile</Tab>
         </TabList>
 
         <TabPanel>
