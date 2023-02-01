@@ -20,7 +20,7 @@ export default function ChatBox(props) {
 
 
   /**************socket io****************/
-
+  const [isConnected, setIsConnected] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("")
   const [messageList,setMessageList]=useState([])
 
@@ -31,9 +31,19 @@ export default function ChatBox(props) {
     socket =io.connect(API_URL)
     
     // joins to a room chat with name eventId
-    socket.emit("joinChat",(eventId))
+    // socket.emit("joinChat",(eventId))
+
+    socket.on('connect', () => {
+      setIsConnected(true);
+      socket.emit("joinChat",(eventId))
+    });
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+      
+    });
+    
   },[])
-  
+  console.log("isConnected",isConnected);
   // useEffect(()=>{
   
   //   socket.on("clientListens",(data)=>{
