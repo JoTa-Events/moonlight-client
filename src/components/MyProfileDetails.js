@@ -92,7 +92,35 @@ export default function MyProfileDetails(props) {
     return (
       <div className="profile-details-container">
         <div className="profile-img-container">
-          <img className="profile-avatar" src={userData.avatar} alt="avatar" />
+          <form onSubmit={handleSubmit}>
+            <label for="fileField">
+              <img
+                className="profile-avatar"
+                src={userData?.avatar}
+                alt="avatar"
+              />
+            </label>
+
+            <input
+              required
+              id="fileField"
+              type="file"
+              hidden="true"
+              onChange={handleFileUpload}
+            />
+
+            <br />
+            {isUploadingImage ? (
+              <button type="submit" disabled>
+                Uploading
+              </button>
+            ) : (
+              <button onClick={handleSubmit} type="submit">
+                Upload Avatar
+              </button>
+            )}
+          </form>
+
         </div>
 
         <h1>{capitalize(userData.username)}</h1>
@@ -101,46 +129,6 @@ export default function MyProfileDetails(props) {
           A Moonlight member for{" "}
           <b>{dayjs(today).diff(userData.createdAt, "day")}</b> days
         </span>
-
-        <br />
-        <br />
-
-        <button hidden={!isFormHidden} onClick={handleDisplayForm}>
-          Update avatar
-        </button>
-
-        <div hidden={isFormHidden}>
-          <form>
-            <input required type="file" onChange={handleFileUpload} />
-
-            {isUploadingImage ? (
-              <button type="submit" disabled>
-                Uploading
-              </button>
-            ) : (
-              <button onClick={handleSubmit} type="submit">
-                Submit
-              </button>
-            )}
-
-            <button
-              onClick={(e) => {
-                handleCancel(e);
-              }}
-            >
-              {" "}
-              x{" "}
-            </button>
-          </form>
-
-          {avatar && (
-            <img
-              className="profile-avatar"
-              src={avatar}
-              alt="Uploaded-avatar"
-            />
-          )}
-        </div>
       </div>
     );
   };
