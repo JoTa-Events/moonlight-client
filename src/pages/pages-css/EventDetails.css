@@ -3,40 +3,76 @@
 
     display: flex;
     flex-wrap: wrap;
-    
+    width: 80%;
     margin: 50px auto;
     overflow: auto;
     resize: none;
+}
+
+.event-details {
+    word-wrap: break-word;
+    text-align: start;
+    height: fit-content;
+    padding: 2.5rem;
+}
+
+.event-details-content h2 {
+    display: flex;
+    font-size: 30px;
+    padding-top: .3rem;
+}
+
+.event-details-content a {
+    display: flex;
+    justify-content: end;
 }
 
 .ChatBox,
 .event-details {
     margin: 0 auto;
     overflow: hidden;
-    height: 650px;
+    height: 700px;
     width: min(100% - 15px, 600px);
+    display: inline;
 }
 
-.ChatBox {
-    text-align: start;
+.event-details-container img {
+    margin: auto;
+    width: auto;
+    height: 350px;
+    border-radius: 5px;
 }
 
-.event-details h1 {
-    margin-bottom: 15px;
+.event-details-content a {
+    margin-top: 1rem;
 }
 
 .event-details h3 {
    color: #fafafa;
+   padding-top: 1rem;
 }
 
-.event-details {
-    word-wrap: break-word;
-    height: fit-content;
+/* attenting counter and link to join event */
+.att-event {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
 }
 
-.edit-delete {
-    display: inline-flex;
-    margin: auto;
+.att-event button {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin-top: 1rem;
+    padding: 0 2rem;
+    border-radius: 15px;
+    color: #fafafa;
+    border: 2px solid #f56457;
+    background-color: #121212;
+}
+
+.att-event button:hover {
+    background-color: #f56457;
 }
 
 .map {
