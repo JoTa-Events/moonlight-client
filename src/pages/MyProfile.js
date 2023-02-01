@@ -3,6 +3,7 @@ import MyProfileDetails from "../components/MyProfileDetails";
 import MyEventsList from "../components/MyEventsList";
 import MyChatsList from "../components/MyChatsList";
 import "./pages-css/Profile.css";
+import "../components/components-css/Card.css"
 
 export default function MyProfile(props) {
   const { deleteCallback, eventsList } = props;
