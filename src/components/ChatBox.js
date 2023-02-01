@@ -16,7 +16,7 @@ let socket;
 
 export default function ChatBox(props) {
 
-  const { eventId, setReRender } = props;
+  const { eventId, setReRender, getAllEvents } = props;
   const [chatObj, setChatObj] = useState(null);
   const { user } = useContext(AuthContext)
   
@@ -110,7 +110,7 @@ export default function ChatBox(props) {
     axios.delete(`${API_URL}/api/events/${eventId}/participants`,authForAPI())
       .then(response=>{
         console.log(user.username,"Leave the event")
-                
+        getAllEvents()        
       })
       .catch(error=>{
         console.log("Error leaving the event", error)

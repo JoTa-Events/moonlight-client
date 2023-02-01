@@ -51,7 +51,7 @@ function App() {
 
     <Routes>
         <Route exact path="/my-profile" 
-          element={<IsPrivate> <MyProfile eventsList={eventsList} deleteCallback={deleteEvent} /> </IsPrivate>} 
+          element={<IsPrivate> <MyProfile getAllEvents={getAllEvents} eventsList={eventsList} deleteCallback={deleteEvent} /> </IsPrivate>} 
         />
 
         <Route exact path="/profile/:username" 
