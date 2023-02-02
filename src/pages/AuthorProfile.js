@@ -55,9 +55,9 @@ export default function AuthorProfile() {
   };
   return (
     <div className="author-profile-page">
-      {!authorData ? (
-        "Loading..."
-      ) : (
+      {!authorData 
+      ? (<div class="loader">Loading...</div>) 
+      : (
         <>
           {renderAuthorProfile()}
 

@@ -126,7 +126,9 @@ export default function SearchBar(props) {
           queryStringLocation ||
           queryStringUsername ||
           queryStringDate) &&
-          (!eventsList ? "Loading......" : renderList())}
+          (!eventsList 
+            ? <div class="loader">Loading...</div> 
+            : renderList())}
       </div>
     </div>
   );

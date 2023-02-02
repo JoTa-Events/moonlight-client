@@ -132,5 +132,7 @@ export default function MyProfileDetails(props) {
     );
   };
 
-  return <>{!userData ? "Loading..." : renderUserData()}</>;
+  return <>{!userData 
+    ? <div class="loader">Loading...</div> 
+    : renderUserData()}</>;
 }

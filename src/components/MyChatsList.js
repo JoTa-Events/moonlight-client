@@ -80,5 +80,11 @@ export default function MyChatsList(props) {
     );
   };
 
-  return <>{!myChatsToDisplay ? "Loading..." : renderMyChats()}</>;
+  return (
+    <>
+      {!myChatsToDisplay 
+        ? "Loading..." 
+        : renderMyChats()}
+    </>
+  );
 }

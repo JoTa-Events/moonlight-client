@@ -56,5 +56,7 @@ export default function MyEventsList(props) {
     );
   };
 
-  return <>{!myEventsList ? "Loading..." : renderMyEvents()}</>;
+  return <>{!myEventsList 
+    ? <div class="loader">Loading...</div>
+    : renderMyEvents()}</>;
 }
