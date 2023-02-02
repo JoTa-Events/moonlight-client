@@ -1,5 +1,8 @@
+
+
 .chatbox {
     height: 600px;
+    
     width: 500px;
     overflow: hidden;
     border-radius: 5px;
@@ -75,6 +78,7 @@
     padding-left: 20px;
     margin: 5px 5px;
     color: #000;
+    word-break: break-word;
 }
 
 /* add message component */
@@ -104,3 +108,13 @@
     color: #f56457;
     background-color: #fafafa;
 }
+
+
+
+@media (max-width: 600px) {
+    .chatbox {
+        width: 100%;
+        max-width: 400px;
+       
+    }
+  }

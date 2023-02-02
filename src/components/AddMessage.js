@@ -63,6 +63,7 @@ export default function AddMessage(props) {
         <input
           required
           type="text"
+          autoComplete="off"
           placeholder="Type here..."
           name="currentMessage"
           value={currentMessage}
