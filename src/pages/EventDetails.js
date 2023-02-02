@@ -92,6 +92,7 @@ export default function EventDetails(props) {
       </div>
     );
   };
+
   return (
     <div className="event-details-container">
       <div className="event-details">
@@ -122,10 +123,12 @@ export default function EventDetails(props) {
             <b>Description: </b>{event.description}
           </p>
 
-          <Link to={`/profile/${event.author?.username}`}>
-            {event.author && capitalize(event.author?.username)} 
-            {<img src={event.author?.avatar} alt="avatar"/>}
-          </Link>
+          <div className="avatar-profile">
+            <Link to={`/profile/${event.author?.username}`}>
+              {event.author && capitalize(event.author?.username)} 
+              {<img src={event.author?.avatar} alt="avatar" className="avatar-profile" />}
+            </Link>
+          </div>
         </div>
 
         <div className="att-event">
@@ -152,7 +155,6 @@ export default function EventDetails(props) {
       <div className="ChatBox">
         {toggle && renderChat()}
         {!toggle && renderMap()}
-       
       </div>
         
     </div>
