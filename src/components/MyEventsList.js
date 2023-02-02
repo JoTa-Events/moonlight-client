@@ -57,6 +57,6 @@ export default function MyEventsList(props) {
   };
 
   return <>{!myEventsList 
-    ? <div class="loader">Loading...</div>
+    ? <div className="loader">Loading...</div>
     : renderMyEvents()}</>;
 }

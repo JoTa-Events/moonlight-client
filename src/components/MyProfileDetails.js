@@ -7,6 +7,8 @@ import service from "../service";
 import authForAPI from "../utils/authForAPI";
 import capitalize from "../utils/capitalize";
 
+import { IconUpload, IconLoader, IconCircleCheck } from "@tabler/icons-react";
+
 export default function MyProfileDetails(props) {
   const API_URL = process.env.REACT_APP_API_URL;
 
@@ -35,6 +37,7 @@ export default function MyProfileDetails(props) {
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
     setIsUploadingImage(true);
+    handleDisplayForm();
 
     service
       .uploadImage(uploadData)
@@ -52,9 +55,9 @@ export default function MyProfileDetails(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!e.target.form.checkValidity()) {
-      return;
-    }
+    // if (!e.target.form.checkValidity()) {
+    //   return;
+    // }
     const requestBody = { avatar };
 
     axios
@@ -66,9 +69,8 @@ export default function MyProfileDetails(props) {
         console.log(error);
       })
       .finally(() => {
-        handleDisplayForm();
         setAvatar("");
-        e.target.form.reset();
+        // e.target.form.reset();
       });
   };
 
@@ -87,18 +89,24 @@ export default function MyProfileDetails(props) {
   //   setAvatar(null);
   // };
 
+  // const renderAvatarUpload = () => {
+  //   return (
+  //     <>
+
+  //     </>
+  //   )
+  // }
+
   //render the page
   const renderUserData = () => {
     return (
       <div className="profile-details-container">
-        <div className="profile-img-container">
+        <div className="profile-container">
+          <img className="profile-avatar" src={userData?.avatar} alt="avatar" />
+
           <form onSubmit={handleSubmit}>
             <label htmlFor="fileField">
-              <img
-                className="profile-avatar"
-                src={userData?.avatar}
-                alt="avatar"
-              />
+              <IconUpload width={25} />
             </label>
 
             <input
@@ -109,16 +117,31 @@ export default function MyProfileDetails(props) {
               onChange={handleFileUpload}
             />
 
-            <br />
-            {isUploadingImage ? (
+            {isFormHidden ? (
+              ""
+            ) : (
+              <>
+                {isUploadingImage ? (
+                  <button type="submit" disabled>
+                    <IconLoader width={25} style={{ color: "#f56457" }} />
+                  </button>
+                ) : (
+                  <button type="submit">
+                    <IconCircleCheck width={25} style={{ color: "green" }} />
+                  </button>
+                )}
+              </>
+            )}
+
+            {/* {isUploadingImage ? (
               <button type="submit" disabled>
-                Uploading
+                <IconLoader style={{color: "red"}} />
               </button>
             ) : (
               <button onClick={handleSubmit} type="submit">
-                Upload Avatar
+                <IconCircleCheck style={{color: "green", backgroundColor: "none"}} />
               </button>
-            )}
+            )} */}
           </form>
         </div>
 
@@ -132,7 +155,7 @@ export default function MyProfileDetails(props) {
     );
   };
 
-  return <>{!userData 
-    ? <div class="loader">Loading...</div> 
-    : renderUserData()}</>;
+  return (
+    <>{!userData ? <div className="loader">Loading...</div> : renderUserData()}</>
+  );
 }

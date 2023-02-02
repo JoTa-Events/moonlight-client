@@ -127,7 +127,7 @@ export default function SearchBar(props) {
           queryStringUsername ||
           queryStringDate) &&
           (!eventsList 
-            ? <div class="loader">Loading...</div> 
+            ? <div className="loader">Loading...</div> 
             : renderList())}
       </div>
     </div>

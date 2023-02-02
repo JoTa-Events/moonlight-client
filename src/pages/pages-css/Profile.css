@@ -54,7 +54,7 @@
 .chat-container {
     padding: 2rem;
     text-transform: initial;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,10 +80,9 @@
     margin-top: 3rem;
 }
 
-.profile-img-container {
+.profile-container {
     display: inline-block;
     margin: auto;
-    margin-top: 1.5rem;
 }
 
 .profile-avatar {
@@ -91,4 +90,21 @@
     border: .1rem solid #000;
     border-radius: 5px;
     overflow: hidden;
+}
+
+.profile-container form {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.profile-container button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    overflow: hidden;
+}
+
+.profile-container form>label {
+    cursor: pointer;
 }
