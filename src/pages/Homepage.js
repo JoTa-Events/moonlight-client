@@ -1,18 +1,17 @@
-
-import EventsThisWeek from "../components/EventsThisWeek"
+import dayjs from "dayjs";
+import Slideshow from "../components/Slideshow";
 
 
 export default function Homepage(props) {
 
   const { eventsList } = props;
-
+  
+  const futureDate = dayjs().add(3, "day")
 
   return (
     <div className="Homepage">
-
-      <h1>What's on this week</h1>      
-      <EventsThisWeek eventsList={eventsList} />
-    
+      <Slideshow eventsList={eventsList} untilDate={futureDate}/>
+      
     </div>
   );
 }
