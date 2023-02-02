@@ -50,6 +50,12 @@ export default function ChatBox(props) {
       setIsConnected(false);
       
     });
+    return ()=>{
+      console.log("is unmounting")
+      socket.emit("leaveChat", eventId);
+      socket.disconnect()
+      console.log("disconected manually")
+    }
     
   },[])
   console.log("isConnected",isConnected);
