@@ -73,11 +73,9 @@ export default function EventDetails(props) {
       });
   };
 
-  // chat toggle button
+  // chat and map toggle button
   const toggleEventChat = () => {
-   
     setToggle(prevToggle=>!prevToggle);
-
   };
 
   const renderChat = () => {

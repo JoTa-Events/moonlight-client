@@ -18,7 +18,7 @@ export default function FutureEvents(props) {
   });
 
   return (
-    <div className="container">
+    <div className="container-scroll">
       {futureEvents.map((event) => (
         <div key={event._id}>
           <EventInList event={event} />
