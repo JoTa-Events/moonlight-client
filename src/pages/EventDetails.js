@@ -75,13 +75,23 @@ export default function EventDetails(props) {
 
   // chat toggle button
   const toggleEventChat = () => {
+   
     setToggle(prevToggle=>!prevToggle);
+
   };
 
   const renderChat = () => {
     return <ChatBox getAllEvents={props.getAllEvents} setReRender={setReRender} eventId={eventId} />;
   };
 
+
+  const renderMap = () => {
+    return (
+      <div className="map">
+        {event.location && <Map coords={event.location.coordinates} />}
+      </div>
+    );
+  };
   return (
     <div className="event-details-container">
       <div className="event-details">
@@ -113,7 +123,8 @@ export default function EventDetails(props) {
           </p>
 
           <Link to={`/profile/${event.author?.username}`}>
-            {event.author && capitalize(event.author?.username)} (AVATAR HERE)
+            {event.author && capitalize(event.author?.username)} 
+            {<img src={event.author?.avatar} alt="avatar"/>}
           </Link>
         </div>
 
@@ -145,10 +156,8 @@ export default function EventDetails(props) {
       
 
         {toggle && renderChat()}
-
-        <div className="map">
-          {event.location && <Map coords={event.location.coordinates} />}
-        </div>
+        {!toggle && renderMap()}
+       
       </div>
         
     </div>

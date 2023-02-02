@@ -32,7 +32,6 @@
 .event-details {
     margin-top: auto;
     overflow: hidden;
-    height: 600px;
     width: min(100% - 15px, 600px);
 }
 
