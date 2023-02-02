@@ -4,8 +4,8 @@
     border:2px solid black;
     border-radius: 5px;
 
-    width:300px;
-    height:180px;
+    width:325px;
+    height:150px;
         
 
     left: 0;
@@ -51,6 +51,7 @@
 .are-you-sure-container p{
     margin: 0;
     padding: 0;
+    padding-bottom:1rem;
     position: absolute;
     top: 45%;
     left: 50%;
@@ -59,4 +60,9 @@
     line-height:1.5;
     letter-spacing: 0.8px;
 
+}
+
+.click-no:hover,
+.click-yes:hover{
+    background-color: #f56457;
 }

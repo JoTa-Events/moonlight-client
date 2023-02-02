@@ -6,7 +6,7 @@ export default function AreYouSure(props){
     }
     return(<>
         <div className="are-you-sure-container">
-            <button className="click-close-window" onClick={closeWindow}>x</button>
+            
             <p>{confirmMessage? confirmMessage : "are you sure?" }</p>
             
             <button className="click-yes" onClick={handleYes}><b>Yes</b></button>
