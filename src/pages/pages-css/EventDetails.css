@@ -9,7 +9,7 @@
     margin: 50px auto;
     overflow: auto;
     resize: none;
-    gap: 5rem;
+    gap: 5rem
 }
 
 .event-details {
@@ -31,16 +31,15 @@
 
 .ChatBox,
 .event-details {
-    margin-top: auto;
     overflow: hidden;
-    width: min(100% - 15px, 600px);
+    width: min(100% - 15px, 500px);
 }
 
 .event-details img {
     margin: auto;
     width: auto;
     height: 350px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .event-details-content a {
@@ -83,4 +82,17 @@
 /* map */
 .map {
     margin-top: 3rem;
+}
+
+/* link to the author's profile */
+.avatar-profile img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.avatar-profile {
+    display: flex;
+    justify-content: end;
+    padding: .5rem;
 }
