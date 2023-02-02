@@ -6,7 +6,7 @@
 
 }
 
-.slideshowSlider {
+.slideshow-slider {
   white-space: nowrap;
   transition: ease 1000ms;
   /* width: max(100% - 20px, 100%); */
@@ -31,14 +31,16 @@
   text-align: end;
   
   position: absolute;
-  right: 0;
+  right: 4vw;
   bottom: 3rem;
-  transform: translate(-50%, 0%);
+  /* transform: translate(-50%, 0%); */
 }
 
 .slide-event-info h1 {
+  
   text-transform: uppercase;
   word-wrap: break-word;
+  white-space: pre-line;
 }
 
 .slide-event-info .city {

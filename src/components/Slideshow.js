@@ -48,7 +48,7 @@ export default function Slideshow(props) {
   return (
     <div className="slideshow">
       <div
-        className="slideshowSlider"
+        className="slideshow-slider"
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
         {eventsToDisplay.map((event) => (
