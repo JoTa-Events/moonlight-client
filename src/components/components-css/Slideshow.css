@@ -1,78 +1,67 @@
-
 .slideshow {
-    margin: 0 auto;
-    overflow: hidden;
-    height: 100%;
-    width:100%;
-  }
-  
-  .slideshowSlider {
-    white-space: nowrap;
-    transition: ease 1000ms;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .slide {
-    display: inline-block;
-  
-    height: 100%;
-    width: 100%;
-    
-  }
-  .slide img{
-    object-fit: cover;
-    height: 100%;
-    max-height: 750px;
-    width: 100%;
-    opacity: 0.56;
+  margin: .5rem auto;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 
-  }
-  .slide-event-info{
-    
-    font-size: 2rem;
-    position: absolute;
-    
-    
-    right: 0;
-    bottom: 15%;
-    transform: translate(-50%, 0%);
-    text-align: end;
-    margin: auto;
-    font-weight: 900;
-  }
+}
 
-  .slide-event-info h1{
-    font-size: 4rem;
-    padding-bottom: 0.4rem; 
-    text-transform: uppercase;
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+  /* width: max(100% - 20px, 100%); */
+  position: relative;
+}
 
-  }
-  .slide-event-info .city{
-    color: #f56457;
-    
-  }
+.slide {
+  display: inline-block;
+  width: max(100% - 20px, 100%);
+}
+
+.slide img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 750px;
+  opacity: 0.56;
+}
+
+.slide-event-info {
+  font-size: 2vw;
+  font-weight: 900;
+  text-align: end;
   
-  
-  /* Buttons */
-  
-  .slideshowDots {
-    text-align: center;
-  }
-  
-  .slideshowDot {
-    display: inline-block;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-  
-    cursor: pointer;
-    margin: 15px 7px 0px;
-  
-    background-color: #fafafa;
-  }
-  
-  .slideshowDot.active {
-    background-color: #f56457;
-  }
-  
+  position: absolute;
+  right: 0;
+  bottom: 3rem;
+  transform: translate(-50%, 0%);
+}
+
+.slide-event-info h1 {
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.slide-event-info .city {
+  color: #f56457;
+}
+
+/* buttons */
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 10px 5px 0px;
+
+  background-color: #fafafa;
+}
+
+.slideshowDot.active {
+  background-color: #f56457;
+}

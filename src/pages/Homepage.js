@@ -11,7 +11,6 @@ export default function Homepage(props) {
   return (
     <div className="Homepage">
       <Slideshow eventsList={eventsList} untilDate={futureDate}/>
-      
     </div>
   );
 }

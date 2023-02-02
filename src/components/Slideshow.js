@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import "./components-css/Slideshow.css"
+import "./components-css/Slideshow.css";
 
 const delay = 3500;
 
 export default function Slideshow(props) {
- 
-  const {eventsList,untilDate} = props 
+  const { eventsList, untilDate } = props;
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
   const today = dayjs().startOf("day");
@@ -35,7 +34,7 @@ export default function Slideshow(props) {
     timeoutRef.current = setTimeout(
       () =>
         setIndex((prevIndex) =>
-          prevIndex ===  eventsToDisplay.length - 1 ? 0 : prevIndex + 1
+          prevIndex === eventsToDisplay.length - 1 ? 0 : prevIndex + 1
         ),
       delay
     );
@@ -45,10 +44,8 @@ export default function Slideshow(props) {
     };
   }, [index]);
 
-  
   return (
     <div className="slideshow">
-    
       <div
         className="slideshowSlider"
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
@@ -60,7 +57,7 @@ export default function Slideshow(props) {
               <div className="slide-event-info">
                 <h1>{event.title}</h1>
                 <p>{dayjs(event.date).format("dddd")}</p>
-                <p className="city">Madrid</p>
+                <p className="city">{event.location.city}</p>
               </div>
             </Link>
           </div>
