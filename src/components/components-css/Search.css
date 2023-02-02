@@ -1,3 +1,4 @@
+
 .search-container {
     text-align: center;
 
@@ -45,3 +46,18 @@
 .search-form button:hover {
     background-color: #f56457;
 }
+
+
+@media (max-width: 400px) {
+    .search-bar{
+        display:flex;
+        flex-direction: column;
+    }
+    .search-container{
+        display: block;
+    }
+    .search-form button{
+        width: fit-content;
+        align-self: center;
+    } 
+  }
