@@ -99,7 +99,7 @@ export default function EventDetails(props) {
 
         {/* only creator of the event can use the functionality edit/delete */}
         {event.author?.username === user?.username && (
-          <div style={{display: "flex", justifyContent: "end"}}>
+          <div className="edit-delete-icon">
             <Link to={`/events/edit/${event._id}`}>
               <IconEdit style={{ strokeWidth: "1.5", width: "23" }} />
             </Link>
@@ -147,14 +147,9 @@ export default function EventDetails(props) {
           </button> ) : ( "" )}
         </div>
 
-        
-
       </div>
         
       <div className="ChatBox">
-
-      
-
         {toggle && renderChat()}
         {!toggle && renderMap()}
        

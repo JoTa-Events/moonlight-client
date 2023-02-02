@@ -3,18 +3,19 @@
 
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     
-
-    width: 80%;
+    width: 100%;
     margin: 50px auto;
     overflow: auto;
     resize: none;
+    gap: 5rem;
 }
 
 .event-details {
     word-wrap: break-word;
     text-align: start;
-    padding: 2.5rem;
+    width: 50%;
 }
 
 .event-details-content h2 {
@@ -39,7 +40,7 @@
     margin: auto;
     width: auto;
     height: 350px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .event-details-content a {
@@ -49,6 +50,11 @@
 .event-details h3 {
    color: #fafafa;
    padding-top: 1rem;
+}
+
+.edit-delete-icon {
+    display: flex;
+    justify-content: end;
 }
 
 /* attenting counter and link to join event */
@@ -74,6 +80,7 @@
     background-color: #f56457;
 }
 
+/* map */
 .map {
     margin-top: 3rem;
 }
