@@ -22,6 +22,8 @@ export default function CreateEvent(props) {
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   // uploading image
   const handleFileUpload = (e) => {
     const uploadData = new FormData();
@@ -59,7 +61,7 @@ export default function CreateEvent(props) {
         requestBody.location = {
           type: "point",
           coordinates: [latitude, longitude],
-          city
+          city,
         };
 
         return axios.post(
@@ -80,7 +82,14 @@ export default function CreateEvent(props) {
 
         props.createCallback(requestBody);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response
+          ? error.response.data.message
+          : "Error when creating an event";
+
+        setErrorMessage(errorDescription);
+        console.log("Error when creating a new event", error);
+      });
   };
 
   return (
@@ -140,12 +149,8 @@ export default function CreateEvent(props) {
           }}
         />
 
-        
         <label>Upload Image</label>
-        <input 
-          type="file"
-          onChange={(e) => handleFileUpload(e)}
-        />        
+        <input type="file" onChange={(e) => handleFileUpload(e)} />
 
         {isUploadingImage ? (
           <button type="submit" disabled>
@@ -154,6 +159,8 @@ export default function CreateEvent(props) {
         ) : (
           <button type="submit">Submit</button>
         )}
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );

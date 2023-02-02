@@ -20,6 +20,8 @@ export default function EditEvent() {
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   // uploading image
   const handleFileUpload = (e) => {
     const uploadData = new FormData();
@@ -95,7 +97,14 @@ export default function EditEvent() {
       .then((response) => {
         navigate(`/events/${eventId}`);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response
+          ? error.response.data.message
+          : "Error when creating an event";
+
+        setErrorMessage(errorDescription);
+        console.log("Error when creating a new event", error);
+      });
   };
 
   return (
@@ -168,6 +177,8 @@ export default function EditEvent() {
         ) : (
           <button type="submit">Submit</button>
         )}
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );
