@@ -10,6 +10,7 @@ import capitalize from "../utils/capitalize";
 import AddMessage from "./AddMessage";
 
 import "./components-css/ChatBox.css";
+import AreYouSure from "./AreYouSure";
 
 const API_URL = process.env.REACT_APP_API_URL;
 let socket;
@@ -18,8 +19,12 @@ export default function ChatBox(props) {
 
   const { eventId, setReRender, getAllEvents } = props;
   const [chatObj, setChatObj] = useState(null);
+  const [displayAreYouSure,setDisplayAreYouSure] = useState(false)
+
   const { user } = useContext(AuthContext)
   
+  const confirmMessage = "Ready to leave this event and its chat?"
+
   const navigate = useNavigate();
   const location = useLocation()
 
@@ -161,14 +166,21 @@ export default function ChatBox(props) {
         <div className="chatbox-footer">
           <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
         </div>
-        <button onClick={leaveEvent}>leave Event</button>
+        <button onClick={()=>(setDisplayAreYouSure(true))}>leave Event</button>
       </div>
     );
   };
   
   return (
     <div>
-        {!chatObj ? "" : renderChat()}
+      {!chatObj ? "" : renderChat()}
+      {displayAreYouSure && (
+        <AreYouSure
+          setDisplayAreYouSure={setDisplayAreYouSure}
+          handleYes={leaveEvent}
+          confirmMessage={confirmMessage}
+        />
+      )}
     </div>
   );
 }

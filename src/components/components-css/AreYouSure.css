@@ -1,0 +1,62 @@
+.are-you-sure-container{
+    position:fixed;
+    background-color:#282c34;
+    border:2px solid black;
+    border-radius: 5px;
+
+    width:300px;
+    height:180px;
+        
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+
+    margin:auto;
+    
+    z-index: 3;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+
+.are-you-sure-container button{
+    cursor: pointer;
+}
+
+.click-close-window{
+    position: absolute;
+    margin: 0.3rem;
+    right: 0;
+    top: 0;
+  
+}
+.click-yes{
+    position: absolute;
+    margin: 0.3rem;
+    left: 20%;
+    bottom: 1rem;
+  
+
+}
+.click-no{
+    position: absolute;
+    margin: 0.3rem;
+    right: 20%;
+    bottom: 1rem;
+}
+.are-you-sure-container p{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    font-size: 16px;
+    transform: translate(-50%, -50%);
+    line-height:1.5;
+    letter-spacing: 0.8px;
+
+}
