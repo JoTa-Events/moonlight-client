@@ -6,6 +6,7 @@ import service from "../service";
 import "./pages-css/Form.css";
 
 import dayjs from "dayjs";
+import getStringUntilComa from "../utils/getStringUntilComa";
 
 export default function EditEvent() {
   const navigate = useNavigate();
@@ -36,17 +37,17 @@ export default function EditEvent() {
       });
   };
 
-  const getStringUntilComa = (address) => {
-    let newString = "";
-    for (let i = 0; i < address.length; i++) {
-      if (address[i] !== ",") {
-        newString = newString + address[i];
-      } else {
-        break;
-      }
-    }
-    return newString;
-  };
+  // const getStringUntilComa = (address) => {
+  //   let newString = "";
+  //   for (let i = 0; i < address.length; i++) {
+  //     if (address[i] !== ",") {
+  //       newString = newString + address[i];
+  //     } else {
+  //       break;
+  //     }
+  //   }
+  //   return newString;
+  // };
 
   useEffect(() => {
     axios
