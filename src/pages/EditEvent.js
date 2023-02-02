@@ -147,7 +147,6 @@ export default function EditEvent() {
         <textarea
           autoComplete="off"
           required={true}
-          rows={5}
           name="description"
           value={description}
           onChange={(e) => {

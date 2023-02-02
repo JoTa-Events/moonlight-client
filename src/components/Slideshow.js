@@ -57,8 +57,8 @@ export default function Slideshow(props) {
               <img src={event.image} alt="event" />
               <div className="slide-event-info">
                 <h1>{event.title}</h1>
-                <p>{dayjs(event.date).format("dddd")}</p>
                 <p className="city">{getStringUntilComa(event.location.city)}</p>
+                <p>{dayjs(event.date).format("dddd")}</p>
               </div>
             </Link>
           </div>
