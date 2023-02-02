@@ -130,10 +130,8 @@ export default function CreateEvent(props) {
         <label>
           Description <b style={{ color: "#f56457" }}>*</b>
         </label>
-        <input
+        <textarea
           required={true}
-          autoComplete="off"
-          as="textarea"
           rows={5}
           name="description"
           value={description}

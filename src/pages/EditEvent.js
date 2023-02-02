@@ -144,6 +144,7 @@ export default function EditEvent() {
           Description <b style={{ color: "#f56457" }}>*</b>
         </label>
         <textarea
+          autoComplete="off"
           required={true}
           rows={5}
           name="description"
