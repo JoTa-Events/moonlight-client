@@ -1,8 +1,27 @@
-.Homepage h1 {
+footer {
+    color: #fafafa;
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.homepage-content {
+    text-align: center;
     padding: 2rem;
- }
- 
- .events-container {
-     display: grid;
- 
- }
+}
+
+.homepage-content h2 {
+    color: #fafafa;
+    padding-bottom: .5rem;
+}
+
+.homepage-content span {
+    color: #f56457
+}
+
+.homepage-icon {
+    padding-top: .5rem;
+    display: flex;
+    justify-content: center;
+}
