@@ -33,23 +33,23 @@ export default function ChatBox(props) {
   const [currentMessage, setCurrentMessage] = useState("")
   const [messageList,setMessageList]=useState([])
 
-  //connects when the component is load
+  //connects when the component is mounted
   useEffect(()=>{
 
     // connect to the server
     socket =io.connect(API_URL)
     
-    // joins to a room chat with name eventId
-    // socket.emit("joinChat",(eventId))
-
     socket.on('connect', () => {
       setIsConnected(true);
       socket.emit("joinChat",(eventId))
     });
+
     socket.on('disconnect', () => {
       setIsConnected(false);
       
     });
+
+    //clean up
     return ()=>{
       console.log("is unmounting")
       socket.emit("leaveChat", eventId);
@@ -60,15 +60,7 @@ export default function ChatBox(props) {
   },[])
   console.log("isConnected",isConnected);
 
-  // useEffect(()=>{
   
-  //   socket.on("clientListens",(data)=>{
-  //     console.log("receiving a msg from the server",data)
-  //     setMessageList((prev)=>{
-  //       return([...prev,data])
-  //      })
-  //   })
-  // },[socket])
 
   const sendMessage = async (e) => {
     e.preventDefault()
@@ -137,46 +129,69 @@ export default function ChatBox(props) {
   const renderChat = () => {
     return (
       <div className="chatbox">
-        <div className="chatbox-head"><span>Live-Chat</span></div>
-         
-          <ScrollToBottom className="scroll-to-bottom-chat" >
-
-            {chatObj.messages.map((message) => {
-              let leftOrRight =""
-              if(user.username === message.author.username){
-                  leftOrRight="message-right"
-              }         
-              return(
-                <div className="message-container" id={leftOrRight} key={message._id}>
-                  <p className="message-author"><b>{capitalize(message.author?.username)}</b></p>
-                  <p className="message-text">{message.message}</p>
-                </div>
-              )
-            })}
-       
-            {messageList.map((message,index) => {
-              let leftOrRight = ""
-              if(user.username===message.author){
-                leftOrRight="message-right"
-              }         
-              return(
-                <div className="message-container" id={leftOrRight} key={index}>
-                  <p className="message-author"><b>{capitalize(message.author)}</b></p>
-                  <p className="message-text">{message.message}</p>
-                </div>
-              )
-            })}
-            
-          </ScrollToBottom>
-         
-        <div className="chatbox-footer">
-          <AddMessage setMessageList={setMessageList} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} sendMessage={sendMessage} socket={socket} eventId={eventId} getChatFromAPI={getChatFromAPI} />
+        <div className="chatbox-head">
+          <span>
+            <b>Live-Chat</b>
+          </span>
+          <button className="leave-event" onClick={() => setDisplayAreYouSure(true)}>
+            Leave Event
+          </button>
         </div>
-        <button onClick={()=>(setDisplayAreYouSure(true))}>leave Event</button>
+
+        <ScrollToBottom className="scroll-to-bottom-chat">
+        
+          {chatObj.messages.map((message) => {
+            let leftOrRight = "";
+            if (user.username === message.author.username) {
+              leftOrRight = "message-right";
+            }
+            return (
+              <div
+                className="message-container"
+                id={leftOrRight}
+                key={message._id}
+              >
+                <p className="message-author">
+                  <b>{capitalize(message.author?.username)}</b>
+                </p>
+                <p className="message-text">{message.message}</p>
+              </div>
+            );
+          })}
+
+          {messageList.map((message, index) => {
+            let leftOrRight = "";
+            if (user.username === message.author) {
+              leftOrRight = "message-right";
+            }
+            return (
+              <div className="message-container" id={leftOrRight} key={index}>
+                <p className="message-author">
+                  <b>{capitalize(message.author)}</b>
+                </p>
+                <p className="message-text">{message.message}</p>
+              </div>
+            );
+          })}
+
+        </ScrollToBottom>
+
+        <div className="chatbox-footer">
+          <AddMessage
+            setMessageList={setMessageList}
+            currentMessage={currentMessage}
+            setCurrentMessage={setCurrentMessage}
+            sendMessage={sendMessage}
+            socket={socket}
+            eventId={eventId}
+            getChatFromAPI={getChatFromAPI}
+          />
+        </div>
+        
       </div>
     );
   };
-  
+
   return (
     <div>
       {!chatObj ? "" : renderChat()}
