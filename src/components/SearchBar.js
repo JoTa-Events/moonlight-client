@@ -62,7 +62,7 @@ export default function SearchBar(props) {
   const renderList = () => {
     return (
       <>
-        <h3>
+        <h3 className="search-result">
           {capitalize(converter.toWords(searchResultDate.length))} event(s)
           found
         </h3>

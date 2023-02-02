@@ -70,7 +70,7 @@ export default function MyProfileDetails(props) {
       })
       .finally(() => {
         setAvatar("");
-        // e.target.form.reset();
+        
       });
   };
 
@@ -80,22 +80,7 @@ export default function MyProfileDetails(props) {
     });
   };
 
-  // const handleCancel = (e) => {
-  //   e.preventDefault();
-  //   e.target.form.reset();
-  //   setIsFormHidden((prevState) => {
-  //     return !prevState;
-  //   });
-  //   setAvatar(null);
-  // };
 
-  // const renderAvatarUpload = () => {
-  //   return (
-  //     <>
-
-  //     </>
-  //   )
-  // }
 
   //render the page
   const renderUserData = () => {
@@ -133,15 +118,6 @@ export default function MyProfileDetails(props) {
               </>
             )}
 
-            {/* {isUploadingImage ? (
-              <button type="submit" disabled>
-                <IconLoader style={{color: "red"}} />
-              </button>
-            ) : (
-              <button onClick={handleSubmit} type="submit">
-                <IconCircleCheck style={{color: "green", backgroundColor: "none"}} />
-              </button>
-            )} */}
           </form>
         </div>
 

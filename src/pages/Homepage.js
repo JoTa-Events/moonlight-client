@@ -22,12 +22,12 @@ export default function Homepage(props) {
 
           <div className="homepage-icon">
             {/* link to linkedin */}
-            <a href="/" >
+            <a href="https://github.com/Jogopin" >
               <IconBrandLinkedin height={30} width={30} />
             </a>
             
             {/* link to github */}
-            <a href="/">
+            <a href="https://github.com/Jogopin">
             <IconBrandGithub height={30} width={30} />
             </a>
           </div>

@@ -51,10 +51,10 @@ export default function ChatBox(props) {
 
     //clean up
     return ()=>{
-      console.log("is unmounting")
+      
       socket.emit("leaveChat", eventId);
       socket.disconnect()
-      console.log("disconected manually")
+      
     }
     
   },[])

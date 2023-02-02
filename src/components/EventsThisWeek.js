@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import EventInList from "./EventInList";
 import "./components-css/Card.css";
-
+import "./components-css/EventsThisWeek.css"
 export default function EventsListWeek(props) {
   const { eventsList } = props;
   const today = dayjs().startOf("day");
