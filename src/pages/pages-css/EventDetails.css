@@ -37,8 +37,9 @@
 
 .event-details img {
     margin: auto;
-    width: auto;
+    width: 100%;
     height: 350px;
+    object-fit: cover;
     border-radius: 5px;
 }
 
