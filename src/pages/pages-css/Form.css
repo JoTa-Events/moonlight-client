@@ -13,7 +13,7 @@
     width: min(100% - 20px, 550px);
     margin-inline: auto;
     margin: auto;
-    position: relative; 
+    position: relative;
 }
 
 .form-box label {
@@ -22,11 +22,12 @@
     margin: 0 0 0 0;
 }
 
-.form-box input, select {
+.form-box input,
+select {
     display: block;
     width: 100%;
     padding: .5rem .7rem .5rem .7rem;
-    margin: .5rem 0 ;
+    margin: .5rem 0;
     border: 0;
     border-radius: 5px;
     background-color: #fafafa;
@@ -46,12 +47,11 @@
 form button {
     padding: .5rem 1rem .5rem 1rem;
     border-radius: 5px;
-
     border: none;
 }
 
-  input[type="file"]::-webkit-file-upload-button {
+input[type="file"]::-webkit-file-upload-button {
     border: none;
     color: #000;
     cursor: pointer;
-  }
+}
