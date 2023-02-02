@@ -54,9 +54,6 @@
     transform: translateX(-52%) rotate(-47deg) translateY(105%) rotate(0deg);
     transform-origin: center top; 
     padding: 0.5rem 4rem;
-    
-
-    
 }
 .card-body .city{
     color: #f56457;

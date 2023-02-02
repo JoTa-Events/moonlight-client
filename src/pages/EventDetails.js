@@ -137,8 +137,9 @@ export default function EventDetails(props) {
           </div>
 
           {isUserInEvent || isAnOldEvent ? ( "" ) : (
-            <button onClick={getParticipants}><IconUserPlus width={23} />
-            {""}Join Event
+            <button onClick={getParticipants}>
+              <IconUserPlus width={23} style={{marginRight: ".5rem"}} />
+              Join Event
             </button>
           )}
 

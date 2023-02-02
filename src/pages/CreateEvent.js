@@ -8,7 +8,7 @@ import service from "../service";
 
 // default events image
 const DefaultImage =
-  "https://res.cloudinary.com/douen1dwv/image/upload/v1675274952/moonlight-default-img/pexels-photo-2111016_jcx0mt.jpg";
+  "https://res.cloudinary.com/douen1dwv/image/upload/v1675350479/moonlight-default-img/default-img-cloudinary_z0fn1e.jpg";
 
 export default function CreateEvent(props) {
   const navigate = useNavigate();
@@ -140,12 +140,12 @@ export default function CreateEvent(props) {
           }}
         />
 
+        
         <label>Upload Image</label>
-        <input
-          style={{ backgroundColor: "white" }}
+        <input 
           type="file"
           onChange={(e) => handleFileUpload(e)}
-        />
+        />        
 
         {isUploadingImage ? (
           <button type="submit" disabled>
