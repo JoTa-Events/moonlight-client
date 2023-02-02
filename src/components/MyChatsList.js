@@ -83,7 +83,7 @@ export default function MyChatsList(props) {
   return (
     <>
       {!myChatsToDisplay 
-        ? "Loading..." 
+        ? (<div class="loader">Loading...</div>) 
         : renderMyChats()}
     </>
   );
