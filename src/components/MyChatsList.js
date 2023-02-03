@@ -26,7 +26,7 @@ export default function MyChatsList(props) {
   });
 
   //past Events
-  const pastEvents = eventsList?.filter((event) => {
+  const pastEvents = eventsUserParticipate?.filter((event) => {
     const eventDate = dayjs(event.date);
 
     return eventDate.isBefore(today);

@@ -7,7 +7,7 @@ import "./components-css/Card.css";
 export default function EventInList(props) {
   const { event } = props;
 
-  const isPopular = event.participants?.length>0
+  const isPopular = event.participants?.length>5
   
   return (
     <Link to={`/events/${event._id}`}>
