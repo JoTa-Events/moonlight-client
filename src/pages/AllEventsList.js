@@ -26,10 +26,8 @@ export default function AllEventsList(props) {
           <h2>Events of the Week</h2>
           <EventsListWeek  eventsList={eventsList} />
 
-          <h2>Future Events</h2>
           <FutureEvents fromDate={nextWeek} eventsList={eventsList} />
 
-          <h2>Past Events</h2>
           <PastEvents fromDate={today} eventsList={eventsList} />
         </>
       )}

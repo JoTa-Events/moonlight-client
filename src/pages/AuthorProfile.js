@@ -28,10 +28,8 @@ export default function AuthorProfile() {
   const renderAuthorEvents = () => {
     return (
       <div className="author-profile-events">
-        <h2>What's next?</h2>
         <FutureEvents eventsList={authorData.events} fromDate={today} />
 
-        <h2>Past events</h2>
         <PastEvents eventsList={authorData.events} fromDate={today} />
       </div>
     );
@@ -53,6 +51,7 @@ export default function AuthorProfile() {
       </div>
     );
   };
+  
   return (
     <div className="author-profile-page">
       {!authorData 

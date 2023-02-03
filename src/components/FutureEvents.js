@@ -18,12 +18,15 @@ export default function FutureEvents(props) {
   });
 
   return (
-    <div className="container-scroll">
-      {futureEvents.map((event) => (
-        <div key={event._id}>
-          <EventInList event={event} />
-        </div>
-      ))}
-    </div>
+    <>
+      <h2>Future Events</h2>
+      <div className="container-scroll">
+        {futureEvents.map((event) => (
+          <div key={event._id}>
+            <EventInList event={event} />
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

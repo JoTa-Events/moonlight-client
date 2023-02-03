@@ -11,6 +11,7 @@ body {
   font-family: 'Roboto';
   height: 100%;
   font-size: 14px;
+  word-break: break-all;
 }
 
 a, p, h1 {

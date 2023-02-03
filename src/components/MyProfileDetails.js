@@ -70,7 +70,6 @@ export default function MyProfileDetails(props) {
       })
       .finally(() => {
         setAvatar("");
-        
       });
   };
 
@@ -79,8 +78,6 @@ export default function MyProfileDetails(props) {
       return !prevState;
     });
   };
-
-
 
   //render the page
   const renderUserData = () => {
@@ -117,7 +114,6 @@ export default function MyProfileDetails(props) {
                 )}
               </>
             )}
-
           </form>
         </div>
 
@@ -132,6 +128,8 @@ export default function MyProfileDetails(props) {
   };
 
   return (
-    <>{!userData ? <div className="loader">Loading...</div> : renderUserData()}</>
+    <>
+      {!userData ? <div className="loader">Loading...</div> : renderUserData()}
+    </>
   );
 }

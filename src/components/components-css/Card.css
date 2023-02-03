@@ -1,6 +1,7 @@
 .container {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     
     padding-top: 1rem;
@@ -24,14 +25,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    min-height: 50px;
+    padding: 15px;
 }
 
 /* view/edit/delete icons in card - profile */
 .edit {
     display: flex;
+    justify-content: center;
 }
 
 /* cards with scroll x - past and this week' events */

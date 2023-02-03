@@ -21,7 +21,6 @@
 .event-details-content h2 {
     display: flex;
     font-size: 30px;
-    padding-top: .3rem;
 }
 
 .event-details-content a {
@@ -41,10 +40,6 @@
     height: 350px;
     object-fit: cover;
     border-radius: 5px;
-}
-
-.event-details-content a {
-    margin-top: 1rem;
 }
 
 .event-details h3 {

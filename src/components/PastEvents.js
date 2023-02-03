@@ -18,12 +18,15 @@ export default function PastEvents(props) {
   });
 
   return (
-    <div className="container-scroll">
-      {pastEvents?.map((event) => (
-        <div className="past-events" key={event._id}>
-          <EventInList event={event} />
-        </div>
-      ))}
-    </div>
+    <>
+      <h2>Past Events</h2>
+      <div className="container-scroll">
+        {pastEvents?.map((event) => (
+          <div className="past-events" key={event._id}>
+            <EventInList event={event} />
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

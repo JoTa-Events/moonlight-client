@@ -82,7 +82,6 @@ export default function EventDetails(props) {
     return <ChatBox getAllEvents={props.getAllEvents} setReRender={setReRender} eventId={eventId} />;
   };
 
-
   const renderMap = () => {
     return (
       <div className="map">
