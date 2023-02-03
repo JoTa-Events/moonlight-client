@@ -75,7 +75,7 @@ function App() {
         />
 
         <Route exact path="/events/edit/:eventId" 
-          element={<IsPrivate> <EditEvent /> </IsPrivate> } 
+          element={<IsPrivate> <EditEvent updateEvent={getAllEvents} /> </IsPrivate> } 
         />
 
         {/* register */}

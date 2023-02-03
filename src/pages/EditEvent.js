@@ -8,7 +8,7 @@ import "./pages-css/Form.css";
 import dayjs from "dayjs";
 import getStringUntilComa from "../utils/getStringUntilComa";
 
-export default function EditEvent() {
+export default function EditEvent(props) {
   const navigate = useNavigate();
   const { eventId } = useParams();
 
@@ -96,14 +96,16 @@ export default function EditEvent() {
       })
       .then((response) => {
         navigate(`/events/${eventId}`);
+
+        props.updateEvent(requestBody)
       })
       .catch((error) => {
         const errorDescription = error.response
           ? error.response.data.message
-          : "Error when creating an event";
+          : "Error when updating the event";
 
         setErrorMessage(errorDescription);
-        console.log("Error when creating a new event", error);
+        console.log("Error when updating the new event", error);
       });
   };
 
