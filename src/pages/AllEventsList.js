@@ -23,7 +23,6 @@ export default function AllEventsList(props) {
 
       {!isSearching && (
         <>
-          <h2>Events of the Week</h2>
           <EventsListWeek  eventsList={eventsList} />
 
           <FutureEvents fromDate={nextWeek} eventsList={eventsList} />

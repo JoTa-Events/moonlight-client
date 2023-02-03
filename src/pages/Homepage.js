@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import Slideshow from "../components/Slideshow";
 
 import "./pages-css/Homepage.css";
-import { IconBrandLinkedin, IconBrandGithub } from '@tabler/icons-react';
+import { IconBrandLinkedin, IconBrandGithub } from "@tabler/icons-react";
 
 export default function Homepage(props) {
   const { eventsList } = props;
@@ -22,13 +22,13 @@ export default function Homepage(props) {
 
           <div className="homepage-icon">
             {/* link to linkedin */}
-            <a href="https://github.com/Jogopin" >
+            <a href="https://github.com/Jogopin">
               <IconBrandLinkedin height={30} width={30} />
             </a>
-            
+
             {/* link to github */}
             <a href="https://github.com/Jogopin">
-            <IconBrandGithub height={30} width={30} />
+              <IconBrandGithub height={30} width={30} />
             </a>
           </div>
         </div>
@@ -41,7 +41,7 @@ export default function Homepage(props) {
 
           <div className="homepage-icon">
             {/* link to linkedin */}
-            <a href="https://www.linkedin.com/in/thalitadosreis/" >
+            <a href="https://www.linkedin.com/in/thalitadosreis/">
               <IconBrandLinkedin height={30} width={30} />
             </a>
 
@@ -51,7 +51,6 @@ export default function Homepage(props) {
             </a>
           </div>
         </div>
-
       </footer>
     </div>
   );

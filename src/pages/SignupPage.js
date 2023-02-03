@@ -88,7 +88,7 @@ export default function SignupPage() {
 
             <Link
               style={{
-                color: "#f7f9f4",
+                color: "#fafafa",
                 lineHeight: "2.5",
                 display: "inline-block",
               }}

@@ -9,7 +9,6 @@
 .slideshow-slider {
   white-space: nowrap;
   transition: ease 1000ms;
-  /* width: max(100% - 20px, 100%); */
   position: relative;
 }
 
@@ -33,11 +32,9 @@
   position: absolute;
   right: 4vw;
   bottom: 3rem;
-  /* transform: translate(-50%, 0%); */
 }
 
 .slide-event-info h1 {
-  
   text-transform: uppercase;
   word-wrap: break-word;
   white-space: pre-line;
@@ -53,15 +50,14 @@
 }
 
 .slideshowDot {
+  background-color: #fafafa;
   display: inline-block;
   height: 10px;
   width: 10px;
-  border-radius: 50%;
-
-  cursor: pointer;
+  
   margin: 10px 5px 0px;
-
-  background-color: #fafafa;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .slideshowDot.active {

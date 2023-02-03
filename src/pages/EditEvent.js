@@ -116,6 +116,7 @@ export default function EditEvent() {
         </label>
         <input
           type="text"
+          autoComplete="off"
           required={true}
           name="title"
           value={title}
@@ -141,6 +142,7 @@ export default function EditEvent() {
         </label>
         <input
           required={true}
+          autoComplete="off"
           placeholder="city"
           type="text"
           name="location"

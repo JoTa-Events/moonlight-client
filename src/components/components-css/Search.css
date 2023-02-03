@@ -1,4 +1,3 @@
-
 .search-container {
     text-align: center;
 
@@ -21,12 +20,15 @@
     text-align: start;
     margin: 0 0 0 0;
 }
+
 .search-result{
     color:#f56457;
 }
+
 .search-form ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
+
 .search-form input, textarea, select {
     background-color: #000;
     color: #fafafa;
@@ -48,10 +50,10 @@
     border: 2px solid #f56457;
     background-color: #121212;
 }
+
 .search-form button:hover {
     background-color: #f56457;
 }
-
 
 @media (max-width: 400px) {
     .search-bar{

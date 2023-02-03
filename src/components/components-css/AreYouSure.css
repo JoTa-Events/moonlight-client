@@ -7,7 +7,6 @@
     width: 350px;
     height: 200px;
 
-
     left: 0;
     right: 0;
     top: 0;
@@ -45,7 +44,6 @@
 .are-you-sure-container {
     -webkit-animation: anvil 0.5s cubic-bezier(0.50, 0.1, 0.50, 0.9) forwards;
 }
-
 
 .are-you-sure-container button {
     cursor: pointer;

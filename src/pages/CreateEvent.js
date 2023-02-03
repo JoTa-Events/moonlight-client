@@ -101,6 +101,7 @@ export default function CreateEvent(props) {
         </label>
         <input
           required={true}
+          autoComplete="off"
           type="text"
           name="title"
           value={title}
@@ -141,6 +142,7 @@ export default function CreateEvent(props) {
         </label>
         <textarea
           required={true}
+          autoComplete="off"
           rows={5}
           name="description"
           value={description}
