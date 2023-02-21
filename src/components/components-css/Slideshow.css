@@ -1,0 +1,65 @@
+.slideshow {
+  margin: .5rem auto;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+
+}
+
+.slideshow-slider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+  position: relative;
+}
+
+.slide {
+  display: inline-block;
+  width: max(100% - 20px, 100%);
+}
+
+.slide img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 700px;
+  opacity: 0.56;
+}
+
+.slide-event-info {
+  font-size: 2vw;
+  font-weight: 800;
+  text-align: end;
+  
+  position: absolute;
+  right: 4vw;
+  bottom: 3rem;
+}
+
+.slide-event-info h1 {
+  text-transform: uppercase;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+
+.slide-event-info .city {
+  color: #f56457;
+}
+
+/* buttons */
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  background-color: #fafafa;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  
+  margin: 10px 5px 0px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slideshowDot.active {
+  background-color: #f56457;
+}

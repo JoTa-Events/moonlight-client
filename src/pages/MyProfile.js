@@ -3,17 +3,20 @@ import MyProfileDetails from "../components/MyProfileDetails";
 import MyEventsList from "../components/MyEventsList";
 import MyChatsList from "../components/MyChatsList";
 import "./pages-css/Profile.css";
+import "../components/components-css/Card.css"
+import { useState } from "react";
 
 export default function MyProfile(props) {
-  const { deleteCallback, eventsList } = props;
+  const { deleteCallback, eventsList, getAllEvents } = props;
+  const [reRender,setReRender] = useState(false)
 
   return (
     <div className="profile">
       <Tabs>
         <TabList>
-          <Tab>My events</Tab>
+          <Tab>Events</Tab>
           <Tab>Chats</Tab>
-          <Tab>My Profile</Tab>
+          <Tab>Profile</Tab>
         </TabList>
 
         <TabPanel>
@@ -24,7 +27,7 @@ export default function MyProfile(props) {
         </TabPanel>
 
         <TabPanel>
-          <MyChatsList eventsList={eventsList} />
+          <MyChatsList reRender={reRender} getAllEvents={getAllEvents} setReRender={setReRender} eventsList={eventsList} />
         </TabPanel>
 
         <TabPanel>

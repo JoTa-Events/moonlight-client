@@ -1,0 +1,100 @@
+.are-you-sure-container {
+    position: fixed;
+    background-color: #1c1e21;
+    border: 2.5px solid #000;
+    border-radius: 5px;
+
+    width: 400px;
+    height: 200px;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    margin: auto;
+
+    z-index: 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes anvil {
+    0% {
+        transform: scale(1) translateY(0px);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    50% {
+        transform: scale(0.10) translateY(50px);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    100% {
+        transform: scale(1) translateY(0px);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+
+.are-you-sure-container {
+    -webkit-animation: anvil 0.5s cubic-bezier(0.50, 0.1, 0.50, 0.9) forwards;
+}
+
+.are-you-sure-container button {
+    cursor: pointer;
+}
+
+.click-close-window {
+    position: absolute;
+    margin: 0.3rem;
+    right: 0;
+    top: 0;
+}
+
+.click-yes {
+    position: absolute;
+    margin: 0.3rem;
+    left: 20%;
+    bottom: 1rem;
+}
+
+.click-no {
+    position: absolute;
+    margin: 0.3rem;
+    right: 20%;
+    bottom: 1rem;
+}
+
+.click-no,
+.click-yes {
+    height: 45px;
+    margin-top: 1rem;
+    padding: 0 2rem;
+    border-radius: 15px;
+    color: #fafafa;
+    border: 2px solid #f56457;
+    background-color: #1c1e21;
+}
+
+.click-no:hover,
+.click-yes:hover {
+    background-color: #f56457;
+}
+
+.are-you-sure-container p {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 1rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    font-size: 16px;
+    transform: translate(-50%, -50%);
+    line-height: 1.5;
+    letter-spacing: 0.8px;
+}

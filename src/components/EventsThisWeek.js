@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import EventInList from "./EventInList";
+import "./components-css/Card.css";
 import "./components-css/EventsThisWeek.css";
-
 export default function EventsListWeek(props) {
   const { eventsList } = props;
   const today = dayjs().startOf("day");
@@ -20,12 +20,15 @@ export default function EventsListWeek(props) {
   });
 
   return (
-    <div className="events-container">
-      {thisWeekEvents?.map((event) => (
-        <div className="event-inweek" key={event._id}>
-          <EventInList event={event} />
-        </div>
-      ))}
-    </div>
+    <>
+      <h2>Events of the Week</h2>
+      <div className="container-scroll">
+        {thisWeekEvents?.map((event) => (
+          <div key={event._id}>
+            <EventInList event={event} />
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

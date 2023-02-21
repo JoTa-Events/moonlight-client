@@ -5,17 +5,22 @@ import { AuthContext } from "../context/auth.context";
 
 import ChatBox from "../components/ChatBox";
 import authForAPI from "../utils/authForAPI";
+import capitalize from "../utils/capitalize";
+import Map from "../components/Map";
 import dayjs from "dayjs";
 import "./pages-css/EventDetails.css";
-import Map from "../components/Map";
+
+import { IconTrash, IconEdit, IconUserPlus } from "@tabler/icons-react";
 
 export default function EventDetails(props) {
   const { user } = useContext(AuthContext);
   const { eventId } = useParams();
-
+  
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
 
+  const [reRender,setReRender] = useState(false)
+  
   const today = dayjs().startOf("day");
   const navigate = useNavigate();
 
@@ -29,12 +34,18 @@ export default function EventDetails(props) {
       .then((response) => {
         setEvent(response.data);
       })
-      .catch((error) => console.log("Error getting event", error));
+      .catch((error) => {
+        console.log("Error getting event", error)
+        navigate("*")
+      });
   };
 
   useEffect(() => {
+
     getEvent();
-  }, []);
+    
+    setToggle(false)
+  }, [reRender]);
 
   // get participants
   const getParticipants = () => {
@@ -58,89 +69,92 @@ export default function EventDetails(props) {
       .catch((error) => console.log("Error getting event", error))
       .finally(() => {
         setToggle(!toggle);
+        props.getAllEvents()
       });
   };
 
-  // chat toggle button
+  // chat and map toggle button
   const toggleEventChat = () => {
-    setToggle(!toggle);
+    setToggle(prevToggle=>!prevToggle);
   };
 
   const renderChat = () => {
-    return <ChatBox eventId={eventId} />;
+    return <ChatBox getAllEvents={props.getAllEvents} setReRender={setReRender} eventId={eventId} />;
+  };
+
+  const renderMap = () => {
+    return (
+      <div className="map">
+        {event.location && <Map coords={event.location.coordinates} />}
+      </div>
+    );
   };
 
   return (
-    <>
-      <div
-        className="event-details-container"
-        style={{ display: "flex", marginTop: "50px" }}
-      >
-        <div className="event-details">
-          <img
-            src={event.image}
-            alt=""
-            style={{ margin: "auto", width: "auto", height: "350px" }}
-          />
-          <h1>{event.title}</h1>
-          <Link
-            style={{ margin: "auto", display: "inline-block" }}
-            to={`/profile/${event.author?.username}`}
-          >
-            <b>By:</b> {event.author?.username}
-          </Link>
+    <div className="event-details-container">
+      <div className="event-details">
+        <img src={event.image} alt="" />
 
-          <p>
-            <b>Location:</b> {event.location?.city}
-          </p>
-          <p>
-            <b>Date:</b> {dayjs(event.date).format("ddd DD MMM YYYY")}
-          </p>
-          <p>
-            <b>Description: </b>
-            {event.description}
-          </p>
-          <br />
-          {/* join event button */}
-          <h3>
-            Attending (
-            <b style={{ color: "#f56457" }}>{event.participants?.length}</b>)
-          </h3>
-          {isUserInEvent || isAnOldEvent ? (
-            ""
-          ) : (
-            <button onClick={getParticipants}>Join Event</button>
-          )}
+        {/* only creator of the event can use the functionality edit/delete */}
+        {event.author?.username === user?.username && (
+          <div className="edit-delete-icon">
+            <Link to={`/events/edit/${event._id}`}>
+              <IconEdit style={{ strokeWidth: "1.5", width: "23" }} />
+            </Link>
 
-          {/* only creator of the event can use the functionality edit/delete */}
-          {event.author?.username === user?.username && (
-            <div className="edit-delete">
-              <Link to={`/events/edit/${event._id}`}>Edit</Link>
-              <Link to="/events" onClick={() => props.deleteCallback(eventId)}>
-                Delete
-              </Link>
-            </div>
-          )}
+            <Link to="/events" onClick={() => props.deleteCallback(eventId)}>
+              <IconTrash style={{ strokeWidth: "1.5", width: "23" }} />
+            </Link>
+          </div>
+        )}
+        
+        <div className="event-details-content">
+          <h2>{event.title}</h2>
+          <p>
+            <b>Location: </b>{event.location?.city}
+          </p>
+          <p>
+            <b>Date: </b>{dayjs(event.date).format("ddd DD MMM YYYY")}
+          </p>
+          <p>
+            <b>Description: </b>{event.description}
+          </p>
+
+          <div className="avatar-profile">
+            <Link to={`/profile/${event.author?.username}`}>
+              {event.author && capitalize(event.author?.username)} 
+              {<img src={event.author?.avatar} alt="avatar" className="avatar-profile" />}
+            </Link>
+          </div>
         </div>
-        <div className="ChatBox">
-          {isUserInEvent ? (
-            <button onClick={toggleEventChat}>
-              {toggle ? "Hide Chat" : "Show Chat"}
-            </button>
-          ) : (
-            ""
-          )}
 
-          {toggle && renderChat()}
-
-          <div style={{ margin: "50px auto" }}>
-            {event.location && <Map coords={event.location.coordinates} />}
+        <div className="att-event">
+          <div>
+            {/* join event button */}
+            <h3>Attending</h3>
+            <h1 style={{ color: "#f56457" }}>{event.participants?.length}</h1>
           </div>
 
+          {isUserInEvent || isAnOldEvent ? ( "" ) : (
+            <button onClick={getParticipants}>
+              <IconUserPlus width={23} style={{marginRight: ".5rem"}} />
+              Join Event
+            </button>
+          )}
+
+          {isUserInEvent ? (
+          <button onClick={toggleEventChat}>
+            {toggle ? "Show Map" : "Show Chat"}
+          </button> ) : ( "" )}
         </div>
 
-        
       </div>
-    </>
+        
+      <div className="ChatBox">
+        {toggle && renderChat()}
+        {!toggle && renderMap()}
+      </div>
+        
+    </div>
   );
 }

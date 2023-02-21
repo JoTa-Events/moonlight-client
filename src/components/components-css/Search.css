@@ -1,4 +1,70 @@
-.search-result{
+.search-container {
+    text-align: center;
+
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.search-bar {
+    display: inline-flex;
+    padding-bottom: 2rem;
+}
+
+.search-form {
+    margin-right: .7rem;
+}
+
+.search-form label {
+    display: block;
+    text-align: start;
+    margin: 0 0 0 0;
+}
+
+.search-result{
+    color:#f56457;
+}
+
+.search-form ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.search-form input, textarea, select {
+    background-color: #000;
+    color: #fafafa;
+    width: 100%;
+    height: 2rem;
+    padding: .5rem .7rem .5rem .7rem;
+    margin: .5rem .5rem;
+    border-radius: 5px;
+    border: 2px solid #f56457;
+}
+
+.search-form button {
+    height: 2rem;
+    padding: .5rem 1rem .5rem 1rem;
+    margin: .5rem .5rem;
+
+    border-radius: 5px;
+    color: #fafafa;
+    border: 2px solid #f56457;
+    background-color: #121212;
+}
+
+.search-form button:hover {
+    background-color: #f56457;
+}
+
+@media (max-width: 400px) {
+    .search-bar{
+        display:flex;
+        flex-direction: column;
+    }
+    .search-container{
+        display: block;
+    }
+    .search-form button{
+        width: fit-content;
+        align-self: center;
+    } 
+  }

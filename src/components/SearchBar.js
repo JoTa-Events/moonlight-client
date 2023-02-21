@@ -4,6 +4,7 @@ import SearchInputText from "./SearchInputText";
 import SearchInputDate from "./SearchInputDate";
 import converter from "number-to-words";
 import capitalize from "../utils/capitalize";
+
 import "./components-css/Search.css";
 import dayjs from "dayjs";
 
@@ -11,7 +12,7 @@ export default function SearchBar(props) {
   const { eventsList, setIsSearching } = props;
 
   const [queryStringTitle, setQueryStringTitle] = useState("");
-  const [queryStringDescription, setQueryStringDescription] = useState("");
+  const [queryStringLocation, setQueryStringLocation] = useState("");
   const [queryStringUsername, setQueryStringUsername] = useState("");
   const [queryStringDate, setQueryStringDate] = useState("");
   const [isSearchHidden, setIsSearchHidden] = useState(true);
@@ -20,13 +21,11 @@ export default function SearchBar(props) {
     event.title.toLowerCase().includes(queryStringTitle.toLowerCase())
   );
 
-  const searchResultDescription = searchResultTitle.filter((event) =>
-    event.description
-      .toLowerCase()
-      .includes(queryStringDescription.toLowerCase())
+  const searchResultLocation = searchResultTitle.filter((event) =>
+    event.location?.city.toLowerCase().includes(queryStringLocation.toLowerCase())
   );
 
-  const searchResultUsername = searchResultDescription.filter((event) =>
+  const searchResultUsername = searchResultLocation.filter((event) =>
     event.author?.username
       .toLowerCase()
       .includes(queryStringUsername.toLowerCase())
@@ -38,7 +37,7 @@ export default function SearchBar(props) {
 
   const clearSearch = () => {
     setQueryStringTitle("");
-    setQueryStringDescription("");
+    setQueryStringLocation("");
     setQueryStringUsername("");
     setQueryStringDate("");
   };
@@ -55,7 +54,7 @@ export default function SearchBar(props) {
     }
   }, [
     queryStringTitle,
-    queryStringDescription,
+    queryStringLocation,
     queryStringUsername,
     queryStringDate,
   ]);
@@ -63,12 +62,14 @@ export default function SearchBar(props) {
   const renderList = () => {
     return (
       <>
-        <h4 style={{ margin: "1rem 0" }}>
-          {capitalize(converter.toWords(searchResultDate.length))} events found
-        </h4>
-        <div className="search-result">
+        <h3 className="search-result">
+          {capitalize(converter.toWords(searchResultDate.length))} event(s)
+          found
+        </h3>
+
+        <div className="container">
           {searchResultDate.map((event) => (
-            <div className="event-inweek" key={event._id}>
+            <div key={event._id}>
               <EventInList event={event} />
             </div>
           ))}
@@ -77,52 +78,58 @@ export default function SearchBar(props) {
     );
   };
   return (
-    <>
-      <button
-        hidden={!isSearchHidden}
-        type="submit"
-        onClick={ShowHideSearch}
-        style={{ padding: "0.3rem", borderRadius: "5px" }}
-      >
-        Search Events
-      </button>
-      <div hidden={isSearchHidden}>
-        <SearchInputText
-          eventKey={"title"}
-          setQueryString={setQueryStringTitle}
-          queryString={queryStringTitle}
-        />
-        <SearchInputText
-          eventKey={"username"}
-          setQueryString={setQueryStringUsername}
-          queryString={queryStringUsername}
-        />
-        <SearchInputText
-          eventKey={"description"}
-          setQueryString={setQueryStringDescription}
-          queryString={queryStringDescription}
-        />
-        <SearchInputDate
-          eventKey={"date"}
-          setQueryString={setQueryStringDate}
-          queryString={queryStringDate}
-        />
-        <button onClick={clearSearch}>Clear search</button>
-        <button
-          style={{ padding: "0 0.3rem", margin: "0.2rem" }}
-          onClick={() => {
-            ShowHideSearch();
-            clearSearch();
-          }}
-        >
-          <b>x</b>
+    <div className="search-container">
+      <h2> Search</h2>
+
+      <div className="search-form">
+        <button hidden={!isSearchHidden} type="submit" onClick={ShowHideSearch}>
+          Search
         </button>
+
+        <div hidden={isSearchHidden}>
+          <div className="search-bar">
+            <SearchInputText
+              eventKey={"title"}
+              setQueryString={setQueryStringTitle}
+              queryString={queryStringTitle}
+            />
+            <SearchInputText
+              eventKey={"username"}
+              setQueryString={setQueryStringUsername}
+              queryString={queryStringUsername}
+            />
+            <SearchInputText
+              eventKey={"location"}
+              setQueryString={setQueryStringLocation}
+              queryString={queryStringLocation}
+            />
+            <SearchInputDate
+              eventKey={"date"}
+              setQueryString={setQueryStringDate}
+              queryString={queryStringDate}
+            />
+
+            <button onClick={clearSearch}>Clear search</button>
+
+            <button
+              onClick={() => {
+                ShowHideSearch();
+                clearSearch();
+              }}
+            >
+              X
+            </button>
+          </div>
+        </div>
+
+        {(queryStringTitle ||
+          queryStringLocation ||
+          queryStringUsername ||
+          queryStringDate) &&
+          (!eventsList 
+            ? <div className="loader">Loading...</div> 
+            : renderList())}
       </div>
-      {(queryStringTitle ||
-        queryStringDescription ||
-        queryStringUsername ||
-        queryStringDate) &&
-        (!eventsList ? "Loading......" : renderList())}
-    </>
+    </div>
   );
 }

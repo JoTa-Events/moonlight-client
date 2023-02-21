@@ -1,83 +1,89 @@
-/* event details page */
 .event-details-container {
     text-align: center;
 
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     
-    margin: 0 auto;
+    width: 100%;
+    margin: 50px auto;
     overflow: auto;
     resize: none;
-}
-
-.ChatBox,
-.event-details {
-    margin: 0 auto;
-    overflow: hidden;
-    height: 600px;
-    width: min(100% - 15px, 600px);
-}
-
-.ChatBox {
-    text-align: start;
-}
-
-.event-details h1 {
-    margin-bottom: 15px;
+    gap: 5rem
 }
 
 .event-details {
     word-wrap: break-word;
-    height: fit-content;
+    text-align: start;
+    width: 50%;
 }
 
-.edit-delete {
-    display: inline-flex;
-    margin: auto;
-}
-
-/* list of events page */
-.events-list-container {
-    display: grid;
-}
-
-.card-events-list {
-    background-color: #f7f9f4;
-    overflow: hidden;
-    width: 250px;
-}
-
-.card-events-header img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.card-events-body {
+.event-details-content h2 {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+    font-size: 30px;
 }
 
-.card-events-body h4 {
-    color: #f56457;
-    letter-spacing: 1.5px;
-    margin-bottom: 5%;
+.event-details-content a {
+    display: flex;
+    justify-content: end;
 }
 
-/* all events details page */
-.allEvents {
-    margin: 0 2%;
+.ChatBox,
+.event-details {
+    overflow: hidden;
+    width: min(100% - 15px, 500px);
 }
 
-/* homepage carousel of events of the week */
-.Homepage h1 {
-   padding: 2rem;
+.event-details img {
+    margin: auto;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
-.events-container {
-    display: grid;
+.event-details h3 {
+   color: #fafafa;
+   padding-top: 1rem;
+}
 
+.edit-delete-icon {
+    display: flex;
+    justify-content: end;
+}
+
+/* attenting counter and link to join event */
+.att-event {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.att-event button {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin-top: 1rem;
+    padding: 0 2rem;
+    border-radius: 15px;
+    color: #fafafa;
+    border: 2px solid #f56457;
+    background-color: #121212;
+}
+
+.att-event button:hover {
+    background-color: #f56457;
+}
+
+/* link to the author's profile */
+.avatar-profile img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.avatar-profile {
+    display: flex;
+    justify-content: end;
+    padding: .5rem;
 }

@@ -6,8 +6,9 @@ import service from "../service";
 import "./pages-css/Form.css";
 
 import dayjs from "dayjs";
+import getStringUntilComa from "../utils/getStringUntilComa";
 
-export default function EditEvent() {
+export default function EditEvent(props) {
   const navigate = useNavigate();
   const { eventId } = useParams();
 
@@ -18,6 +19,8 @@ export default function EditEvent() {
   const [image, setImage] = useState("");
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   // uploading image
   const handleFileUpload = (e) => {
@@ -36,17 +39,17 @@ export default function EditEvent() {
       });
   };
 
-  const getStringUntilComa = (address) => {
-    let newString = "";
-    for(let i = 0; i < address.length; i++){
-      if(address[i] !== ","){
-        newString = newString + address[i];
-      } else {
-        break;
-      }
-    }
-    return newString;
-  }
+  // const getStringUntilComa = (address) => {
+  //   let newString = "";
+  //   for (let i = 0; i < address.length; i++) {
+  //     if (address[i] !== ",") {
+  //       newString = newString + address[i];
+  //     } else {
+  //       break;
+  //     }
+  //   }
+  //   return newString;
+  // };
 
   useEffect(() => {
     axios
@@ -57,10 +60,9 @@ export default function EditEvent() {
         setDate(dayjs(event.date).format("YYYY-MM-DD"));
         setLocation(event.location.city);
         setDescription(event.description);
-        setImage(event.image)
+        setImage(event.image);
       })
       .catch((error) => console.log(error));
-
   }, [eventId]);
 
   const handleSubmit = (e) => {
@@ -83,19 +85,28 @@ export default function EditEvent() {
         requestBody.location = {
           type: "point",
           coordinates: [latitude, longitude],
-          city
+          city,
         };
-        
+
         return axios.put(
           `${process.env.REACT_APP_API_URL}/api/events/${eventId}`,
           requestBody,
           authForAPI()
-        )
+        );
       })
       .then((response) => {
         navigate(`/events/${eventId}`);
+
+        props.updateEvent(requestBody)
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response
+          ? error.response.data.message
+          : "Error when updating the event";
+
+        setErrorMessage(errorDescription);
+        console.log("Error when updating the new event", error);
+      });
   };
 
   return (
@@ -107,6 +118,7 @@ export default function EditEvent() {
         </label>
         <input
           type="text"
+          autoComplete="off"
           required={true}
           name="title"
           value={title}
@@ -128,10 +140,11 @@ export default function EditEvent() {
         />
 
         <label>
-          Location <b style={{ color: "#f56457" }}>*</b>
+          City <b style={{ color: "#f56457" }}>*</b>
         </label>
         <input
           required={true}
+          autoComplete="off"
           placeholder="city"
           type="text"
           name="location"
@@ -145,9 +158,8 @@ export default function EditEvent() {
           Description <b style={{ color: "#f56457" }}>*</b>
         </label>
         <textarea
+          autoComplete="off"
           required={true}
-          
-          rows={5}
           name="description"
           value={description}
           onChange={(e) => {
@@ -169,6 +181,8 @@ export default function EditEvent() {
         ) : (
           <button type="submit">Submit</button>
         )}
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );
