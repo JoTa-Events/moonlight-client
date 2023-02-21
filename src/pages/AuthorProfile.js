@@ -6,9 +6,8 @@ import FutureEvents from "../components/FutureEvents";
 import PastEvents from "../components/PastEvents";
 import capitalize from "../utils/capitalize";
 
-import "./pages-css/AuthorProfile.css";
-
 export default function AuthorProfile() {
+
   const API_URL = process.env.REACT_APP_API_URL;
   const [authorData, setAuthorData] = useState(null);
   const { username } = useParams();
@@ -28,8 +27,10 @@ export default function AuthorProfile() {
   const renderAuthorEvents = () => {
     return (
       <div className="author-profile-events">
+        <h2>What's next?</h2>
         <FutureEvents eventsList={authorData.events} fromDate={today} />
 
+        <h2>Past events</h2>
         <PastEvents eventsList={authorData.events} fromDate={today} />
       </div>
     );
@@ -44,19 +45,17 @@ export default function AuthorProfile() {
           <h1>{capitalize(authorData.author.username)}</h1>
           <p>
             A Moonlight member for{" "}
-            <b>{dayjs(today).diff(authorData.author.createdAt, "day")}</b>{" "}
-            day(s)
+            <b>{dayjs(today).diff(authorData.author.createdAt, "day")}</b> day(s)
           </p>
         </div>
       </div>
     );
   };
-  
   return (
     <div className="author-profile-page">
-      {!authorData 
-      ? (<div className="loader">Loading...</div>) 
-      : (
+      {!authorData ? (
+        "Loading..."
+      ) : (
         <>
           {renderAuthorProfile()}
 

@@ -1,8 +1,8 @@
-/* tabs container */
+/* Tab Container */
 .profile {
-    color: #fafafa;
+    color: #282c34;
     text-transform: uppercase;
-    margin: 25px 25px;
+    padding: 2rem;
 }
 
 .react-tabs {
@@ -13,10 +13,7 @@
     width: 50%;
     margin: auto;
     display: flex;
-
-    border: 1px solid #000;
-    border-radius: 5px;
-    overflow: hidden;
+    border: 1px solid #282c34;
 }
 
 .react-tabs__tab {
@@ -29,8 +26,8 @@
 }
 
 .react-tabs__tab--selected {
-    background: #000;
-    color: #fafafa;
+    background: #f56457;
+    color: #282c34;
 }
 
 .react-tabs__tab-panel {
@@ -39,72 +36,98 @@
 
 .react-tabs__tab-panel--selected {
     display: block;
+    text-align: center;
 }
 
-/* list of events in my-profile */
-.my-events {
-    margin: 25px 25px;
-}
-
-.my-events .container {
-    gap: 35px;
-}
-
-/* list of chats in my-profile */
-.chat-container {
-    padding: 2rem;
-    text-transform: initial;
-
+/* List of Events in Profile */
+.container {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 1.5rem;
+}
+
+.card {
+    background-color: #f7f9f4;
+    overflow: hidden;
+    width: 255px;
+    flex: 1 1 100px;
+}
+
+.card-header img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 50px;
+}
+
+.date {
+    color: #f56457;
+}
+
+/* List of Chats in Profile */
+.chat-container {
+    text-align: center;
+    padding-top: 2.5rem;
 }
 
 .chat-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     width: 150px;
-    height: 600px;
-    overflow-y: scroll;
+    margin-left: 30%;
+}
 
-    border: 1px solid #000;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+.chat-list,
+.ChatBox {
+    float: left;
 }
 
 /* profile */
 .profile-details-container {
     text-transform: none;
-    text-align: center;
-    margin-top: 3rem;
 }
 
-.profile-container {
+.profile-img-container {
     display: inline-block;
     margin: auto;
+    margin-top: 1.5rem;
 }
 
 .profile-avatar {
     width: 300px;
-    border: .1rem solid #000;
+    border: .5px solid #282c34;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.profile-container form {
-    display: flex;
-    justify-content: start;
-    align-items: center;
+/* author's profile */
+.AuthorProfile {
+    color: #282c34;
+    text-align: center;
+    padding: 1.5rem;
 }
 
-.profile-container button {
-    background-color: Transparent;
-    background-repeat: no-repeat;
-    border: none;
-    overflow: hidden;
+.AuthorProfile img {
+    width: 300px;
+    border: 1px solid #282c34;
 }
 
-.profile-container form>label {
-    cursor: pointer;
+.author-profile-events {
+    margin: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax (300px, 1fr));    
 }
+
+.author-profile-events h2 {
+    color: #282c34;
+    text-align: center;
+    padding-top: 1.5rem;
+}
+

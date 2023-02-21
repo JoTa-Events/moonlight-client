@@ -1,26 +1,20 @@
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import getStringUntilComa from "../utils/getStringUntilComa";
-
-import "./components-css/Card.css";
+import "../pages/pages-css/EventDetails.css"
 
 export default function EventInList(props) {
   const { event } = props;
 
-  const isPopular = event.participants?.length>5
-  
   return (
     <Link to={`/events/${event._id}`}>
-      <div className="container" key={event._id}>
-        <div className="card">
-          <div className="card-header">
-            {isPopular && <p className="popular-medal"><b>Popular</b></p>}
+      <div className="events-list-container" key={event._id} >
+        <div className="card-events-list">
+          <div className="card-events-header">
             <img src={event.image} alt="" />
           </div>
-          <div className="card-body">
-            <h3>{dayjs(event.date).format("dddd DD MMM")}</h3>
+          <div className="card-events-body" >
+            <h4>{dayjs(event.date).format("dddd DD MMM")}</h4>
             <span>{event.title}</span>
-            <p className="city">{getStringUntilComa(event.location.city)}</p>
           </div>
         </div>
       </div>

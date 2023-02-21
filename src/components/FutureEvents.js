@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
 import EventInList from "./EventInList";
-import "./components-css/Card.css";
+import "./components-css/FutureEvents.css";
 
 export default function FutureEvents(props) {
-  const { eventsList, fromDate } = props;
+  const { eventsList,fromDate } = props;
+  
 
   const futureEvents = eventsList?.filter((event) => {
     const eventDate = dayjs(event.date);
@@ -18,15 +19,12 @@ export default function FutureEvents(props) {
   });
 
   return (
-    <>
-      <h2>Future Events</h2>
-      <div className="container-scroll">
-        {futureEvents.map((event) => (
-          <div key={event._id}>
-            <EventInList event={event} />
-          </div>
-        ))}
-      </div>
-    </>
+    <div className="future-events-list">
+      {futureEvents.map((event) => (
+        <div className="event-inweek" key={event._id}>
+          <EventInList event={event} />
+        </div>
+      ))}
+    </div>
   );
 }

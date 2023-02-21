@@ -5,11 +5,12 @@ import "leaflet/dist/leaflet.css";
 // location marker icon
 import L from "leaflet";
 const locationIcon = new L.Icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/4874/4874744.png",
-  iconSize: [35, 35],
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/2377/2377922.png",
+  iconSize: [45, 45],
 });
 
 export default function Map({ coords }) {
+
   return (
     <div>
       <MapContainer

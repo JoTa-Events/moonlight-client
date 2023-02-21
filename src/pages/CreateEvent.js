@@ -8,7 +8,7 @@ import service from "../service";
 
 // default events image
 const DefaultImage =
-  "https://res.cloudinary.com/douen1dwv/image/upload/v1675350479/moonlight-default-img/default-img-cloudinary_z0fn1e.jpg";
+  "https://res.cloudinary.com/douen1dwv/image/upload/v1675155618/moonlight-default-img/photo-1551370764-98cd16e274f9_btrxyn.jpg";
 
 export default function CreateEvent(props) {
   const navigate = useNavigate();
@@ -21,8 +21,6 @@ export default function CreateEvent(props) {
   const [image, setImage] = useState(DefaultImage);
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-
-  const [errorMessage, setErrorMessage] = useState(undefined);
 
   // uploading image
   const handleFileUpload = (e) => {
@@ -61,7 +59,7 @@ export default function CreateEvent(props) {
         requestBody.location = {
           type: "point",
           coordinates: [latitude, longitude],
-          city,
+          city
         };
 
         return axios.post(
@@ -82,14 +80,7 @@ export default function CreateEvent(props) {
 
         props.createCallback(requestBody);
       })
-      .catch((error) => {
-        const errorDescription = error.response
-          ? error.response.data.message
-          : "Error when creating an event";
-
-        setErrorMessage(errorDescription);
-        console.log("Error when creating a new event", error);
-      });
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -101,7 +92,6 @@ export default function CreateEvent(props) {
         </label>
         <input
           required={true}
-          autoComplete="off"
           type="text"
           name="title"
           value={title}
@@ -124,11 +114,11 @@ export default function CreateEvent(props) {
         />
 
         <label>
-          City <b style={{ color: "#f56457" }}>*</b>
+          Location <b style={{ color: "#f56457" }}>*</b>
         </label>
         <input
           required={true}
-          autoComplete="off"
+          placeholder="location"
           type="text"
           name="location"
           value={location}
@@ -140,9 +130,9 @@ export default function CreateEvent(props) {
         <label>
           Description <b style={{ color: "#f56457" }}>*</b>
         </label>
-        <textarea
+        <input
           required={true}
-          autoComplete="off"
+          as="textarea"
           rows={5}
           name="description"
           value={description}
@@ -152,7 +142,11 @@ export default function CreateEvent(props) {
         />
 
         <label>Upload Image</label>
-        <input type="file" onChange={(e) => handleFileUpload(e)} />
+        <input
+          style={{ backgroundColor: "white" }}
+          type="file"
+          onChange={(e) => handleFileUpload(e)}
+        />
 
         {isUploadingImage ? (
           <button type="submit" disabled>
@@ -161,8 +155,6 @@ export default function CreateEvent(props) {
         ) : (
           <button type="submit">Submit</button>
         )}
-
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );

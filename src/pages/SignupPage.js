@@ -86,14 +86,7 @@ export default function SignupPage() {
               </button>
             </form>
 
-            <Link
-              style={{
-                color: "#fafafa",
-                lineHeight: "2.5",
-                display: "inline-block",
-              }}
-              to={"/login"}
-            >
+            <Link style={{ color: "#f7f9f4", lineHeight: "2.5", display: "inline-block"}} to={"/login"}>
               Already have an account?
             </Link>
 

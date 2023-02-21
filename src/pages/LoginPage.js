@@ -74,7 +74,7 @@ export default function LoginPage(props) {
 
             <Link
               style={{
-                color: "#fafafa",
+                color: "#f7f9f4",
                 lineHeight: "2.5",
                 display: "inline-block",
               }}
