@@ -39,18 +39,6 @@ export default function EditEvent(props) {
       });
   };
 
-  // const getStringUntilComa = (address) => {
-  //   let newString = "";
-  //   for (let i = 0; i < address.length; i++) {
-  //     if (address[i] !== ",") {
-  //       newString = newString + address[i];
-  //     } else {
-  //       break;
-  //     }
-  //   }
-  //   return newString;
-  // };
-
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`)
@@ -97,7 +85,7 @@ export default function EditEvent(props) {
       .then((response) => {
         navigate(`/events/${eventId}`);
 
-        props.updateEvent(requestBody)
+        props.updateEvent(requestBody);
       })
       .catch((error) => {
         const errorDescription = error.response

@@ -3,12 +3,12 @@ import MyProfileDetails from "../components/MyProfileDetails";
 import MyEventsList from "../components/MyEventsList";
 import MyChatsList from "../components/MyChatsList";
 import "./pages-css/Profile.css";
-import "../components/components-css/Card.css"
+import "../components/components-css/Card.css";
 import { useState } from "react";
 
 export default function MyProfile(props) {
   const { deleteCallback, eventsList, getAllEvents } = props;
-  const [reRender,setReRender] = useState(false)
+  const [reRender, setReRender] = useState(false);
 
   return (
     <div className="profile">
@@ -27,7 +27,12 @@ export default function MyProfile(props) {
         </TabPanel>
 
         <TabPanel>
-          <MyChatsList reRender={reRender} getAllEvents={getAllEvents} setReRender={setReRender} eventsList={eventsList} />
+          <MyChatsList
+            reRender={reRender}
+            getAllEvents={getAllEvents}
+            setReRender={setReRender}
+            eventsList={eventsList}
+          />
         </TabPanel>
 
         <TabPanel>

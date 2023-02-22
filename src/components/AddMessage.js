@@ -18,7 +18,7 @@ export default function AddMessage(props) {
   const { user } = useContext(AuthContext);
 
   //************socket.io********************* */
-  
+
   useEffect(() => {
     // listens to the server
     socket.on("clientListens", (data) => {

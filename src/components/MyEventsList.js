@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { IconTrash, IconEdit, IconDots } from "@tabler/icons-react";
 
-import "../pages/pages-css/Profile.css"
+import "../pages/pages-css/Profile.css";
 import "./components-css/Card.css";
 import getStringUntilComa from "../utils/getStringUntilComa";
 
@@ -28,7 +28,9 @@ export default function MyEventsList(props) {
               <div className="card-body">
                 <h3>{event.title}</h3>
                 <h5>{dayjs(event.date).format("ddd DD MMM YYYY")}</h5>
-                <h4 className="city">{getStringUntilComa(event.location.city)}</h4>
+                <h4 className="city">
+                  {getStringUntilComa(event.location.city)}
+                </h4>
 
                 {event.author?.username === user?.username && (
                   <div className="edit">
@@ -56,7 +58,13 @@ export default function MyEventsList(props) {
     );
   };
 
-  return <>{!myEventsList 
-    ? <div className="loader">Loading...</div>
-    : renderMyEvents()}</>;
+  return (
+    <>
+      {!myEventsList ? (
+        <div className="loader">Loading...</div>
+      ) : (
+        renderMyEvents()
+      )}
+    </>
+  );
 }

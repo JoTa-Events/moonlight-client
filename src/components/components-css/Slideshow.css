@@ -28,7 +28,7 @@
   font-size: 2vw;
   font-weight: 800;
   text-align: end;
-  
+
   position: absolute;
   right: 4vw;
   bottom: 3rem;
@@ -54,7 +54,7 @@
   display: inline-block;
   height: 10px;
   width: 10px;
-  
+
   margin: 10px 5px 0px;
   border-radius: 50%;
   cursor: pointer;

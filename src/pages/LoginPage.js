@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import "./pages-css/Register.css"
+import "./pages-css/Register.css";
 
 export default function LoginPage(props) {
   const API_URL = process.env.REACT_APP_API_URL;

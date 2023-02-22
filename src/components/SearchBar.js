@@ -22,7 +22,9 @@ export default function SearchBar(props) {
   );
 
   const searchResultLocation = searchResultTitle.filter((event) =>
-    event.location?.city.toLowerCase().includes(queryStringLocation.toLowerCase())
+    event.location?.city
+      .toLowerCase()
+      .includes(queryStringLocation.toLowerCase())
   );
 
   const searchResultUsername = searchResultLocation.filter((event) =>
@@ -126,9 +128,11 @@ export default function SearchBar(props) {
           queryStringLocation ||
           queryStringUsername ||
           queryStringDate) &&
-          (!eventsList 
-            ? <div className="loader">Loading...</div> 
-            : renderList())}
+          (!eventsList ? (
+            <div className="loader">Loading...</div>
+          ) : (
+            renderList()
+          ))}
       </div>
     </div>
   );

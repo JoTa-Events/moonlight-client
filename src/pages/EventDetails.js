@@ -15,12 +15,12 @@ import { IconTrash, IconEdit, IconUserPlus } from "@tabler/icons-react";
 export default function EventDetails(props) {
   const { user } = useContext(AuthContext);
   const { eventId } = useParams();
-  
+
   const [event, setEvent] = useState([]);
   const [toggle, setToggle] = useState(true);
 
-  const [reRender,setReRender] = useState(false)
-  
+  const [reRender, setReRender] = useState(false);
+
   const today = dayjs().startOf("day");
   const navigate = useNavigate();
 
@@ -35,16 +35,15 @@ export default function EventDetails(props) {
         setEvent(response.data);
       })
       .catch((error) => {
-        console.log("Error getting event", error)
-        navigate("*")
+        console.log("Error getting event", error);
+        navigate("*");
       });
   };
 
   useEffect(() => {
-
     getEvent();
-    
-    setToggle(false)
+
+    setToggle(false);
   }, [reRender]);
 
   // get participants
@@ -69,17 +68,23 @@ export default function EventDetails(props) {
       .catch((error) => console.log("Error getting event", error))
       .finally(() => {
         setToggle(!toggle);
-        props.getAllEvents()
+        props.getAllEvents();
       });
   };
 
   // chat and map toggle button
   const toggleEventChat = () => {
-    setToggle(prevToggle=>!prevToggle);
+    setToggle((prevToggle) => !prevToggle);
   };
 
   const renderChat = () => {
-    return <ChatBox getAllEvents={props.getAllEvents} setReRender={setReRender} eventId={eventId} />;
+    return (
+      <ChatBox
+        getAllEvents={props.getAllEvents}
+        setReRender={setReRender}
+        eventId={eventId}
+      />
+    );
   };
 
   const renderMap = () => {
@@ -107,23 +112,32 @@ export default function EventDetails(props) {
             </Link>
           </div>
         )}
-        
+
         <div className="event-details-content">
           <h2>{event.title}</h2>
           <p>
-            <b>Location: </b>{event.location?.city}
+            <b>Location: </b>
+            {event.location?.city}
           </p>
           <p>
-            <b>Date: </b>{dayjs(event.date).format("ddd DD MMM YYYY")}
+            <b>Date: </b>
+            {dayjs(event.date).format("ddd DD MMM YYYY")}
           </p>
           <p>
-            <b>Description: </b>{event.description}
+            <b>Description: </b>
+            {event.description}
           </p>
 
           <div className="avatar-profile">
             <Link to={`/profile/${event.author?.username}`}>
-              {event.author && capitalize(event.author?.username)} 
-              {<img src={event.author?.avatar} alt="avatar" className="avatar-profile" />}
+              {event.author && capitalize(event.author?.username)}
+              {
+                <img
+                  src={event.author?.avatar}
+                  alt="avatar"
+                  className="avatar-profile"
+                />
+              }
             </Link>
           </div>
         </div>
@@ -135,26 +149,29 @@ export default function EventDetails(props) {
             <h1 style={{ color: "#f56457" }}>{event.participants?.length}</h1>
           </div>
 
-          {isUserInEvent || isAnOldEvent ? ( "" ) : (
+          {isUserInEvent || isAnOldEvent ? (
+            ""
+          ) : (
             <button onClick={getParticipants}>
-              <IconUserPlus width={23} style={{marginRight: ".5rem"}} />
+              <IconUserPlus width={23} style={{ marginRight: ".5rem" }} />
               Join Event
             </button>
           )}
 
           {isUserInEvent ? (
-          <button onClick={toggleEventChat}>
-            {toggle ? "Show Map" : "Show Chat"}
-          </button> ) : ( "" )}
+            <button onClick={toggleEventChat}>
+              {toggle ? "Show Map" : "Show Chat"}
+            </button>
+          ) : (
+            ""
+          )}
         </div>
-
       </div>
-        
+
       <div className="ChatBox">
         {toggle && renderChat()}
         {!toggle && renderMap()}
       </div>
-        
     </div>
   );
 }

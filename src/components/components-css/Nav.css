@@ -170,8 +170,8 @@ a {
     -ms-flex-pack: distribute;
 }
 
-.dropdown-sub:checked + label,
-.dropdown-sub:not(:checked) + label {
+.dropdown-sub:checked+label,
+.dropdown-sub:not(:checked)+label {
     position: relative;
     transition: all 200ms linear;
     font-weight: 500;

@@ -3,7 +3,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
-    
+
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
@@ -40,20 +40,22 @@
     overflow-x: scroll;
 }
 
-.card-header{
+.card-header {
     position: relative;
     overflow: hidden;
 }
+
 .popular-medal {
     font-size: 1rem;
     position: absolute;
-    background-color:#f56457;
+    background-color: #f56457;
     color: black;
-    
+
     transform: translateX(-52%) rotate(-47deg) translateY(105%) rotate(0deg);
-    transform-origin: center top; 
+    transform-origin: center top;
     padding: 0.5rem 4rem;
 }
-.card-body .city{
+
+.card-body .city {
     color: #f56457;
 }

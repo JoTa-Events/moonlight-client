@@ -7,7 +7,6 @@ import SearchBar from "../components/SearchBar";
 import "./pages-css/AllEvents.css";
 
 export default function AllEventsList(props) {
-
   const today = dayjs().startOf("day");
   const nextWeek = dayjs().add(7, "day");
   const { eventsList } = props;
@@ -15,7 +14,8 @@ export default function AllEventsList(props) {
 
   return (
     <div className="all-events-container">
-      <SearchBar className="search-bar"
+      <SearchBar
+        className="search-bar"
         eventKey={"title"}
         setIsSearching={setIsSearching}
         eventsList={eventsList}
@@ -23,7 +23,7 @@ export default function AllEventsList(props) {
 
       {!isSearching && (
         <>
-          <EventsListWeek  eventsList={eventsList} />
+          <EventsListWeek eventsList={eventsList} />
 
           <FutureEvents fromDate={nextWeek} eventsList={eventsList} />
 

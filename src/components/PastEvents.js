@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import EventInList from "./EventInList";
-import "./components-css/Card.css"
+import "./components-css/Card.css";
 
 export default function PastEvents(props) {
   const { eventsList, fromDate } = props;

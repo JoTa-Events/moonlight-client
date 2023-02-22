@@ -21,15 +21,17 @@
     margin: 0 0 0 0;
 }
 
-.search-result{
-    color:#f56457;
+.search-result {
+    color: #f56457;
 }
 
 .search-form ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
-.search-form input, textarea, select {
+.search-form input,
+textarea,
+select {
     background-color: #000;
     color: #fafafa;
     width: 100%;
@@ -56,15 +58,17 @@
 }
 
 @media (max-width: 400px) {
-    .search-bar{
-        display:flex;
+    .search-bar {
+        display: flex;
         flex-direction: column;
     }
-    .search-container{
+
+    .search-container {
         display: block;
     }
-    .search-form button{
+
+    .search-form button {
         width: fit-content;
         align-self: center;
-    } 
-  }
+    }
+}

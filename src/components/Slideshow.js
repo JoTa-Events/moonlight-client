@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import getStringUntilComa from "../utils/getStringUntilComa";
-import "./components-css/Slideshow.css"
+import "./components-css/Slideshow.css";
 
 const delay = 3500;
 
@@ -57,7 +57,9 @@ export default function Slideshow(props) {
               <img src={event.image} alt="event" />
               <div className="slide-event-info">
                 <h1>{event.title}</h1>
-                <p className="city">{getStringUntilComa(event.location.city)}</p>
+                <p className="city">
+                  {getStringUntilComa(event.location.city)}
+                </p>
                 <p>{dayjs(event.date).format("dddd")}</p>
               </div>
             </Link>

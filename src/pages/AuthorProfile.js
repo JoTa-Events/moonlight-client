@@ -51,12 +51,12 @@ export default function AuthorProfile() {
       </div>
     );
   };
-  
+
   return (
     <div className="author-profile-page">
-      {!authorData 
-      ? (<div className="loader">Loading...</div>) 
-      : (
+      {!authorData ? (
+        <div className="loader">Loading...</div>
+      ) : (
         <>
           {renderAuthorProfile()}
 

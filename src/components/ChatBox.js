@@ -16,79 +16,69 @@ const API_URL = process.env.REACT_APP_API_URL;
 let socket;
 
 export default function ChatBox(props) {
-
   const { eventId, setReRender, getAllEvents } = props;
   const [chatObj, setChatObj] = useState(null);
-  const [displayAreYouSure,setDisplayAreYouSure] = useState(false)
+  const [displayAreYouSure, setDisplayAreYouSure] = useState(false);
 
-  const { user } = useContext(AuthContext)
-  
-  const confirmMessage = "Ready to leave this event and its chat?"
+  const { user } = useContext(AuthContext);
+
+  const confirmMessage = "Ready to leave this event and its chat?";
 
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   /**************socket io****************/
   const [isConnected, setIsConnected] = useState(false);
-  const [currentMessage, setCurrentMessage] = useState("")
-  const [messageList,setMessageList]=useState([])
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [messageList, setMessageList] = useState([]);
 
   //connects when the component is mounted
-  useEffect(()=>{
-
+  useEffect(() => {
     // connect to the server
-    socket =io.connect(API_URL)
-    
-    socket.on('connect', () => {
+    socket = io.connect(API_URL);
+
+    socket.on("connect", () => {
       setIsConnected(true);
-      socket.emit("joinChat",(eventId))
+      socket.emit("joinChat", eventId);
     });
 
-    socket.on('disconnect', () => {
+    socket.on("disconnect", () => {
       setIsConnected(false);
-      
     });
 
     //clean up
-    return ()=>{
-      
+    return () => {
       socket.emit("leaveChat", eventId);
-      socket.disconnect()
-      
-    }
-    
-  },[])
-  console.log("isConnected",isConnected);
-
-  
+      socket.disconnect();
+    };
+  }, []);
+  console.log("isConnected", isConnected);
 
   const sendMessage = async (e) => {
-    e.preventDefault()
-    if(currentMessage !== ""){
-
-      const messageData={
+    e.preventDefault();
+    if (currentMessage !== "") {
+      const messageData = {
         eventId,
-        author:user.username,
-        message:currentMessage,
-        date: dayjs().format("YYYY-MM-DD")
-      }
+        author: user.username,
+        message: currentMessage,
+        date: dayjs().format("YYYY-MM-DD"),
+      };
       //send the message to the server
-      await socket.emit("serverListens",(messageData))
+      await socket.emit("serverListens", messageData);
 
-      console.log("currentMessage",messageData)
+      console.log("currentMessage", messageData);
 
       //store the message sent, in a state to display it in the chat
-      setMessageList((prev)=>{
-        return([...prev,messageData])
-      })
+      setMessageList((prev) => {
+        return [...prev, messageData];
+      });
     }
-  }
+  };
 
   /*************************************/
-  
-  const getChatFromAPI = () => {
 
-    if(!user) return
+  const getChatFromAPI = () => {
+    if (!user) return;
     axios
       .get(`${API_URL}/api/chats/${eventId}`, authForAPI())
       .then((response) => {
@@ -103,29 +93,28 @@ export default function ChatBox(props) {
     getChatFromAPI();
   }, []);
 
-   const leaveEvent=()=>{
+  const leaveEvent = () => {
     if (!user) {
       navigate(`/login`);
 
       return;
     }
-        
-    axios.delete(`${API_URL}/api/events/${eventId}/participants`,authForAPI())
-      .then(response=>{
-        console.log(user.username,"Leave the event")
-        getAllEvents()        
-      })
-      .catch(error=>{
-        console.log("Error leaving the event", error)
 
+    axios
+      .delete(`${API_URL}/api/events/${eventId}/participants`, authForAPI())
+      .then((response) => {
+        console.log(user.username, "Leave the event");
+        getAllEvents();
       })
-      .finally(()=>{
-        setReRender(prevState=>!prevState)
-        navigate(location.pathname)
+      .catch((error) => {
+        console.log("Error leaving the event", error);
       })
-    
-   }
-   
+      .finally(() => {
+        setReRender((prevState) => !prevState);
+        navigate(location.pathname);
+      });
+  };
+
   const renderChat = () => {
     return (
       <div className="chatbox">
@@ -133,13 +122,15 @@ export default function ChatBox(props) {
           <span>
             <b>Live-Chat</b>
           </span>
-          <button className="leave-event" onClick={() => setDisplayAreYouSure(true)}>
+          <button
+            className="leave-event"
+            onClick={() => setDisplayAreYouSure(true)}
+          >
             Leave Event
           </button>
         </div>
 
         <ScrollToBottom className="scroll-to-bottom-chat">
-        
           {chatObj.messages.map((message) => {
             let leftOrRight = "";
             if (user.username === message.author.username) {
@@ -173,7 +164,6 @@ export default function ChatBox(props) {
               </div>
             );
           })}
-
         </ScrollToBottom>
 
         <div className="chatbox-footer">
@@ -187,7 +177,6 @@ export default function ChatBox(props) {
             getChatFromAPI={getChatFromAPI}
           />
         </div>
-        
       </div>
     );
   };
